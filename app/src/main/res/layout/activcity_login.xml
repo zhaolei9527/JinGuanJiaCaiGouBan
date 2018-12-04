@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgfff"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/x50"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:text="金管家 采购版"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:text="版本 v_2018_03_12"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x12"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x42"
+        android:layout_marginTop="@dimen/y15"
+        android:layout_marginRight="@dimen/x20"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/x15"
+                android:layout_height="@dimen/x15"
+                android:background="@mipmap/ic_launcher" />
+
+            <View
+                android:layout_width="@dimen/x1"
+                android:layout_height="@dimen/y15"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x5"
+                android:background="@color/bgtitle" />
+
+            <TextView
+                android:id="@+id/tv_Link"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y33"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="请设置链接名"
+                android:singleLine="true"
+                android:textColor="@color/text333"
+                android:textColorHint="@color/text999"
+                android:textSize="@dimen/x13" />
+
+            <FrameLayout
+                android:id="@+id/fl_More_Link"
+                android:layout_width="@dimen/x25"
+                android:layout_height="@dimen/x25">
+
+                <ImageView
+                    android:layout_width="@dimen/x15"
+                    android:layout_height="@dimen/x15"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/ic_launcher" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_Test"
+                android:layout_width="@dimen/x30"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:gravity="center"
+                android:text="测试"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@color/bgddd"></View>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x42"
+        android:layout_marginTop="@dimen/y15"
+        android:layout_marginRight="@dimen/x20"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/x15"
+                android:layout_height="@dimen/x15"
+                android:background="@mipmap/ic_launcher" />
+
+            <View
+                android:layout_width="@dimen/x1"
+                android:layout_height="@dimen/y15"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x5"
+                android:background="@color/bgtitle" />
+
+
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y33"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入帐号"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="@color/text333"
+                android:textColorHint="@color/text999"
+                android:textSize="@dimen/x13" />
+
+
+            <FrameLayout
+                android:layout_width="@dimen/x25"
+                android:layout_height="@dimen/x25"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:layout_width="@dimen/x15"
+                    android:layout_height="@dimen/x15"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/ic_launcher" />
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="@dimen/x30"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:gravity="center"
+                android:text="测试"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@color/bgddd"></View>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x42"
+        android:layout_marginTop="@dimen/y15"
+        android:layout_marginRight="@dimen/x20"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/x15"
+                android:layout_height="@dimen/x15"
+                android:background="@mipmap/ic_launcher" />
+
+            <View
+                android:layout_width="@dimen/x1"
+                android:layout_height="@dimen/y15"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x5"
+                android:background="@color/bgtitle" />
+
+
+            <EditText
+                android:id="@+id/et_pwd"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y33"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/text333"
+                android:textColorHint="@color/text999"
+                android:textSize="@dimen/x13" />
+
+
+            <FrameLayout
+                android:layout_width="@dimen/x25"
+                android:layout_height="@dimen/x25"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:layout_width="@dimen/x15"
+                    android:layout_height="@dimen/x15"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/ic_launcher" />
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="@dimen/x30"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:gravity="center"
+                android:text="测试"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@color/bgddd"></View>
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cb_SavePsd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginTop="@dimen/x5"
+        android:checked="true"
+        android:text="保存密码" />
+
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="@dimen/x234"
+        android:layout_height="@dimen/y30"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/x40"
+        android:background="@drawable/bg_login"
+        android:text="登录"
+        android:textColor="@color/white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y50"
+        android:background="@color/bgtitle"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x10"
+            android:weightSum="3">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="电话:18642275921"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x11" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="微信:18642275921"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x11" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="QQ:675857000"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x11" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_androidIMEI"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/x11" />
+
+    </LinearLayout>
+
+</LinearLayout>
