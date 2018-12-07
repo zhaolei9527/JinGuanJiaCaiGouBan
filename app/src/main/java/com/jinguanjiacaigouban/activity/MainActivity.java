@@ -143,7 +143,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 break;
             case R.id.ll_fendian:
-
+                startActivity(new Intent(context, FenDianActivity.class));
                 break;
             case R.id.ll_gonghuoshang:
                 startActivity(new Intent(context, GongHuoShangActivity.class));

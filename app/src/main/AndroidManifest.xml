@@ -36,7 +36,8 @@
         <activity android:name=".activity.GoodShopEditActivity"></activity>
         <activity android:name=".activity.ScanActivity"></activity>
         <activity android:name=".activity.HDImageViewActivity"></activity>
-
+        <activity android:name=".activity.FenDianActivity"></activity>
+        <activity android:name=".activity.FenDianEditActivity"></activity>
 
         <!--====================================功能需要==========================================-->
 

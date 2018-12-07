@@ -265,7 +265,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     UrlUtils.checkUrl(split[0], split[1], split[2], split[3], split[4]);
                     java.sql.Connection conn = DBOpenHelper.getConn();
                     if (conn.isClosed()) {
-                        dialog.dismiss();
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                            }
+                        });
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -273,7 +278,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             }
                         });
                     } else {
-                        dialog.dismiss();
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                            }
+                        });
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -283,7 +293,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -318,7 +333,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 String[] split = URl.split("#");
                 UrlUtils.checkUrl(split[0], split[1], split[2], split[3], split[4]);
                 String pro_login = DBService.doConnection("pro_login", username, pwd, getAndroidIMEI(context));
-                dialog.dismiss();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                    }
+                });
                 if (TextUtils.isEmpty(pro_login)) {
                     mHandler.post(new Runnable() {
                         @Override

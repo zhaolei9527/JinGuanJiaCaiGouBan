@@ -172,7 +172,13 @@ public class GoodShopActivity extends BaseActivity {
             public void doSth() {
                 try {
                     String pro_cs_select = DBService.doConnection("pro_pm_select", key);
-                    dialog.dismiss();
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
 
                     if (TextUtils.isEmpty(pro_cs_select)) {
                         mHandler.post(new Runnable() {

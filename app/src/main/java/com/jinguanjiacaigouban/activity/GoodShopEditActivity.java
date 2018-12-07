@@ -478,8 +478,12 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                             , strFL1, strFL2, strFL3, strBH, strMC, strPYM, strTYM
                             , strTM, intJHDJ, intXSDJ, intJHSL, strBZ, isIMAGE
                     );
-
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_pm_update)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -549,7 +553,12 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
             public void doSth() {
                 try {
                     String pro_pm_sm = DBService.doConnection("pro_pm_sm", key);
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_pm_sm)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -594,7 +603,12 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
             public void doSth() {
                 try {
                     final String pro_pym = DBService.doConnection("pro_pym", key);
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_pym)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -638,7 +652,12 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
             public void doSth() {
                 try {
                     String pro_cs_add = DBService.doConnection("pro_pm_add");
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_cs_add)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -810,7 +829,12 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
             public void doSth() {
                 try {
                     String pro_cs_edit = DBService.doConnection(host, key);
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_cs_edit)) {
                         mHandler.post(new Runnable() {
                             @Override

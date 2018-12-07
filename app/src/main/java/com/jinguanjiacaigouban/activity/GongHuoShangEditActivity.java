@@ -158,7 +158,12 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             public void doSth() {
                 try {
                     String pro_cs_add = DBService.doConnection("pro_cs_add");
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_cs_add)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -202,7 +207,12 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             public void doSth() {
                 try {
                     String pro_cs_edit = DBService.doConnection("pro_cs_edit", key);
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_cs_edit)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -372,7 +382,12 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             public void doSth() {
                 try {
                     String pro_cs_edit = DBService.doConnection(host, key);
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_cs_edit)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -441,7 +456,12 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             public void doSth() {
                 try {
                     String pro_cs_edit = DBService.doConnection(host, key);
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_cs_edit)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -479,7 +499,12 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             public void doSth() {
                 try {
                     final String pro_pym = DBService.doConnection("pro_pym", key);
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_pym)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -526,7 +551,12 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             public void doSth() {
                 try {
                     String pro_cs_edit = DBService.doConnection(host, strCZY, strSBID, strBBH, strLX, strBH, strMC, strPYM, strTYM, strLXDH, strFL1, strFL2, strFL3, strBZ);
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_cs_edit)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -575,7 +605,12 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             public void doSth() {
                 try {
                     String pro_cs_edit = DBService.doConnection("pro_cslx", "");
-                    dialog.dismiss();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
                     if (TextUtils.isEmpty(pro_cs_edit)) {
                         mHandler.post(new Runnable() {
                             @Override
