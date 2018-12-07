@@ -94,6 +94,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:text="sakura"
                         android:id="@+id/tv_Link_name"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -161,6 +162,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:text="www.jgjyun.cn"
                         android:id="@+id/et_Service_IP"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -228,6 +230,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:text="1435"
                         android:id="@+id/et_Service_Host"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -295,6 +298,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:text="temp"
                         android:id="@+id/et_Service_username"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -362,6 +366,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:text="1"
                         android:id="@+id/et_Service_pwd"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"

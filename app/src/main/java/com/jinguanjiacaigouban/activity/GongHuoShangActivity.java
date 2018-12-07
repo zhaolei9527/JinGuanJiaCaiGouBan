@@ -104,9 +104,7 @@ public class GongHuoShangActivity extends BaseActivity {
         llAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, GongHuoShangEditActivity.class)
-                        .putExtra("type", "edit")
-                );
+                startActivity(new Intent(context, GongHuoShangEditActivity.class));
             }
         });
 
@@ -178,5 +176,11 @@ public class GongHuoShangActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 圆角 -->
+    <corners
+        android:bottomLeftRadius="@dimen/x4"
+        android:bottomRightRadius="@dimen/x4"
+        android:topLeftRadius="@dimen/x4"
+        android:topRightRadius="@dimen/x4" /><!-- 设置圆角半径 -->
+    <!-- 大小 -->
+    <size
+        android:width="@dimen/x50"
+        android:height="@dimen/x50" /><!-- 宽度和高度 -->
+
+    <!-- 填充 -->
+    <solid android:color="#90000000" /><!-- 填充的颜色 -->
+    <!-- 描边 -->
+    <stroke
+        android:width="1px"
+        android:color="#90000000" />
+</shape>

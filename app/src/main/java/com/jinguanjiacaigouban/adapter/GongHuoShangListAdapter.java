@@ -96,7 +96,11 @@ public class GongHuoShangListAdapter extends RecyclerView.Adapter<GongHuoShangLi
                     public void onClick(Dialog dialog, final boolean confirm) {
                         dialog.dismiss();
                         if (confirm) {
-                            mContext.setResult(200, new Intent().putExtra("gonghuoshang", datas.get(position).getMC()));
+                            mContext.setResult(200, new Intent()
+                                    .putExtra("FLMC1", datas.get(position).getFLMC1())
+                                    .putExtra("FLMC2", datas.get(position).getFLMC2())
+                                    .putExtra("FLMC3", datas.get(position).getFLMC3())
+                                    .putExtra("gonghuoshang", datas.get(position).getMC()));
                             mContext.finish();
                         }
                     }

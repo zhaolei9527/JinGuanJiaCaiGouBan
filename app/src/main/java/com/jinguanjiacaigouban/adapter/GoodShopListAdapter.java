@@ -2,6 +2,7 @@ package com.jinguanjiacaigouban.adapter;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -15,8 +16,8 @@ import android.widget.TextView;
 
 import com.jinguanjiacaigouban.App;
 import com.jinguanjiacaigouban.R;
-import com.jinguanjiacaigouban.activity.GongHuoShangEditActivity;
 import com.jinguanjiacaigouban.activity.GoodShopActivity;
+import com.jinguanjiacaigouban.activity.GoodShopEditActivity;
 import com.jinguanjiacaigouban.bean.proCsDeleteBean;
 import com.jinguanjiacaigouban.bean.proPmSelectBean;
 import com.jinguanjiacaigouban.db.DBService;
@@ -83,6 +84,21 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
             }
         });
 
+
+        holder.btnCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    ClipboardManager cm = (ClipboardManager) mContext.getSystemService(mContext.CLIPBOARD_SERVICE);
+                    cm.setText(datas.get(position).getXSNR()+"==="+datas.get(position).getXSNR2());
+                    EasyToast.showShort(mContext, "已复制到粘贴板");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
         if (((GoodShopActivity) mContext).isCheck) {
             holder.cbCheck.setEnabled(true);
         } else {
@@ -112,7 +128,7 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
         holder.llEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, GongHuoShangEditActivity.class)
+                mContext.startActivity(new Intent(mContext, GoodShopEditActivity.class)
                         .putExtra("strBH", datas.get(position).getBH())
                         .putExtra("type", "edit")
                 );
@@ -186,6 +202,8 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
         TextView tvXSNR2;
         @BindView(R.id.btn_delete)
         Button btnDelete;
+        @BindView(R.id.btn_copy)
+        Button btnCopy;
         @BindView(R.id.ll_edit)
         LinearLayout llEdit;
 

@@ -109,9 +109,7 @@ public class GoodShopActivity extends BaseActivity {
         llAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, GongHuoShangEditActivity.class)
-                        .putExtra("type", "edit")
-                );
+                startActivity(new Intent(context, GoodShopEditActivity.class));
             }
         });
 
@@ -219,9 +217,15 @@ public class GoodShopActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String gonghuoshang = data.getStringExtra("gonghuoshang");
-        etSearchHonghuoshang.setText(gonghuoshang);
+        if (requestCode == 200) {
+            String gonghuoshang = data.getStringExtra("gonghuoshang");
+            etSearchHonghuoshang.setText(gonghuoshang);
+        }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+    }
 }

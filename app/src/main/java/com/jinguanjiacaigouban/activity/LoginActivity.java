@@ -155,12 +155,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.gc();
-    }
-
-    @Override
     protected void ready() {
         super.ready();
         /*set it to be no title*/
@@ -432,5 +426,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         SpUtil.putAndApply(context, "udid", androidIMEI);
         return androidIMEI;
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+    }
 }

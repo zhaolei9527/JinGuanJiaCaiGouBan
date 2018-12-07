@@ -132,7 +132,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                 if (input) {
                     if (!TextUtils.isEmpty(editable.toString().trim())) {
                         dialog.show();
-                        getproPymData(editable.toString().trim(), et_MC);
+                        getproPymData(editable.toString().trim(), et_JM);
                     }
                 }
             }
@@ -608,6 +608,10 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             }
         });
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+    }
 
 }

@@ -4,14 +4,14 @@ import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-import static com.jinguanjiacaigouban.utils.UrlUtils.user;
 import static com.jinguanjiacaigouban.utils.UrlUtils.driver;
-import static com.jinguanjiacaigouban.utils.UrlUtils.url;
 import static com.jinguanjiacaigouban.utils.UrlUtils.password;
+import static com.jinguanjiacaigouban.utils.UrlUtils.url;
+import static com.jinguanjiacaigouban.utils.UrlUtils.user;
 
 /**
  * com.zxp.jdbc4mysql
@@ -38,6 +38,8 @@ public class DBOpenHelper {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return conn;
     }
@@ -45,7 +47,7 @@ public class DBOpenHelper {
     /**
      * 关闭数据库
      */
-    public static void closeAll(Connection conn, PreparedStatement ps) {
+    public static void closeAll(Connection conn, Statement ps) {
         if (conn != null) {
             try {
                 conn.close();
@@ -67,7 +69,7 @@ public class DBOpenHelper {
      * 关闭数据库
      */
 
-    public static void closeAll(Connection conn, PreparedStatement ps, ResultSet rs) {
+    public static void closeAll(Connection conn, Statement ps, ResultSet rs) {
         if (conn != null) {
             try {
                 conn.close();
@@ -90,5 +92,18 @@ public class DBOpenHelper {
             }
         }
     }
+
+    // 关闭连接
+    public static void closeConn(Connection conn) {
+        if (null != conn) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("关闭连接失败！");
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }

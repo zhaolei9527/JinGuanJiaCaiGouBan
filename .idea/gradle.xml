@@ -9,6 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/fresco" />
+            <option value="$PROJECT_DIR$/picke" />
+            <option value="$PROJECT_DIR$/pickerviewr" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -19,4 +19,5 @@
     <color name="pressedColor">#f23882</color>
     <color name="white">#fff</color>
     <color name="text">#fff</color>
+    <color name="colorPrimaryDarkTrans">#CCf57257</color>
 </resources>

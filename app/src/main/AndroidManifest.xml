@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
 
     <application
         android:name=".App"
@@ -20,23 +22,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".activity.MainActivity"
-            android:launchMode="singleTask"></activity>
-
+        <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.LinkActivity"></activity>
         <activity android:name=".activity.GongHuoShangActivity"></activity>
         <activity android:name=".activity.GongHuoShangEditActivity"></activity>
         <activity android:name=".activity.GoodShopActivity"></activity>
+        <activity android:name=".activity.GoodShopEditActivity"></activity>
+        <activity android:name=".activity.ScanActivity"></activity>
+        <activity android:name=".activity.HDImageViewActivity"></activity>
+
+
+        <!--====================================功能需要==========================================-->
+
+        <activity
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/customTheme" />
+
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/customTheme" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.lingqiapp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

@@ -106,11 +106,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
         super.onResume();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.gc();
-    }
 
     @Override
     protected void ready() {
@@ -428,5 +423,9 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
             });
         }
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+    }
 }

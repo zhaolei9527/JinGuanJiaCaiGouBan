@@ -93,11 +93,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mHandler.postDelayed(rTime, 0);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mHandler.removeCallbacks(rTime);
-    }
 
     private boolean mIsExit;
 
@@ -216,5 +211,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        mHandler.removeCallbacks(rTime);
+    }
 }
