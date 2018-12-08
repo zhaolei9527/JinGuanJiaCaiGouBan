@@ -1,28 +1,29 @@
 package com.jinguanjiacaigouban.activity;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jinguanjiacaigouban.App;
 import com.jinguanjiacaigouban.R;
-import com.jinguanjiacaigouban.adapter.FenDianEditListAdapter;
-import com.jinguanjiacaigouban.bean.proCsAddBean;
-import com.jinguanjiacaigouban.bean.proFdlxEditBean;
-import com.jinguanjiacaigouban.bean.proFdlxFdBean;
+import com.jinguanjiacaigouban.adapter.AddFenDianListAdapter;
+import com.jinguanjiacaigouban.bean.proFdFdlxBean;
+import com.jinguanjiacaigouban.bean.proFdlxFdInsertBean;
 import com.jinguanjiacaigouban.db.DBService;
+import com.jinguanjiacaigouban.utils.EasyToast;
 import com.jinguanjiacaigouban.utils.PriorityRunnable;
 import com.jinguanjiacaigouban.utils.SpUtil;
+import com.jinguanjiacaigouban.utils.UrlUtils;
 import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
 import com.jinguanjiacaigouban.view.JinGuanJiaRecycleView;
@@ -37,55 +38,44 @@ import butterknife.ButterKnife;
  * com.jinguanjiacaigouban.activity
  *
  * @author 赵磊
- * @date 2018/12/7
+ * @date 2018/12/8
  * 功能描述：
  */
-public class FenDianEditActivity extends BaseActivity implements View.OnClickListener {
+public class AddFenDianActivity extends BaseActivity implements View.OnClickListener {
+
     @BindView(R.id.fl_back)
     FrameLayout flBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ll_Save_Fendian)
     LinearLayout llSaveFendian;
-    @BindView(R.id.tv_BH)
-    TextView tvBH;
-    @BindView(R.id.et_MC)
-    EditText etMC;
-    @BindView(R.id.et_JM)
-    EditText etJM;
-    @BindView(R.id.rv_fendian_list)
-    JinGuanJiaRecycleView rvFendianList;
+    @BindView(R.id.tv_FD_Type)
+    TextView tvFDType;
+    @BindView(R.id.cb_CheckAll)
+    CheckBox cbCheckAll;
     @BindView(R.id.tv_cont)
     TextView tvCont;
-    @BindView(R.id.tv_ADD)
-    TextView tvADD;
-    @BindView(R.id.img)
-    ImageView img;
     @BindView(R.id.rl_add_fendian)
     RelativeLayout rlAddFendian;
-    private String type;
+    @BindView(R.id.rv_fendian_list)
+    JinGuanJiaRecycleView rvFendianList;
     private String strBH;
+    private String MC;
     private Dialog dialog;
+    private AddFenDianListAdapter adapter;
     private LinearLayoutManager line;
-    private FenDianEditListAdapter adapter;
 
     @Override
     protected int setthislayout() {
-        return R.layout.activcity_fendian_edit;
+        return R.layout.activcity_add_fendian_edit;
     }
 
     @Override
     protected void initview() {
         dialog = Utils.showLoadingDialog(context);
-        type = getIntent().getStringExtra("type");
         strBH = getIntent().getStringExtra("strBH");
-
-        if (!TextUtils.isEmpty(type)) {
-            tvTitle.setText("分店_修改");
-        } else {
-            tvTitle.setText("分店_新增");
-        }
-
+        MC = getIntent().getStringExtra("MC");
+        tvFDType.setText("分店类型：" + MC);
         line = new LinearLayoutManager(context);
         line.setOrientation(LinearLayoutManager.VERTICAL);
         rvFendianList.setLayoutManager(line);
@@ -102,23 +92,25 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
     protected void initListener() {
         flBack.setOnClickListener(this);
         llSaveFendian.setOnClickListener(this);
-        rlAddFendian.setOnClickListener(this);
+        cbCheckAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                for (int i = 0; i < adapter.getDatas().size(); i++) {
+                    if (b) {
+                        adapter.getDatas().get(i).setErr("1");
+                    } else {
+                        adapter.getDatas().get(i).setErr("0");
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
     protected void initData() {
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!TextUtils.isEmpty(strBH)) {
-            dialog.show();
-            getData(strBH);
-        } else {
-            dialog.show();
-            getproCsAdd();
-        }
+        dialog.show();
+        getData(strBH);
     }
 
     @Override
@@ -132,16 +124,26 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fl_back:
-                finish();
+                onBackPressed();
                 break;
             case R.id.ll_Save_Fendian:
-
-                break;
-            case R.id.rl_add_fendian:
-                startActivity(new Intent(context, AddFenDianActivity.class)
-                        .putExtra("strBH", strBH)
-                        .putExtra("MC", etMC.getText().toString())
-                );
+                StringBuffer stringBuffer = new StringBuffer();
+                for (int i = 0; i < adapter.getDatas().size(); i++) {
+                    if (adapter.getDatas().get(i).getErr().equals("1")) {
+                        if (i == 0) {
+                            stringBuffer.append(adapter.getDatas().get(i).getMC());
+                        } else {
+                            stringBuffer.append("+" + adapter.getDatas().get(i).getMC());
+                        }
+                    }
+                }
+                if (TextUtils.isEmpty(stringBuffer.toString())) {
+                    CommomDialog.showMessage(context, "请先选择录入信息");
+                    return;
+                }
+                Log.e("AddFenDianActivity", stringBuffer.toString());
+                dialog.show();
+                getProFdlxFdInsertData(strBH, stringBuffer.toString());
                 break;
             default:
                 break;
@@ -153,71 +155,14 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void doSth() {
                 try {
-
-                    String pro_fdlx_edit = DBService.doConnection("pro_fdlx_edit", key);
+                    String pro_fd_fdlx = DBService.doConnection("pro_fd_fdlx", String.valueOf(SpUtil.get(context, "MC", "")), key);
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             dialog.dismiss();
                         }
                     });
-
-                    if (TextUtils.isEmpty(pro_fdlx_edit)) {
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                CommomDialog.showMessage(context, "链接异常，请检查链接信息");
-                                return;
-                            }
-                        });
-                    }
-                    final List<proFdlxEditBean> proFdlxEditBeans = proFdlxEditBean.arrayproFdlxEditBeanFromData(pro_fdlx_edit);
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (TextUtils.isEmpty(proFdlxEditBeans.get(0).getErr())) {
-                                if ("1".equals(proFdlxEditBeans.get(0).getCol0())) {
-                                    etMC.setFocusable(false);
-                                    etMC.setEnabled(false);
-                                    etJM.setEnabled(false);
-                                    etJM.setFocusable(false);
-                                }
-
-                                tvBH.setText(proFdlxEditBeans.get(0).getCol1());
-                                etMC.setText(proFdlxEditBeans.get(0).getCol2());
-                                etJM.setText(proFdlxEditBeans.get(0).getCol3());
-                            } else {
-                                CommomDialog.showMessage(context, proFdlxEditBeans.get(0).getErr());
-                            }
-                        }
-                    });
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialog.dismiss();
-                            CommomDialog.showMessage(context, "链接异常，请检查链接信息");
-                        }
-                    });
-                }
-            }
-        });
-
-        App.pausableThreadPoolExecutor.execute(new PriorityRunnable(2) {
-            @Override
-            public void doSth() {
-                try {
-                    String pro_fdlx_fd = DBService.doConnection("pro_fdlx_fd", String.valueOf(SpUtil.get(context, "MC", "")), key);
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    if (TextUtils.isEmpty(pro_fdlx_fd)) {
+                    if (TextUtils.isEmpty(pro_fd_fdlx)) {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -227,19 +172,17 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         });
                     }
 
+                    final List<proFdFdlxBean> proFdFdlxBeans = proFdFdlxBean.arrayproFdFdlxBeanFromData(pro_fd_fdlx);
 
-                    final List<proFdlxFdBean> proFdlxSelectBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
-
-                    adapter = new FenDianEditListAdapter(FenDianEditActivity.this, proFdlxSelectBeans);
+                    adapter = new AddFenDianListAdapter(AddFenDianActivity.this, proFdFdlxBeans);
 
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             rvFendianList.setAdapter(adapter);
-                            tvCont.setText("总计：" + proFdlxSelectBeans.size());
+                            tvCont.setText("总计：" + proFdFdlxBeans.size());
                         }
                     });
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -253,25 +196,24 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                 }
             }
         });
-
-
     }
 
 
-    private void getproCsAdd() {
+    public void getProFdlxFdInsertData(final String strBH, final String key) {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
             @Override
             public void doSth() {
                 try {
-
-                    String pro_cs_add = DBService.doConnection("pro_fdlx_add");
+                    String pro_fdlx_fd_insert = DBService.doConnection("pro_fdlx_fd_insert", String.valueOf(SpUtil.get(context, "MC", ""))
+                            , (String) SpUtil.get(context, "androidIMEI", "")
+                            , UrlUtils.BBH, strBH, key);
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             dialog.dismiss();
                         }
                     });
-                    if (TextUtils.isEmpty(pro_cs_add)) {
+                    if (TextUtils.isEmpty(pro_fdlx_fd_insert)) {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -281,19 +223,20 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         });
                     }
 
-                    final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
+                    final List<proFdlxFdInsertBean> proFdlxFdInsertBeans = proFdlxFdInsertBean.arrayproFdlxFdInsertBeanFromData(pro_fdlx_fd_insert);
 
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
-                                tvBH.setText(proCsAddBeans.get(0).getBH());
-                                rlAddFendian.setVisibility(View.GONE);
+                            if (TextUtils.isEmpty(proFdlxFdInsertBeans.get(0).getErr())) {
+                                EasyToast.showShort(context, "添加成功");
+                                onBackPressed();
                             } else {
-                                CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
+                                CommomDialog.showMessage(context, proFdlxFdInsertBeans.get(0).getErr());
                             }
                         }
                     });
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -307,5 +250,6 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
             }
         });
     }
+
 
 }

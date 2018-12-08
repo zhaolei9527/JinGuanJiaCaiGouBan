@@ -190,12 +190,13 @@ public class GoodShopActivity extends BaseActivity {
                         });
                     }
 
-                    List<proPmSelectBean> proPmSelectBeans = proPmSelectBean.arrayproPmSelectBeanFromData(pro_cs_select);
+                    final List<proPmSelectBean> proPmSelectBeans = proPmSelectBean.arrayproPmSelectBeanFromData(pro_cs_select);
                     adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans);
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             rvGonghuoshangList.setAdapter(adapter);
+                            tvCont.setText("总计：" + proPmSelectBeans.size());
                         }
                     });
                 } catch (Exception e) {

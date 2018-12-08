@@ -132,13 +132,14 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                         });
                     }
 
-                    List<proFdlxSelectBean> proFdlxSelectBeans = proFdlxSelectBean.arrayproFdlxSelectBeanFromData(pro_fdlx_select);
+                    final List<proFdlxSelectBean> proFdlxSelectBeans = proFdlxSelectBean.arrayproFdlxSelectBeanFromData(pro_fdlx_select);
 
                     adapter = new FenDianListAdapter(FenDianActivity.this, proFdlxSelectBeans);
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             rvFendianList.setAdapter(adapter);
+                            tvCont.setText("总计："+proFdlxSelectBeans.size());
                         }
                     });
 

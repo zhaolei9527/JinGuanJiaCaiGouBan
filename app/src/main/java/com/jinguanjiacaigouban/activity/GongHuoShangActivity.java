@@ -153,12 +153,13 @@ public class GongHuoShangActivity extends BaseActivity {
                             }
                         });
                     }
-                    ArrayList<proCsSelectBean> proCsSelectBeans = (ArrayList<proCsSelectBean>) proCsSelectBean.arrayproCsSelectBeanFromData(pro_cs_select);
+                    final ArrayList<proCsSelectBean> proCsSelectBeans = (ArrayList<proCsSelectBean>) proCsSelectBean.arrayproCsSelectBeanFromData(pro_cs_select);
                     adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans);
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             rvGonghuoshangList.setAdapter(adapter);
+                            tvCont.setText("总计："+proCsSelectBeans.size());
                         }
                     });
                 } catch (Exception e) {

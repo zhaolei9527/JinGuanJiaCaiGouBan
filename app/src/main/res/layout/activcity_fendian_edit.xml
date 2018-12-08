@@ -287,7 +287,6 @@
                 android:id="@+id/rv_fendian_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/x5"
                 android:layout_marginBottom="@dimen/x5"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
         </LinearLayout>

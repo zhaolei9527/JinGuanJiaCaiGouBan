@@ -38,6 +38,7 @@
         <activity android:name=".activity.HDImageViewActivity"></activity>
         <activity android:name=".activity.FenDianActivity"></activity>
         <activity android:name=".activity.FenDianEditActivity"></activity>
+        <activity android:name=".activity.AddFenDianActivity"></activity>
 
         <!--====================================功能需要==========================================-->
 
