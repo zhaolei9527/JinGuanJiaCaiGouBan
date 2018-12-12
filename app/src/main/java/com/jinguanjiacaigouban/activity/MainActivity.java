@@ -137,10 +137,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 doTest();
                 break;
             case R.id.ll_chadan:
-
+                startActivity(new Intent(context, OrderSearchActivity.class));
                 break;
             case R.id.ll_kaidan:
-
+                startActivity(new Intent(context, OrderAddActivity.class));
                 break;
             case R.id.ll_fendian:
                 startActivity(new Intent(context, FenDianActivity.class));

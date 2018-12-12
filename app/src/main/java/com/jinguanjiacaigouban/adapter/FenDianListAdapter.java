@@ -97,7 +97,8 @@ public class FenDianListAdapter extends RecyclerView.Adapter<FenDianListAdapter.
                     public void onClick(Dialog dialog, final boolean confirm) {
                         dialog.dismiss();
                         if (confirm) {
-
+                            mContext.setResult(204, new Intent().putExtra("MC", datas.get(position).getMC()).putExtra("BH", datas.get(position).getBH()));
+                            mContext.finish();
                         }
                     }
                 }).setTitle("提示").show();

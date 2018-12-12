@@ -8,4 +8,6 @@
     <string name="Clicktheexitprogramagain">再按一次退出</string>
     <string name="Abnormalserver">服务器异常</string>
     <string name="hasError">出错啦</string>
+    <string name="Thestarttime">开始时间</string>
+    <string name="Theendtime">结束时间</string>
 </resources>

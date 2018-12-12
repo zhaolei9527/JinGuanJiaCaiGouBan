@@ -1,6 +1,7 @@
 package com.jinguanjiacaigouban.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -95,7 +96,7 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.ll_Add:
-
+                startActivity(new Intent(context, FenDianEditActivity.class));
                 break;
             default:
                 break;
@@ -139,7 +140,7 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                         @Override
                         public void run() {
                             rvFendianList.setAdapter(adapter);
-                            tvCont.setText("总计："+proFdlxSelectBeans.size());
+                            tvCont.setText("总计：" + proFdlxSelectBeans.size());
                         }
                     });
 

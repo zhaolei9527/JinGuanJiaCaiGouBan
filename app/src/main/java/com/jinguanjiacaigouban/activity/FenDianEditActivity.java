@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -18,11 +20,15 @@ import com.jinguanjiacaigouban.App;
 import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.adapter.FenDianEditListAdapter;
 import com.jinguanjiacaigouban.bean.proCsAddBean;
+import com.jinguanjiacaigouban.bean.proCsInsertBean;
 import com.jinguanjiacaigouban.bean.proFdlxEditBean;
 import com.jinguanjiacaigouban.bean.proFdlxFdBean;
+import com.jinguanjiacaigouban.bean.proPymBean;
 import com.jinguanjiacaigouban.db.DBService;
+import com.jinguanjiacaigouban.utils.EasyToast;
 import com.jinguanjiacaigouban.utils.PriorityRunnable;
 import com.jinguanjiacaigouban.utils.SpUtil;
+import com.jinguanjiacaigouban.utils.UrlUtils;
 import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
 import com.jinguanjiacaigouban.view.JinGuanJiaRecycleView;
@@ -98,12 +104,38 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
         rvFendianList.setCanloadMore(false);
     }
 
+    boolean input = false;
+
     @Override
     protected void initListener() {
         flBack.setOnClickListener(this);
         llSaveFendian.setOnClickListener(this);
         rlAddFendian.setOnClickListener(this);
+
+        etMC.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (input) {
+                    if (!TextUtils.isEmpty(editable.toString().trim())) {
+                        dialog.show();
+                        getproPymData(editable.toString().trim(), etJM);
+                    }
+                }
+            }
+        });
+
     }
+
 
     @Override
     protected void initData() {
@@ -118,6 +150,7 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
         } else {
             dialog.show();
             getproCsAdd();
+            input = true;
         }
     }
 
@@ -135,7 +168,27 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.ll_Save_Fendian:
-
+                if (checkMessage()) {
+                    if (!TextUtils.isEmpty(type)) {
+                        getProCsData("pro_fdlx_update"
+                                , String.valueOf(SpUtil.get(context, "MC", ""))
+                                , (String) SpUtil.get(context, "androidIMEI", "")
+                                , UrlUtils.BBH
+                                , tvBH.getText().toString()
+                                , etMC.getText().toString()
+                                , etJM.getText().toString()
+                        );
+                    } else {
+                        getProCsData("pro_fdlx_insert"
+                                , String.valueOf(SpUtil.get(context, "MC", ""))
+                                , (String) SpUtil.get(context, "androidIMEI", "")
+                                , UrlUtils.BBH
+                                , tvBH.getText().toString()
+                                , etMC.getText().toString()
+                                , etJM.getText().toString()
+                        );
+                    }
+                }
                 break;
             case R.id.rl_add_fendian:
                 startActivity(new Intent(context, AddFenDianActivity.class)
@@ -146,6 +199,131 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
             default:
                 break;
         }
+    }
+
+    /*
+     *校验保存必须录入信息
+     */
+    private boolean checkMessage() {
+
+        String JM = etJM.getText().toString().trim();
+        String Mc = etMC.getText().toString().trim();
+
+        if (TextUtils.isEmpty(JM)) {
+            CommomDialog.showMessage(context, "请输入简码");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(Mc)) {
+            CommomDialog.showMessage(context, "请输入名称信息");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public void getProCsData(final String host, final String... key) {
+        App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
+            @Override
+            public void doSth() {
+                try {
+                    String pro_cs_edit = DBService.doConnection(host, key);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
+                    if (TextUtils.isEmpty(pro_cs_edit)) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                                return;
+                            }
+                        });
+                    }
+                    final List<proCsInsertBean> proCsInsertBeans = proCsInsertBean.arrayproCsInsertBeanFromData(pro_cs_edit);
+                    if (TextUtils.isEmpty(proCsInsertBeans.get(0).getErr().toString().trim())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                EasyToast.showShort(context, "操作成功");
+                                rlAddFendian.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    } else {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                                CommomDialog.showMessage(context, proCsInsertBeans.get(0).getErr().toString().trim());
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                            CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    public void getproPymData(final String key, final EditText et) {
+        App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
+            @Override
+            public void doSth() {
+                try {
+                    final String pro_pym = DBService.doConnection("pro_pym", key);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
+                    if (TextUtils.isEmpty(pro_pym)) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                                return;
+                            }
+                        });
+                    }
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
+                            if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
+                                et.setText(proPymBeans.get(0).getPYM());
+                            } else {
+                                CommomDialog.showMessage(context, proPymBeans.get(0).getErr());
+                            }
+
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                            CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                        }
+                    });
+                }
+            }
+        });
     }
 
     public void getData(final String key) {
@@ -191,6 +369,8 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                             }
                         }
                     });
+
+                    input = true;
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -253,10 +433,7 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                 }
             }
         });
-
-
     }
-
 
     private void getproCsAdd() {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
@@ -288,6 +465,7 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         public void run() {
                             if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                                 tvBH.setText(proCsAddBeans.get(0).getBH());
+                                strBH = proCsAddBeans.get(0).getBH();
                                 rlAddFendian.setVisibility(View.GONE);
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());

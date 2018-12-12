@@ -113,7 +113,8 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
                     public void onClick(Dialog dialog, final boolean confirm) {
                         dialog.dismiss();
                         if (confirm) {
-
+                            mContext.setResult(205, new Intent().putExtra("MC", datas.get(position).getMC()).putExtra("BH", datas.get(position).getBH()));
+                            mContext.finish();
                         }
                     }
                 }).setTitle("提示").show();
