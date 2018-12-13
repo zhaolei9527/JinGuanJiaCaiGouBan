@@ -181,6 +181,8 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         public void run() {
                             if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                                 tv_BH.setText(proCsAddBeans.get(0).getBH());
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
                             }
@@ -249,6 +251,8 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                             sanji.setText(proCsEditBeans.get(0).getCol9());
                             et_beizhu.setText(proCsEditBeans.get(0).getCol10());
                             input = true;
+                            Utils.showSoundWAV(context,R.raw.susses);
+
                         }
                     });
 
@@ -418,6 +422,8 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         }
                         showSponer(profl3list, et);
                     }
+                    Utils.showSoundWAV(context,R.raw.susses);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -521,6 +527,8 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et_JM.setText(proPymBeans.get(0).getPYM());
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proPymBeans.get(0).getErr());
                             }
@@ -574,6 +582,8 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                             @Override
                             public void run() {
                                 EasyToast.showShort(context, "操作成功");
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             }
                         });
                     } else {
@@ -627,6 +637,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                     for (int i = 0; i < proCslxBeans.size(); i++) {
                         addresslist.add(proCslxBeans.get(i).getMC());
                     }
+                    Utils.showSoundWAV(context,R.raw.susses);
 
                     showSponer(addresslist, et);
 

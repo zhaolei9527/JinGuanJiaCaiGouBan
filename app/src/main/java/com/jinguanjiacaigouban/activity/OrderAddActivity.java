@@ -249,6 +249,7 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                     }
 
                     showSponer(proYgList, etSearchCGY);
+                    Utils.showSoundWAV(context,R.raw.susses);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -354,6 +355,8 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                             if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                                 tvBH.setText(proCsAddBeans.get(0).getBH());
                                 strBH = proCsAddBeans.get(0).getBH();
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
                             }
@@ -405,6 +408,8 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                             if (TextUtils.isEmpty(proDdInsertBeans.get(0).getErr())) {
                                 finish();
                                 startActivity(new Intent(context, OrderEditActivity.class).putExtra("strBH", proDdInsertBeans.get(0).getBH()));
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
                             }

@@ -91,15 +91,15 @@
         <LinearLayout
             android:id="@+id/ll_kaidan"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/y90"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x60"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
                 android:background="@mipmap/kd" />
 
             <TextView
@@ -116,15 +116,15 @@
         <LinearLayout
             android:id="@+id/ll_chadan"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/y90"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x60"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
                 android:background="@mipmap/cd" />
 
             <TextView
@@ -141,15 +141,16 @@
         <LinearLayout
             android:id="@+id/ll_setting"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/y90"
+
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x60"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
                 android:background="@mipmap/setting" />
 
             <TextView
@@ -174,15 +175,16 @@
         <LinearLayout
             android:id="@+id/ll_zidian"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/y90"
+
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x60"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
                 android:background="@mipmap/good" />
 
             <TextView
@@ -199,15 +201,16 @@
         <LinearLayout
             android:id="@+id/ll_gonghuoshang"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/y90"
+
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x60"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
                 android:background="@mipmap/ghszd" />
 
             <TextView
@@ -224,15 +227,15 @@
         <LinearLayout
             android:id="@+id/ll_fendian"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/y90"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x60"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
                 android:background="@mipmap/fdlx" />
 
             <TextView

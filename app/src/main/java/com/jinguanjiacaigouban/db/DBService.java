@@ -52,10 +52,13 @@ public class DBService {
             } else {
                 return "";
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
         } catch (Exception e) {
             e.printStackTrace();
+            return "";
         }
-        return "";
     }
 
     public static String doConnectionIMG(final String method, String fileName, final String... key) {
@@ -95,8 +98,8 @@ public class DBService {
             ps.setString(16, key[15]);
             if (in != null) {
                 ps.setBinaryStream(17, in, (int) myFile.length());
-            }else {
-                ps.setBinaryStream(17,null,0);
+            } else {
+                ps.setBinaryStream(17, null, 0);
             }
             ps.setString(18, key[16]);
 

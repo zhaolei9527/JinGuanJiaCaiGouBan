@@ -28,6 +28,7 @@ import com.jinguanjiacaigouban.bean.proDdEditBean;
 import com.jinguanjiacaigouban.bean.proDdFdBean;
 import com.jinguanjiacaigouban.bean.proDdInsertBean;
 import com.jinguanjiacaigouban.bean.proDdPmBean;
+import com.jinguanjiacaigouban.bean.proFdlxFdBean;
 import com.jinguanjiacaigouban.bean.proYgBean;
 import com.jinguanjiacaigouban.db.DBService;
 import com.jinguanjiacaigouban.utils.DateUtils;
@@ -121,6 +122,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
     private OrderGoodsListAdapter adapter;
     private OrderFenDianListAdapter orderFenDianListAdapter;
     private ArrayList<String> proFDList = new ArrayList<>();
+    private ArrayList<String> proFDBHList;
 
     @Override
     protected int setthislayout() {
@@ -207,7 +209,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         dialog.show();
         strBH = getIntent().getStringExtra("strBH");
         getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "查单");
-
     }
 
     @Override
@@ -231,7 +232,11 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                 getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "前单");
                 break;
             case R.id.btn_add_good:
-                startActivityForResult(new Intent(context, GoodShopActivity.class).putExtra("ischeck", true), 205);
+                startActivityForResult(new Intent(context, GoodShopActivity.class)
+                                .putExtra("ischeck", true)
+                                .putExtra("GHS", etSearchHonghuoshang.getText().toString())
+                                .putExtra("BH", tvBH.getText().toString())
+                        , 205);
                 break;
             case R.id.cb_Check_FD:
                 StringBuffer stringBuffer = new StringBuffer();
@@ -381,6 +386,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             } else {
                                 vNo.setVisibility(View.VISIBLE);
                             }
+
+                            etFd.setText("");
+                            Utils.showSoundWAV(context,R.raw.susses);
+
                         }
                     });
 
@@ -435,6 +444,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     }
 
                     showSponer(proYgList, etSearchCGY, "");
+                    Utils.showSoundWAV(context,R.raw.susses);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -456,6 +466,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void doSth() {
                 try {
+
                     String pro_yg = DBService.doConnection("pro_fdlx", String.valueOf(SpUtil.get(context, "MC", "")));
 
                     mHandler.post(new Runnable() {
@@ -478,12 +489,16 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
 
                     proFDList = new ArrayList<>();
+                    proFDBHList = new ArrayList<>();
+
 
                     for (int i = 0; i < proYgBeans.size(); i++) {
                         proFDList.add(proYgBeans.get(i).getMC());
+                        proFDBHList.add(proYgBeans.get(i).getBH());
                     }
 
                     showSponer(proFDList, etFd, "1");
+                    Utils.showSoundWAV(context,R.raw.susses);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -511,10 +526,9 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 et.setText(profl1list.get(i));
                             }
                         } else {
-                            proDdFdBean proDdFdBean = new proDdFdBean();
-                            proDdFdBean.setCol1(profl1list.get(i));
-                            orderFenDianListAdapter.getDatas().add(proDdFdBean);
-                            orderFenDianListAdapter.notifyDataSetChanged();
+                            String s = proFDBHList.get(i);
+                            etFd.setText(profl1list.get(i));
+                            getpro_fdlx_fd(String.valueOf(SpUtil.get(context, "MC", "")), s);
                         }
                         stringSpinerPopWindow.dismiss();
                     }
@@ -523,6 +537,61 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             }
         });
     }
+
+    private void getpro_fdlx_fd(final String... key) {
+        App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
+            @Override
+            public void doSth() {
+                try {
+                    String pro_fdlx_fd = DBService.doConnection("pro_fdlx_fd", key[0], key[1]);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
+                    if (TextUtils.isEmpty(pro_fdlx_fd)) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                                return;
+                            }
+                        });
+                    }
+
+                    final List<proFdlxFdBean> proFdlxFdBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i = 0; i < proFdlxFdBeans.size(); i++) {
+                                proDdFdBean proDdFdBean = new proDdFdBean();
+                                proDdFdBean.setErr(proFdlxFdBeans.get(i).getErr());
+                                proDdFdBean.setCol1(proFdlxFdBeans.get(i).getXSNR());
+                                proDdFdBean.setCol2(proFdlxFdBeans.get(i).getBH());
+                                orderFenDianListAdapter.getDatas().add(proDdFdBean);
+                            }
+                            orderFenDianListAdapter.notifyDataSetChanged();
+                            Utils.showSoundWAV(context,R.raw.susses);
+
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                            CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 
     private void initTimePicker(String title, final String TYPE) {
         Calendar selectedDate = Calendar.getInstance();
@@ -563,10 +632,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         }
 
         if (resultCode == 204 && requestCode == 204) {
-            proDdFdBean proDdFdBean = new proDdFdBean();
-            proDdFdBean.setCol1(data.getStringExtra("MC"));
-            orderFenDianListAdapter.getDatas().add(proDdFdBean);
-            orderFenDianListAdapter.notifyDataSetChanged();
+            etFd.setText(data.getStringExtra("MC"));
+            getpro_fdlx_fd(String.valueOf(SpUtil.get(context, "MC", "")), data.getStringExtra("BH"));
         }
 
         if (resultCode == 205 && requestCode == 205) {
@@ -629,6 +696,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 proDdPmBean.setCol2(key[4]);
                                 adapter.getDatas().add(proDdPmBean);
                                 adapter.notifyDataSetChanged();
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
                             }
@@ -680,6 +749,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         public void run() {
                             if (TextUtils.isEmpty(proDdInsertBeans.get(0).getErr())) {
                                 EasyToast.showShort(context, "保存成功");
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
                             }
@@ -731,6 +802,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         public void run() {
                             if (TextUtils.isEmpty(proDdInsertBeans.get(0).getErr())) {
                                 EasyToast.showShort(context, "保存成功");
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
                             }
@@ -789,6 +862,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                     rvOrderGoods.setAdapter(adapter);
                                 }
                             });
+                            Utils.showSoundWAV(context,R.raw.susses);
 
                         }
                     });
@@ -845,7 +919,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 public void run() {
                                     rvOrderFendian.setAdapter(orderFenDianListAdapter);
                                 }
+
                             });
+                            Utils.showSoundWAV(context,R.raw.susses);
+
                         }
                     });
 

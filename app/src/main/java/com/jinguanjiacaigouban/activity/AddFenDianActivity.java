@@ -184,6 +184,9 @@ public class AddFenDianActivity extends BaseActivity implements View.OnClickList
                         }
                     });
 
+                    Utils.showSoundWAV(context,R.raw.susses);
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -236,6 +239,8 @@ public class AddFenDianActivity extends BaseActivity implements View.OnClickList
                             }
                         }
                     });
+
+                    Utils.showSoundWAV(context,R.raw.susses);
 
                 } catch (Exception e) {
                     e.printStackTrace();

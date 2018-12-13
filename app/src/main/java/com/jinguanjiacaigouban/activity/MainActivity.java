@@ -195,6 +195,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             @Override
                             public void run() {
                                 EasyToast.showShort(context, "链接正常");
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             }
                         });
                     }

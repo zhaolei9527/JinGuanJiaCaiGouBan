@@ -251,6 +251,8 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                             public void run() {
                                 EasyToast.showShort(context, "操作成功");
                                 rlAddFendian.setVisibility(View.VISIBLE);
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             }
                         });
                     } else {
@@ -305,9 +307,12 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et.setText(proPymBeans.get(0).getPYM());
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proPymBeans.get(0).getErr());
                             }
+
 
                         }
                     });
@@ -364,6 +369,8 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                                 tvBH.setText(proFdlxEditBeans.get(0).getCol1());
                                 etMC.setText(proFdlxEditBeans.get(0).getCol2());
                                 etJM.setText(proFdlxEditBeans.get(0).getCol3());
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proFdlxEditBeans.get(0).getErr());
                             }
@@ -417,6 +424,8 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         public void run() {
                             rvFendianList.setAdapter(adapter);
                             tvCont.setText("总计：" + proFdlxSelectBeans.size());
+                            Utils.showSoundWAV(context,R.raw.susses);
+
                         }
                     });
 
@@ -467,6 +476,8 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                                 tvBH.setText(proCsAddBeans.get(0).getBH());
                                 strBH = proCsAddBeans.get(0).getBH();
                                 rlAddFendian.setVisibility(View.GONE);
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
                             }

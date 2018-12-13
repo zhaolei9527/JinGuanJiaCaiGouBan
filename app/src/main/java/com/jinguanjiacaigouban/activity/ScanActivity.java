@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.jinguanjiacaigouban.R;
+import com.jinguanjiacaigouban.utils.Utils;
 
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
@@ -66,7 +67,9 @@ public class ScanActivity extends AppCompatActivity implements QRCodeView.Delega
     @Override
     public void onScanQRCodeSuccess(String result) {
         Log.i(TAG, "result:" + result);
-        setResult(201,new Intent().putExtra("result",result));
+        setResult(201, new Intent().putExtra("result", result));
+        Utils.showSoundWAV(this, R.raw.susses);
+
         //vibrate();
         //mZXingView.startSpot(); // 延迟0.1秒后开始识别
         finish();

@@ -329,6 +329,8 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
         }
         SpUtil.putAndApply(context, "URl#" + linkName, serviceIP + "#" + serviceHost + "#" + serviceUsername + "#" + servicePwd + "#" + checkDB);
         EasyToast.showShort(context, "连接保存成功");
+        Utils.showSoundWAV(context,R.raw.susses);
+
         finish();
     }
 
@@ -363,6 +365,8 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
                                 Log.e("LinkActivity", resultSet.getString("NAME"));
                                 DBName.add(resultSet.getString("NAME"));
                             }
+                            Utils.showSoundWAV(context,R.raw.susses);
+
                             Log.e("LinkActivity", "读取完毕");
                             runOnUiThread(new Runnable() {
                                 @Override

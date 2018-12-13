@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
@@ -289,5 +290,15 @@ public class Utils {
         return "";
     }
 
+    /**
+     * 语音提示
+     *
+     * @param raw
+     */
+    public static void showSoundWAV(Context context, int raw) {
+        MediaPlayer mediaPlayer = null;
+        mediaPlayer = MediaPlayer.create(context, raw);
+        mediaPlayer.start();
+    }
 
 }

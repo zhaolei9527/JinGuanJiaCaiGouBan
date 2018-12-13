@@ -143,6 +143,7 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                             tvCont.setText("总计：" + proFdlxSelectBeans.size());
                         }
                     });
+                    Utils.showSoundWAV(context,R.raw.susses);
 
                 } catch (Exception e) {
                     e.printStackTrace();

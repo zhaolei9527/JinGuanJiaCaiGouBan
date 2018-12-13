@@ -61,7 +61,8 @@ public class GoodShopActivity extends BaseActivity {
     private SakuraLinearLayoutManager line;
     private GoodShopListAdapter adapter;
     public boolean isCheck;
-    public boolean isCheckGongHuoShang = false;
+    public boolean isCheckGongHuoShang = true;
+    private String ghs;
 
     @Override
     protected int setthislayout() {
@@ -154,14 +155,24 @@ public class GoodShopActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (!isCheckGongHuoShang) {
-            getData(etSearch.getText().toString().trim());
+            etSearchHonghuoshang.setText("");
+            etSearch.setText("");
+            getData("");
+        } else {
+            getData(etSearchHonghuoshang.getText().toString());
+            isCheckGongHuoShang = false;
         }
-        isCheckGongHuoShang = false;
     }
 
     @Override
     protected void initData() {
         isCheck = getIntent().getBooleanExtra("ischeck", false);
+        ghs = getIntent().getStringExtra("GHS");
+
+        if (!TextUtils.isEmpty(ghs)) {
+            etSearchHonghuoshang.setText(ghs);
+        }
+
         dialog = Utils.showLoadingDialog(context);
         dialog.show();
     }
@@ -199,6 +210,8 @@ public class GoodShopActivity extends BaseActivity {
                             tvCont.setText("总计：" + proPmSelectBeans.size());
                         }
                     });
+                    Utils.showSoundWAV(context,R.raw.susses);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {

@@ -502,9 +502,13 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                             if (TextUtils.isEmpty(proPmInsertBeans.get(0).getErr())) {
                                 if (!TextUtils.isEmpty(type)) {
+                                    Utils.showSoundWAV(context,R.raw.susses);
+
                                     EasyToast.showShort(context, "修改成功");
                                     finish();
                                 } else {
+                                    Utils.showSoundWAV(context,R.raw.susses);
+
                                     EasyToast.showShort(context, "添加成功");
                                     getproPmAdd();
 
@@ -577,6 +581,8 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                 etMC.setText(proPmSmBeans.get(0).getMC());
                                 etTM.setText(proPmSmBeans.get(0).getTM());
                                 tvCGDJ.setText(proPmSmBeans.get(0).getDJ());
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proPmSmBeans.get(0).getErr());
                             }
@@ -625,6 +631,8 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et.setText(proPymBeans.get(0).getPYM());
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proPymBeans.get(0).getErr());
                             }
@@ -675,6 +683,8 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         public void run() {
                             if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                                 tvBH.setText(proCsAddBeans.get(0).getBH());
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
                             }
@@ -714,6 +724,8 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                     try {
                         Log.e("GoodShopEditActivity", "数据流转换");
+                        Utils.showSoundWAV(context,R.raw.susses);
+
                         while (pro_pm_edit.next()) {
                             Log.e("GoodShopEditActivity", "数据流寻找");
 
@@ -865,6 +877,8 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         }
                         showSponer(profl3list, et);
                     }
+                    Utils.showSoundWAV(context,R.raw.susses);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {

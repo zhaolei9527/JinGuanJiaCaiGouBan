@@ -160,6 +160,8 @@ public class GongHuoShangActivity extends BaseActivity {
                         public void run() {
                             rvGonghuoshangList.setAdapter(adapter);
                             tvCont.setText("总计："+proCsSelectBeans.size());
+                            Utils.showSoundWAV(context,R.raw.susses);
+
                         }
                     });
                 } catch (Exception e) {

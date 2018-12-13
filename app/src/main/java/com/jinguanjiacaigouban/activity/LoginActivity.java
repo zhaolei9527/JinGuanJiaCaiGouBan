@@ -152,6 +152,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             cbSavePsd.setChecked(false);
         }
 
+
+
+
     }
 
     @Override
@@ -287,6 +290,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
+                                Utils.showSoundWAV(context,R.raw.susses);
+
                                 EasyToast.showShort(context, "链接正常");
                             }
                         });
@@ -363,6 +368,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             .putExtra("link", link)
                                     );
                                     EasyToast.showShort(context, "登录成功");
+                                    Utils.showSoundWAV(context,R.raw.susses);
+
                                     finish();
                                 }
                             }
