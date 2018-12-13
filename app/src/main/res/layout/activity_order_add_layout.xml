@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:background="@mipmap/ic_launcher" />
+                    android:background="@mipmap/back" />
 
             </FrameLayout>
 
@@ -131,9 +131,9 @@
 
                 <ImageView
                     android:layout_width="@dimen/x15"
-                    android:layout_height="@dimen/x15"
+                    android:layout_height="@dimen/x10"
                     android:layout_marginRight="@dimen/x5"
-                    android:background="@mipmap/ic_launcher" />
+                    android:background="@mipmap/down" />
 
             </LinearLayout>
 
@@ -172,9 +172,9 @@
             <ImageView
                 android:id="@+id/img_selelte_CGY"
                 android:layout_width="@dimen/x15"
-                android:layout_height="@dimen/x15"
+                android:layout_height="@dimen/x10"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/down" />
 
         </LinearLayout>
 
@@ -213,7 +213,7 @@
                 android:layout_width="@dimen/x15"
                 android:layout_height="@dimen/x15"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/ghs" />
 
         </LinearLayout>
 

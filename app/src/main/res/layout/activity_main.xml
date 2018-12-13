@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/back" />
 
         </FrameLayout>
 
@@ -98,16 +98,18 @@
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:background="@mipmap/kd" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x5"
                 android:layout_marginBottom="@dimen/x5"
-                android:text="开单" />
+                android:text="开单"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
 
         </LinearLayout>
 
@@ -121,16 +123,18 @@
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:background="@mipmap/cd" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x5"
                 android:layout_marginBottom="@dimen/x5"
-                android:text="查单" />
+                android:text="查单"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
 
         </LinearLayout>
 
@@ -144,16 +148,18 @@
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:background="@mipmap/setting" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x5"
                 android:layout_marginBottom="@dimen/x5"
-                android:text="系统设置" />
+                android:text="系统设置"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
 
         </LinearLayout>
 
@@ -175,16 +181,18 @@
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:background="@mipmap/good" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x5"
                 android:layout_marginBottom="@dimen/x5"
-                android:text="商品字典" />
+                android:text="商品字典"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
 
         </LinearLayout>
 
@@ -198,16 +206,18 @@
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:background="@mipmap/ghszd" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x5"
                 android:layout_marginBottom="@dimen/x5"
-                android:text="供货商字典" />
+                android:text="供货商字典"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
 
         </LinearLayout>
 
@@ -221,16 +231,18 @@
             android:padding="@dimen/x10">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:background="@mipmap/fdlx" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x5"
                 android:layout_marginBottom="@dimen/x5"
-                android:text="分店类型" />
+                android:text="分店类型"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
 
         </LinearLayout>
 
@@ -262,7 +274,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="技术支持：18642275921（微信同步）"
-                android:textSize="@dimen/x11" />
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
 
         </LinearLayout>
 

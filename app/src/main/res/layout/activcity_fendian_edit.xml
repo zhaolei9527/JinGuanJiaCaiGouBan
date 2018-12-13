@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/back" />
 
         </FrameLayout>
 
@@ -49,9 +49,9 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="@dimen/x30"
-                android:layout_height="@dimen/x30"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:background="@mipmap/save" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
                     android:layout_width="@dimen/x15"
                     android:layout_height="@dimen/x15"
                     android:layout_marginLeft="@dimen/x15"
-                    android:background="@mipmap/ic_launcher" />
+                    android:background="@mipmap/cont" />
 
                 <TextView
                     android:id="@+id/tv_cont"
@@ -272,7 +272,7 @@
                         android:layout_height="@dimen/x15"
                         android:layout_marginLeft="@dimen/x15"
                         android:layout_toLeftOf="@id/tv_ADD"
-                        android:background="@mipmap/ic_launcher" />
+                        android:background="@mipmap/addd" />
 
                 </RelativeLayout>
 

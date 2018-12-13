@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/back" />
 
         </FrameLayout>
 
@@ -49,9 +49,9 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="@dimen/x30"
-                android:layout_height="@dimen/x30"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:background="@mipmap/save" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,12 +109,12 @@
                     android:textSize="@dimen/x13" />
 
                 <ImageView
-                    android:id="@+id/img_selelte_gonghuoshang"
                     android:layout_width="@dimen/x15"
-                    android:layout_height="@dimen/x15"
+                    android:layout_height="@dimen/x10"
+                    android:id="@+id/img_selelte_gonghuoshang"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/x5"
-                    android:background="@mipmap/ic_launcher" />
+                    android:background="@mipmap/down" />
 
             </LinearLayout>
 
@@ -168,9 +168,9 @@
 
                             <ImageView
                                 android:layout_width="@dimen/x15"
-                                android:layout_height="@dimen/x15"
+                                android:layout_height="@dimen/x10"
                                 android:layout_gravity="center"
-                                android:background="@mipmap/ic_launcher" />
+                                android:background="@mipmap/down" />
 
                         </FrameLayout>
 
@@ -231,9 +231,9 @@
 
                             <ImageView
                                 android:layout_width="@dimen/x15"
-                                android:layout_height="@dimen/x15"
+                                android:layout_height="@dimen/x10"
                                 android:layout_gravity="center"
-                                android:background="@mipmap/ic_launcher" />
+                                android:background="@mipmap/down" />
 
                         </FrameLayout>
 
@@ -294,9 +294,9 @@
 
                             <ImageView
                                 android:layout_width="@dimen/x15"
-                                android:layout_height="@dimen/x15"
+                                android:layout_height="@dimen/x10"
                                 android:layout_gravity="center"
-                                android:background="@mipmap/ic_launcher" />
+                                android:background="@mipmap/down" />
 
                         </FrameLayout>
 

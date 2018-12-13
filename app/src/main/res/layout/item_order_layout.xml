@@ -38,10 +38,10 @@
             <ImageView
                 android:id="@+id/img_show_goods"
                 android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x20"
+                android:layout_height="@dimen/x10"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/x10"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/down" />
 
         </LinearLayout>
 

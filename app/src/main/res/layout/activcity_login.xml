@@ -14,9 +14,9 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/ic_launcher" />
+            android:layout_width="@dimen/x65"
+            android:layout_height="@dimen/x65"
+            android:background="@mipmap/ic" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
             <ImageView
                 android:layout_width="@dimen/x15"
                 android:layout_height="@dimen/x15"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/linkname" />
 
             <View
                 android:layout_width="@dimen/x1"
@@ -92,9 +92,9 @@
 
                 <ImageView
                     android:layout_width="@dimen/x15"
-                    android:layout_height="@dimen/x15"
+                    android:layout_height="@dimen/x10"
                     android:layout_gravity="center"
-                    android:background="@mipmap/ic_launcher" />
+                    android:background="@mipmap/down" />
 
             </FrameLayout>
 
@@ -134,7 +134,7 @@
             <ImageView
                 android:layout_width="@dimen/x15"
                 android:layout_height="@dimen/x15"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/name" />
 
             <View
                 android:layout_width="@dimen/x1"
@@ -210,7 +210,7 @@
             <ImageView
                 android:layout_width="@dimen/x15"
                 android:layout_height="@dimen/x15"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/pwd" />
 
             <View
                 android:layout_width="@dimen/x1"
