@@ -75,6 +75,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         llSetting.setOnClickListener(this);
         llZidian.setOnClickListener(this);
         tvLinkName.setOnClickListener(this);
+        tvUserName.setOnClickListener(this);
     }
 
     @Override
@@ -129,12 +130,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.tv_UserName:
+                doTest();
+                break;
             case R.id.fl_back:
                 startActivity(new Intent(context, LoginActivity.class));
                 finish();
                 break;
             case R.id.tv_Link_name:
-                doTest();
+                startActivity(new Intent(context, ChangePasswordActivity.class));
                 break;
             case R.id.ll_chadan:
                 startActivity(new Intent(context, OrderSearchActivity.class));
@@ -195,8 +199,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             @Override
                             public void run() {
                                 EasyToast.showShort(context, "链接正常");
-                                Utils.showSoundWAV(context,R.raw.susses);
-
+                                Utils.showSoundWAV(context, R.raw.susses);
                             }
                         });
                     }
@@ -213,6 +216,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

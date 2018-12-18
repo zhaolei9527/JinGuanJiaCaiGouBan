@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -75,6 +76,12 @@ public class CheckPwdDialog extends Dialog implements View.OnClickListener {
 
     private void initView() {
         contentTxt = (EditText) findViewById(R.id.content);
+
+        contentTxt.setFocusable(true);
+        contentTxt.setFocusableInTouchMode(true);
+        contentTxt.requestFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
         titleTxt = (TextView) findViewById(R.id.title);
         submitTxt = (TextView) findViewById(R.id.submit);
         submitTxt.setOnClickListener(this);

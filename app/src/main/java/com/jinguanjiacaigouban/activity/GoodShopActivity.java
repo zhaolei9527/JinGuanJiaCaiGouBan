@@ -20,6 +20,7 @@ import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.adapter.GoodShopListAdapter;
 import com.jinguanjiacaigouban.bean.proPmSelectBean;
 import com.jinguanjiacaigouban.db.DBService;
+import com.jinguanjiacaigouban.utils.EasyToast;
 import com.jinguanjiacaigouban.utils.PriorityRunnable;
 import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
@@ -63,6 +64,34 @@ public class GoodShopActivity extends BaseActivity {
     public boolean isCheck;
     public boolean isCheckGongHuoShang = true;
     private String ghs;
+    public static String mc;
+    private String oid;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isCheckGongHuoShang) {
+            etSearchHonghuoshang.setText("");
+            etSearch.setText("");
+            getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
+        } else {
+            getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
+            isCheckGongHuoShang = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+    }
 
     @Override
     protected int setthislayout() {
@@ -81,6 +110,8 @@ public class GoodShopActivity extends BaseActivity {
         rvGonghuoshangList.setFootLoadingView(progressView);
         rvGonghuoshangList.loadMoreComplete();
         rvGonghuoshangList.setCanloadMore(false);
+        mc = "";
+
 
     }
 
@@ -102,7 +133,7 @@ public class GoodShopActivity extends BaseActivity {
                     /**
                      *检索输入监听
                      */
-                    getData(editable.toString());
+                    getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
                 }
             }
         });
@@ -145,29 +176,17 @@ public class GoodShopActivity extends BaseActivity {
                     /**
                      *检索输入监听
                      */
-                    getData(editable.toString());
+                    getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
                 }
             }
         });
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (!isCheckGongHuoShang) {
-            etSearchHonghuoshang.setText("");
-            etSearch.setText("");
-            getData("");
-        } else {
-            getData(etSearchHonghuoshang.getText().toString());
-            isCheckGongHuoShang = false;
-        }
-    }
-
-    @Override
     protected void initData() {
         isCheck = getIntent().getBooleanExtra("ischeck", false);
         ghs = getIntent().getStringExtra("GHS");
+        oid = getIntent().getStringExtra("oid");
 
         if (!TextUtils.isEmpty(ghs)) {
             etSearchHonghuoshang.setText(ghs);
@@ -177,7 +196,7 @@ public class GoodShopActivity extends BaseActivity {
         dialog.show();
     }
 
-    public void getData(final String key) {
+    public void getData(final String... key) {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
             @Override
             public void doSth() {
@@ -202,16 +221,23 @@ public class GoodShopActivity extends BaseActivity {
                     }
 
                     final List<proPmSelectBean> proPmSelectBeans = proPmSelectBean.arrayproPmSelectBeanFromData(pro_cs_select);
-                    adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans);
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
+                            adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans);
                             rvGonghuoshangList.setAdapter(adapter);
                             tvCont.setText("总计：" + proPmSelectBeans.size());
+                            if (!TextUtils.isEmpty(GongHuoShangActivity.mc)) {
+                                for (int i = 0; i < proPmSelectBeans.size(); i++) {
+                                    if (proPmSelectBeans.get(i).getMC().equals(GongHuoShangActivity.mc)) {
+                                        proPmSelectBeans.get(i).setErr("1");
+                                        rvGonghuoshangList.scrollToPosition(i);
+                                        EasyToast.showShort(context, proPmSelectBeans.get(i).getMC());
+                                    }
+                                }
+                            }
                         }
                     });
-                    Utils.showSoundWAV(context,R.raw.susses);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -227,25 +253,14 @@ public class GoodShopActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 200) {
             String gonghuoshang = data.getStringExtra("gonghuoshang");
             etSearchHonghuoshang.setText(gonghuoshang);
+        } else if (requestCode == 800) {
+            mc = data.getStringExtra("MC");
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.gc();
-    }
 }

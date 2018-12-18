@@ -610,6 +610,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:inputType="numberDecimal"
                             android:id="@+id/tv_CGDJ"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -660,6 +661,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:inputType="numberDecimal"
                             android:id="@+id/tv_YSDJ"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -709,6 +711,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:inputType="numberDecimal"
                             android:id="@+id/tv_DDSL"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.jinguanjiacaigouban.App;
 import com.jinguanjiacaigouban.R;
+import com.jinguanjiacaigouban.activity.FenDianEditActivity;
 import com.jinguanjiacaigouban.bean.proCsDeleteBean;
 import com.jinguanjiacaigouban.bean.proFdlxFdBean;
 import com.jinguanjiacaigouban.db.DBService;
@@ -72,7 +73,7 @@ public class FenDianEditListAdapter extends RecyclerView.Adapter<FenDianEditList
                     public void onClick(Dialog dialog, final boolean confirm) {
                         dialog.dismiss();
                         if (confirm) {
-                            getData(position, datas.get(position).getBH(), datas.get(position).getMC(), (String) SpUtil.get(mContext, "androidIMEI", ""));
+                            getData(position, FenDianEditActivity.strBH, datas.get(position).getMC(), (String) SpUtil.get(mContext, "androidIMEI", ""));
                         }
                     }
                 }).setTitle("提示").show();

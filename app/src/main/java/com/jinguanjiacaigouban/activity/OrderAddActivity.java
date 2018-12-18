@@ -76,6 +76,8 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
     Button btnSubmit;
     @BindView(R.id.tv_BH)
     TextView tvBH;
+    @BindView(R.id.ll_qiandan)
+    LinearLayout llQiandan;
     private TimePickerView pvTime;
     private ArrayList<String> proYgList = new ArrayList<>();
     private Dialog dialog;
@@ -102,6 +104,7 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
         imgSelelteCGY.setOnClickListener(this);
         imgSelelteGonghuoshang.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
+        llQiandan.setOnClickListener(this);
 
         strFKFS = "月结";
 
@@ -145,6 +148,11 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.ll_qiandan:
+                startActivity(new Intent(context, OrderEditActivity.class)
+                        .putExtra("strBH", strBH)
+                        .putExtra("type", "前单"));
+                break;
             case R.id.fl_back:
                 finish();
                 break;
@@ -249,8 +257,6 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                     }
 
                     showSponer(proYgList, etSearchCGY);
-                    Utils.showSoundWAV(context,R.raw.susses);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -355,7 +361,7 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                             if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                                 tvBH.setText(proCsAddBeans.get(0).getBH());
                                 strBH = proCsAddBeans.get(0).getBH();
-                                Utils.showSoundWAV(context,R.raw.susses);
+                                Utils.showSoundWAV(context, R.raw.susses);
 
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
@@ -408,15 +414,12 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                             if (TextUtils.isEmpty(proDdInsertBeans.get(0).getErr())) {
                                 finish();
                                 startActivity(new Intent(context, OrderEditActivity.class).putExtra("strBH", proDdInsertBeans.get(0).getBH()));
-                                Utils.showSoundWAV(context,R.raw.susses);
-
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
                             }
 
                         }
                     });
-
 
 
                 } catch (Exception e) {

@@ -67,6 +67,7 @@ public class GongHuoShangListAdapter extends RecyclerView.Adapter<GongHuoShangLi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
+
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,23 +89,22 @@ public class GongHuoShangListAdapter extends RecyclerView.Adapter<GongHuoShangLi
             holder.cbCheck.setEnabled(false);
         }
 
+        if (datas.get(position).getErr().equals("1")) {
+            holder.cbCheck.setEnabled(true);
+            holder.cbCheck.setChecked(true);
+        } else {
+            holder.cbCheck.setChecked(false);
+        }
+
         holder.cbCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommomDialog(mContext, R.style.dialog, "确认录入该条信息？", new CommomDialog.OnCloseListener() {
-                    @Override
-                    public void onClick(Dialog dialog, final boolean confirm) {
-                        dialog.dismiss();
-                        if (confirm) {
-                            mContext.setResult(200, new Intent()
-                                    .putExtra("FLMC1", datas.get(position).getFLMC1())
-                                    .putExtra("FLMC2", datas.get(position).getFLMC2())
-                                    .putExtra("FLMC3", datas.get(position).getFLMC3())
-                                    .putExtra("gonghuoshang", datas.get(position).getMC()));
-                            mContext.finish();
-                        }
-                    }
-                }).setTitle("提示").show();
+                mContext.setResult(200, new Intent()
+                        .putExtra("FLMC1", datas.get(position).getFLMC1())
+                        .putExtra("FLMC2", datas.get(position).getFLMC2())
+                        .putExtra("FLMC3", datas.get(position).getFLMC3())
+                        .putExtra("gonghuoshang", datas.get(position).getMC()));
+                mContext.finish();
             }
         });
 

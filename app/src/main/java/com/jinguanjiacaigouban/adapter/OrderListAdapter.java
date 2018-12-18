@@ -79,6 +79,10 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
             @Override
             public void onClick(View view) {
 
+
+
+
+
                 Log.e("OrderListAdapter", "position:" + position);
 
                 proDdPm(holder, datas.get(position).getBH());
@@ -298,7 +302,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                                 TextView tv_shuliang = item_proddpm_layout.findViewById(R.id.tv_shuliang);
                                 TextView tv_beizhu = item_proddpm_layout.findViewById(R.id.tv_beizhu);
                                 tv_title.setText("编号：" + proDdPmBeans.get(i).getCol1() + " 品名：" + proDdPmBeans.get(i).getCol2());
-                                tv_danjia.setText("单价：" + proDdPmBeans.get(i).getCol3());
+                                tv_danjia.setText("单价：" + Utils.subZeroAndDot(proDdPmBeans.get(i).getCol3()));
                                 tv_shuliang.setText("数量：" + proDdPmBeans.get(i).getCol4());
                                 tv_beizhu.setText("备注：" + proDdPmBeans.get(i).getCol5());
                                 holder.llOrderGoods.addView(item_proddpm_layout);

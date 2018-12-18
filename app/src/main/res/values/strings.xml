@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">金管家</string>
+    <string name="app_name">金管家采购</string>
     <string name="loading">加载中......</string>
     <string name="requstPerminssions">扫描二维码需要打开相机和散光灯的权限</string>
     <string name="notmore">没有更多了</string>

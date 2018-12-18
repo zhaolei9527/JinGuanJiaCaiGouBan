@@ -92,69 +92,69 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onResume() {
         super.onResume();
-        Acp.getInstance(context).
-                request(new AcpOptions.Builder().setPermissions(
-                        Manifest.permission.READ_PHONE_STATE
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        )
-                                .setDeniedMessage(getString(R.string.requstPerminssions))
-                                .build(),
-                        new AcpListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                            @Override
-                            public void onGranted() {
-                                //获取设备号
-                                String androidIMEI = getAndroidIMEI(context);
-                                SpUtil.putAndApply(context, "androidIMEI", androidIMEI);
-                                Log.e("MainActivity", androidIMEI);
-                                tvAndroidIMEI.setText("设备号：" + androidIMEI + "  复制");
-                            }
+        try {
+            Acp.getInstance(context).
+                    request(new AcpOptions.Builder().setPermissions(
+                            Manifest.permission.READ_PHONE_STATE
+                            , Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            )
+                                    .setDeniedMessage(getString(R.string.requstPerminssions))
+                                    .build(),
+                            new AcpListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                                @Override
+                                public void onGranted() {
+                                    //获取设备号
+                                    String androidIMEI = getAndroidIMEI(context);
+                                    SpUtil.putAndApply(context, "androidIMEI", androidIMEI);
+                                    Log.e("MainActivity", androidIMEI);
+                                    tvAndroidIMEI.setText("设备号：" + androidIMEI + "  复制");
+                                }
 
-                            @Override
-                            public void onDenied(List<String> permissions) {
-                                Toast.makeText(context, R.string.Thepermissionapplicationisrejected, Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                                @Override
+                                public void onDenied(List<String> permissions) {
+                                    Toast.makeText(context, R.string.Thepermissionapplicationisrejected, Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
-        allSP = (Map<String, String>) SpUtil.getAll(context);
-        list = new ArrayList<>();
-        for (Map.Entry<String, String> entry : allSP.entrySet()) {
-            Log.e("LinkActivity", entry.getKey());
-            if (entry.getKey().startsWith("URl#")) {
-                String[] split = entry.getKey().split("#");
-                list.add(split[1]);
+            allSP = (Map<String, String>) SpUtil.getAll(context);
+            list = new ArrayList<>();
+            for (Map.Entry<String, String> entry : allSP.entrySet()) {
+                Log.e("LinkActivity", entry.getKey());
+                if (entry.getKey().startsWith("URl#")) {
+                    String[] split = entry.getKey().split("#");
+                    list.add(split[1]);
+                }
             }
+
+            mSpinerPopWindow = new SpinerPopWindow<String>(this, list, itemClickListener);
+
+            link = (String) SpUtil.get(context, "lastURL", "");
+            username = (String) SpUtil.get(context, "username", "");
+            pwd = (String) SpUtil.get(context, "pwd", "");
+
+            if (!TextUtils.isEmpty(link)) {
+                tvLink.setText(link);
+            } else {
+                tvLink.setText("");
+            }
+
+            if (!TextUtils.isEmpty(username)) {
+                etUsername.setText(username);
+            } else {
+                etUsername.setText("");
+            }
+
+            if (!TextUtils.isEmpty(pwd)) {
+                etPwd.setText(pwd);
+                cbSavePsd.setChecked(true);
+            } else {
+                etPwd.setText("");
+                cbSavePsd.setChecked(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        mSpinerPopWindow = new SpinerPopWindow<String>(this, list, itemClickListener);
-
-        link = (String) SpUtil.get(context, "lastURL", "");
-        username = (String) SpUtil.get(context, "username", "");
-        pwd = (String) SpUtil.get(context, "pwd", "");
-
-        if (!TextUtils.isEmpty(link)) {
-            tvLink.setText(link);
-        }else {
-            tvLink.setText("");
-        }
-
-        if (!TextUtils.isEmpty(username)) {
-            etUsername.setText(username);
-        }else {
-            etUsername.setText("");
-        }
-
-        if (!TextUtils.isEmpty(pwd)) {
-            etPwd.setText(pwd);
-            cbSavePsd.setChecked(true);
-        } else {
-            etPwd.setText("");
-            cbSavePsd.setChecked(false);
-        }
-
-
-
-
     }
 
     @Override
@@ -290,7 +290,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                Utils.showSoundWAV(context,R.raw.susses);
+                                Utils.showSoundWAV(context, R.raw.susses);
 
                                 EasyToast.showShort(context, "链接正常");
                             }
@@ -368,8 +368,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                             .putExtra("link", link)
                                     );
                                     EasyToast.showShort(context, "登录成功");
-                                    Utils.showSoundWAV(context,R.raw.susses);
-
                                     finish();
                                 }
                             }
@@ -408,10 +406,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         pwd = etPwd.getText().toString().trim();
-        if (TextUtils.isEmpty(pwd)) {
-            CommomDialog.showMessage(context, "请输入密码");
-            return false;
-        }
+        //if (TextUtils.isEmpty(pwd)) {
+        //  CommomDialog.showMessage(context, "请输入密码");
+        //    return false;
+        //}
+
+
         return true;
     }
 
@@ -453,6 +453,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         SpUtil.putAndApply(context, "udid", androidIMEI);
         return androidIMEI;
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

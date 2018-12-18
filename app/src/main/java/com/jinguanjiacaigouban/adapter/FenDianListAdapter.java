@@ -92,16 +92,10 @@ public class FenDianListAdapter extends RecyclerView.Adapter<FenDianListAdapter.
         holder.cbCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommomDialog(mContext, R.style.dialog, "确认录入该条信息？", new CommomDialog.OnCloseListener() {
-                    @Override
-                    public void onClick(Dialog dialog, final boolean confirm) {
-                        dialog.dismiss();
-                        if (confirm) {
-                            mContext.setResult(204, new Intent().putExtra("MC", datas.get(position).getMC()).putExtra("BH", datas.get(position).getBH()));
-                            mContext.finish();
-                        }
-                    }
-                }).setTitle("提示").show();
+
+                mContext.setResult(204, new Intent().putExtra("MC", datas.get(position).getMC()).putExtra("BH", datas.get(position).getBH()));
+                mContext.finish();
+
             }
         });
 

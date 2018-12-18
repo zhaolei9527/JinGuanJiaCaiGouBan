@@ -120,7 +120,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable editable) {
                 if (input) {
-                    getdata();
+                    getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
                 }
             }
         });
@@ -139,7 +139,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable editable) {
                 if (input) {
-                    getdata();
+                    getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
                 }
             }
         });
@@ -337,8 +337,6 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     showSponer(proYgList, etSearchCGY);
-                    Utils.showSoundWAV(context,R.raw.susses);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {

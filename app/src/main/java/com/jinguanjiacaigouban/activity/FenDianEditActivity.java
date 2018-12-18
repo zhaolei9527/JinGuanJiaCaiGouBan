@@ -70,7 +70,7 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.rl_add_fendian)
     RelativeLayout rlAddFendian;
     private String type;
-    private String strBH;
+    public static String strBH;
     private Dialog dialog;
     private LinearLayoutManager line;
     private FenDianEditListAdapter adapter;
@@ -87,9 +87,9 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
         strBH = getIntent().getStringExtra("strBH");
 
         if (!TextUtils.isEmpty(type)) {
-            tvTitle.setText("分店_修改");
+            tvTitle.setText("分店类型_修改");
         } else {
-            tvTitle.setText("分店_新增");
+            tvTitle.setText("分店类型_新增");
         }
 
         line = new LinearLayoutManager(context);
@@ -127,7 +127,6 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
             public void afterTextChanged(Editable editable) {
                 if (input) {
                     if (!TextUtils.isEmpty(editable.toString().trim())) {
-                        dialog.show();
                         getproPymData(editable.toString().trim(), etJM);
                     }
                 }
@@ -251,8 +250,8 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                             public void run() {
                                 EasyToast.showShort(context, "操作成功");
                                 rlAddFendian.setVisibility(View.VISIBLE);
-                                Utils.showSoundWAV(context,R.raw.susses);
-
+                                Utils.showSoundWAV(context, R.raw.susses);
+                                tvTitle.setText("分店类型_编辑");
                             }
                         });
                     } else {
@@ -307,8 +306,6 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et.setText(proPymBeans.get(0).getPYM());
-                                Utils.showSoundWAV(context,R.raw.susses);
-
                             } else {
                                 CommomDialog.showMessage(context, proPymBeans.get(0).getErr());
                             }
@@ -369,8 +366,6 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                                 tvBH.setText(proFdlxEditBeans.get(0).getCol1());
                                 etMC.setText(proFdlxEditBeans.get(0).getCol2());
                                 etJM.setText(proFdlxEditBeans.get(0).getCol3());
-                                Utils.showSoundWAV(context,R.raw.susses);
-
                             } else {
                                 CommomDialog.showMessage(context, proFdlxEditBeans.get(0).getErr());
                             }
@@ -414,7 +409,6 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         });
                     }
 
-
                     final List<proFdlxFdBean> proFdlxSelectBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
 
                     adapter = new FenDianEditListAdapter(FenDianEditActivity.this, proFdlxSelectBeans);
@@ -424,11 +418,8 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         public void run() {
                             rvFendianList.setAdapter(adapter);
                             tvCont.setText("总计：" + proFdlxSelectBeans.size());
-                            Utils.showSoundWAV(context,R.raw.susses);
-
                         }
                     });
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -476,8 +467,7 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                                 tvBH.setText(proCsAddBeans.get(0).getBH());
                                 strBH = proCsAddBeans.get(0).getBH();
                                 rlAddFendian.setVisibility(View.GONE);
-                                Utils.showSoundWAV(context,R.raw.susses);
-
+                                Utils.showSoundWAV(context, R.raw.susses);
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
                             }

@@ -1,6 +1,7 @@
 package com.jinguanjiacaigouban.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -131,7 +132,6 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             public void afterTextChanged(Editable editable) {
                 if (input) {
                     if (!TextUtils.isEmpty(editable.toString().trim())) {
-                        dialog.show();
                         getproPymData(editable.toString().trim(), et_JM);
                     }
                 }
@@ -181,7 +181,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         public void run() {
                             if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                                 tv_BH.setText(proCsAddBeans.get(0).getBH());
-                                Utils.showSoundWAV(context,R.raw.susses);
+                                Utils.showSoundWAV(context, R.raw.susses);
 
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
@@ -251,7 +251,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                             sanji.setText(proCsEditBeans.get(0).getCol9());
                             et_beizhu.setText(proCsEditBeans.get(0).getCol10());
                             input = true;
-                            Utils.showSoundWAV(context,R.raw.susses);
+                            Utils.showSoundWAV(context, R.raw.susses);
 
                         }
                     });
@@ -422,8 +422,6 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         }
                         showSponer(profl3list, et);
                     }
-                    Utils.showSoundWAV(context,R.raw.susses);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -527,8 +525,6 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et_JM.setText(proPymBeans.get(0).getPYM());
-                                Utils.showSoundWAV(context,R.raw.susses);
-
                             } else {
                                 CommomDialog.showMessage(context, proPymBeans.get(0).getErr());
                             }
@@ -576,14 +572,29 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                     }
                     final List<proCsInsertBean> proCsInsertBeans = proCsInsertBean.arrayproCsInsertBeanFromData(pro_cs_edit);
 
-
                     if (TextUtils.isEmpty(proCsInsertBeans.get(0).getErr().toString().trim())) {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 EasyToast.showShort(context, "操作成功");
-                                Utils.showSoundWAV(context,R.raw.susses);
+                                Utils.showSoundWAV(context, R.raw.susses);
+                                setResult(800, new Intent().putExtra("MC", et_MC.getText().toString()));
 
+                                if (!TextUtils.isEmpty(type)) {
+                                    tvTitle.setText("供货商_修改");
+                                    finish();
+                                } else {
+                                    tvTitle.setText("供货商_新增");
+                                    dialog.show();
+                                    getproCsAdd();
+                                    et_JM.setText("");
+                                    et_TYM.setText("");
+                                    et_Phone.setText("");
+                                    et_beizhu.setText("");
+                                    yiji.setText("");
+                                    erji.setText("");
+                                    sanji.setText("");
+                                }
                             }
                         });
                     } else {
@@ -637,10 +648,6 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                     for (int i = 0; i < proCslxBeans.size(); i++) {
                         addresslist.add(proCslxBeans.get(i).getMC());
                     }
-                    Utils.showSoundWAV(context,R.raw.susses);
-
-                    showSponer(addresslist, et);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -654,6 +661,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -90,7 +90,7 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
             public void onClick(View view) {
                 try {
                     ClipboardManager cm = (ClipboardManager) mContext.getSystemService(mContext.CLIPBOARD_SERVICE);
-                    cm.setText(datas.get(position).getXSNR()+"==="+datas.get(position).getXSNR2());
+                    cm.setText(datas.get(position).getXSNR() + "===" + datas.get(position).getXSNR2());
                     EasyToast.showShort(mContext, "已复制到粘贴板");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -108,25 +108,25 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
         holder.cbCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CommomDialog(mContext, R.style.dialog, "确认录入该条信息？", new CommomDialog.OnCloseListener() {
-                    @Override
-                    public void onClick(Dialog dialog, final boolean confirm) {
-                        dialog.dismiss();
-                        if (confirm) {
-                            mContext.setResult(205, new Intent().putExtra("MC", datas.get(position).getMC()).putExtra("BH", datas.get(position).getBH()));
-                            mContext.finish();
-                        }
-                    }
-                }).setTitle("提示").show();
+
+                mContext.setResult(205, new Intent().putExtra("MC", datas.get(position).getMC()).putExtra("BH", datas.get(position).getBH()));
+                mContext.finish();
+            
             }
         });
 
 
-        holder.tvXSNR.setText(datas.get(position).getXSNR());
+        holder.tvXSNR.setText(datas.get(position).
 
-        holder.tvXSNR2.setText(datas.get(position).getXSNR2());
+                getXSNR());
 
-        holder.llEdit.setOnClickListener(new View.OnClickListener() {
+        holder.tvXSNR2.setText(datas.get(position).
+
+                getXSNR2());
+
+        holder.llEdit.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View view) {
                 mContext.startActivity(new Intent(mContext, GoodShopEditActivity.class)

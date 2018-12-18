@@ -188,7 +188,6 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
             public void afterTextChanged(Editable editable) {
                 if (input) {
                     if (!TextUtils.isEmpty(editable.toString().trim())) {
-                        dialog.show();
                         getproPymData(editable.toString().trim(), etJM);
                     }
                 }
@@ -202,6 +201,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                     SpUtil.putAndApply(context, "autoTM", "1");
                     etTM.setFocusable(false);
                     etTM.setEnabled(false);
+                    etTM.setText("-1");
                 } else {
                     SpUtil.putAndApply(context, "autoTM", "0");
                     etTM.setFocusable(true);
@@ -500,40 +500,49 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         @Override
                         public void run() {
 
-                            if (TextUtils.isEmpty(proPmInsertBeans.get(0).getErr())) {
-                                if (!TextUtils.isEmpty(type)) {
-                                    Utils.showSoundWAV(context,R.raw.susses);
+                            try {
 
-                                    EasyToast.showShort(context, "修改成功");
-                                    finish();
+                                if (TextUtils.isEmpty(proPmInsertBeans.get(0).getErr())) {
+
+                                    setResult(800, new Intent().putExtra("MC", etMC.getText().toString()));
+
+                                    if (!TextUtils.isEmpty(type)) {
+                                        Utils.showSoundWAV(context, R.raw.susses);
+
+                                        EasyToast.showShort(context, "修改成功");
+                                        finish();
+                                    } else {
+                                        Utils.showSoundWAV(context, R.raw.susses);
+
+                                        EasyToast.showShort(context, "添加成功");
+                                        getproPmAdd();
+
+                                        etMC.setText("");
+                                        etJM.setText("");
+                                        etTYM.setText("");
+                                        etTM.setText("");
+                                        tvCGDJ.setText("");
+                                        tvYSDJ.setText("");
+                                        tvDDSL.setText("");
+                                        etBeizhu.setText("");
+                                        pic = "";
+                                        isclear = "";
+                                        imgShop.setVisibility(View.GONE);
+
+                                    }
+
                                 } else {
-                                    Utils.showSoundWAV(context,R.raw.susses);
-
-                                    EasyToast.showShort(context, "添加成功");
-                                    getproPmAdd();
-
-                                    etMC.setText("");
-                                    etJM.setText("");
-                                    etTYM.setText("");
-                                    etTM.setText("");
-                                    tvCGDJ.setText("");
-                                    tvYSDJ.setText("");
-                                    tvDDSL.setText("");
-                                    etBeizhu.setText("");
-                                    pic = "";
-                                    isclear = "";
-                                    imgShop.setVisibility(View.GONE);
-
+                                    CommomDialog.showMessage(context, proPmInsertBeans.get(0).getErr());
                                 }
 
-                            } else {
-                                CommomDialog.showMessage(context, proPmInsertBeans.get(0).getErr());
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
 
 
                         }
                     });
-
 
 
                 } catch (Exception e) {
@@ -580,9 +589,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                             if (TextUtils.isEmpty(proPmSmBeans.get(0).getErr())) {
                                 etMC.setText(proPmSmBeans.get(0).getMC());
                                 etTM.setText(proPmSmBeans.get(0).getTM());
-                                tvCGDJ.setText(proPmSmBeans.get(0).getDJ());
-                                Utils.showSoundWAV(context,R.raw.susses);
-
+                                tvCGDJ.setText(Utils.subZeroAndDot(proPmSmBeans.get(0).getDJ()));
                             } else {
                                 CommomDialog.showMessage(context, proPmSmBeans.get(0).getErr());
                             }
@@ -631,8 +638,6 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et.setText(proPymBeans.get(0).getPYM());
-                                Utils.showSoundWAV(context,R.raw.susses);
-
                             } else {
                                 CommomDialog.showMessage(context, proPymBeans.get(0).getErr());
                             }
@@ -683,7 +688,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         public void run() {
                             if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                                 tvBH.setText(proCsAddBeans.get(0).getBH());
-                                Utils.showSoundWAV(context,R.raw.susses);
+                                Utils.showSoundWAV(context, R.raw.susses);
 
                             } else {
                                 CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
@@ -724,8 +729,6 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                     try {
                         Log.e("GoodShopEditActivity", "数据流转换");
-                        Utils.showSoundWAV(context,R.raw.susses);
-
                         while (pro_pm_edit.next()) {
                             Log.e("GoodShopEditActivity", "数据流寻找");
 
@@ -759,6 +762,8 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                             return;
                                         }
                                         if (col0.equals("1")) {
+                                            tvZxing.setVisibility(View.GONE);
+                                            imgSelelteGonghuoshang.setVisibility(View.GONE);
                                             etMC.setFocusable(false);
                                             etMC.setEnabled(false);
                                             etJM.setEnabled(false);
@@ -775,9 +780,9 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                         etJM.setText(col7);
                                         etTYM.setText(col8);
                                         etTM.setText(col9);
-                                        tvCGDJ.setText(col10);
-                                        tvYSDJ.setText(col11);
-                                        tvDDSL.setText(col12);
+                                        tvCGDJ.setText(Utils.subZeroAndDot(col10));
+                                        tvYSDJ.setText(Utils.subZeroAndDot(col11));
+                                        tvDDSL.setText(Utils.subZeroAndDot(col12));
                                         etBeizhu.setText(col13);
 
                                         if (bd != null) {
@@ -877,8 +882,6 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         }
                         showSponer(profl3list, et);
                     }
-                    Utils.showSoundWAV(context,R.raw.susses);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {

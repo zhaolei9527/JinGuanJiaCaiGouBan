@@ -19,6 +19,7 @@ import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.adapter.GongHuoShangListAdapter;
 import com.jinguanjiacaigouban.bean.proCsSelectBean;
 import com.jinguanjiacaigouban.db.DBService;
+import com.jinguanjiacaigouban.utils.EasyToast;
 import com.jinguanjiacaigouban.utils.PriorityRunnable;
 import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
@@ -57,6 +58,7 @@ public class GongHuoShangActivity extends BaseActivity {
     private SakuraLinearLayoutManager line;
     private GongHuoShangListAdapter adapter;
     public boolean isCheck;
+    public static String mc;
 
     @Override
     protected int setthislayout() {
@@ -75,7 +77,7 @@ public class GongHuoShangActivity extends BaseActivity {
         rvGonghuoshangList.setFootLoadingView(progressView);
         rvGonghuoshangList.loadMoreComplete();
         rvGonghuoshangList.setCanloadMore(false);
-
+        mc = "";
     }
 
     @Override
@@ -91,19 +93,14 @@ public class GongHuoShangActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(editable.toString())) {
-                    /**
-                     *检索输入监听
-                     */
-                    getData(editable.toString());
-                }
+                getData(editable.toString());
             }
         });
 
         llAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, GongHuoShangEditActivity.class));
+                startActivityForResult(new Intent(context, GongHuoShangEditActivity.class), 800);
             }
         });
 
@@ -116,6 +113,15 @@ public class GongHuoShangActivity extends BaseActivity {
         });
 
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 800) {
+            mc = data.getStringExtra("MC");
+        }
     }
 
     @Override
@@ -136,6 +142,7 @@ public class GongHuoShangActivity extends BaseActivity {
             @Override
             public void doSth() {
                 try {
+
                     String pro_cs_select = DBService.doConnection("pro_cs_select", key);
                     mHandler.post(new Runnable() {
                         @Override
@@ -155,13 +162,21 @@ public class GongHuoShangActivity extends BaseActivity {
                     }
                     final ArrayList<proCsSelectBean> proCsSelectBeans = (ArrayList<proCsSelectBean>) proCsSelectBean.arrayproCsSelectBeanFromData(pro_cs_select);
                     adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans);
+
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             rvGonghuoshangList.setAdapter(adapter);
-                            tvCont.setText("总计："+proCsSelectBeans.size());
-                            Utils.showSoundWAV(context,R.raw.susses);
-
+                            tvCont.setText("总计：" + proCsSelectBeans.size());
+                            if (!TextUtils.isEmpty(GongHuoShangActivity.mc)) {
+                                for (int i = 0; i < proCsSelectBeans.size(); i++) {
+                                    if (proCsSelectBeans.get(i).getMC().equals(GongHuoShangActivity.mc)) {
+                                        proCsSelectBeans.get(i).setErr("1");
+                                        rvGonghuoshangList.scrollToPosition(i);
+                                        EasyToast.showShort(context, proCsSelectBeans.get(i).getMC());
+                                    }
+                                }
+                            }
                         }
                     });
                 } catch (Exception e) {

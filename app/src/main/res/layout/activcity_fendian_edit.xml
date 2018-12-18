@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="分店_新增"
+            android:text="分店类型_新增"
             android:textColor="@color/white"
             android:textSize="@dimen/x15" />
 

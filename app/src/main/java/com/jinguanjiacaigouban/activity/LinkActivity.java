@@ -153,16 +153,21 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData() {
-        allSP = (Map<String, String>) SpUtil.getAll(context);
-        list = new ArrayList<>();
-        for (Map.Entry<String, String> entry : allSP.entrySet()) {
-            Log.e("LinkActivity", entry.getKey());
-            if (entry.getKey().startsWith("URl#")) {
-                String[] split = entry.getKey().split("#");
-                list.add(split[1]);
+        try {
+            allSP = (Map<String, String>) SpUtil.getAll(context);
+            list = new ArrayList<>();
+            for (Map.Entry<String, String> entry : allSP.entrySet()) {
+                Log.e("LinkActivity", entry.getKey());
+                if (entry.getKey().startsWith("URl#")) {
+                    String[] split = entry.getKey().split("#");
+                    list.add(split[1]);
+                }
             }
+            mSpinerPopWindow = new SpinerPopWindow<String>(this, list, itemClickListener);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mSpinerPopWindow = new SpinerPopWindow<String>(this, list, itemClickListener);
     }
 
     /**
@@ -310,12 +315,14 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
      * 保存服务器连接配置
      * */
     private void saveLink() {
-        if (checkMessage()) {
-            checkDB = tvCheckDB.getText().toString().trim();
-            if (TextUtils.isEmpty(checkDB)) {
-                CommomDialog.showMessage(context, "请选择链接数据库");
-                return;
-            }
+        if (!checkMessage()) {
+            return;
+        }
+
+        checkDB = tvCheckDB.getText().toString().trim();
+        if (TextUtils.isEmpty(checkDB)) {
+            CommomDialog.showMessage(context, "请选择链接数据库");
+            return;
         }
         Map<String, String> allSP = (Map<String, String>) SpUtil.getAll(context);
         for (Map.Entry<String, String> entry : allSP.entrySet()) {
@@ -323,13 +330,13 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
             String s = "URl#" + linkName;
             Log.e("LinkActivity", s);
             if ((s).equals(entry.getKey())) {
-                CommomDialog.showMessage(context, "连接名称已存在");
-                return;
+                //CommomDialog.showMessage(context, "连接名称已存在.将覆盖原有信息。");
+                //return;
             }
         }
         SpUtil.putAndApply(context, "URl#" + linkName, serviceIP + "#" + serviceHost + "#" + serviceUsername + "#" + servicePwd + "#" + checkDB);
+        Utils.showSoundWAV(context, R.raw.susses);
         EasyToast.showShort(context, "连接保存成功");
-        Utils.showSoundWAV(context,R.raw.susses);
 
         finish();
     }
@@ -347,6 +354,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
                     UrlUtils.checkUrl(serviceIP, serviceHost, serviceUsername, servicePwd);
                     Connection conn = DBOpenHelper.getConn();
                     try {
+                        dialogLoading.dismiss();
                         Log.e("LinkActivity", "链接开始");
                         if (!conn.isClosed()) {
                             Statement stmt = conn.createStatement();// 创建SQL命令对象
@@ -365,8 +373,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
                                 Log.e("LinkActivity", resultSet.getString("NAME"));
                                 DBName.add(resultSet.getString("NAME"));
                             }
-                            Utils.showSoundWAV(context,R.raw.susses);
-
                             Log.e("LinkActivity", "读取完毕");
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -402,7 +408,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
                                     });
                                     picker.show();
                                     EasyToast.showShort(context, "获取成功");
-                                    dialogLoading.dismiss();
                                 }
                             });
                         } else {
@@ -427,6 +432,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
             });
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

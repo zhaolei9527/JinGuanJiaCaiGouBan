@@ -46,6 +46,37 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="@dimen/y33"
+            android:background="@color/bgtitle"
+            android:gravity="center_vertical"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:id="@+id/ll_qiandan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/x15"
+                    android:layout_height="@dimen/x15"
+                    android:background="@mipmap/qd" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:text="前单"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x10"
             android:layout_marginTop="@dimen/y5"
@@ -59,7 +90,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="@dimen/x50"
+                    android:layout_width="@dimen/x60"
                     android:layout_height="wrap_content"
                     android:text="编号:"
                     android:textSize="@dimen/x12" />
@@ -104,7 +135,7 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x60"
                 android:layout_height="@dimen/x15"
                 android:layout_centerVertical="true"
                 android:text="采购日期：" />
@@ -151,7 +182,7 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x60"
                 android:layout_height="@dimen/x15"
                 android:layout_centerVertical="true"
                 android:text="采购员：" />
@@ -188,7 +219,7 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x60"
                 android:layout_height="@dimen/x15"
                 android:layout_centerVertical="true"
                 android:text="供货商：" />
@@ -226,7 +257,7 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x60"
                 android:layout_height="wrap_content"
                 android:text="付款方式" />
 
@@ -256,14 +287,16 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x60"
                 android:layout_height="wrap_content"
                 android:text="付款周期" />
 
             <EditText
                 android:id="@+id/et_yue"
                 android:layout_width="@dimen/x45"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="4" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -274,7 +307,9 @@
             <EditText
                 android:id="@+id/et_tian"
                 android:layout_width="@dimen/x45"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="7" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -292,7 +327,7 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x60"
                 android:layout_height="wrap_content"
                 android:text="备注说明" />
 

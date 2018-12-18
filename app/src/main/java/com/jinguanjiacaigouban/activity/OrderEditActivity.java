@@ -109,6 +109,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
     LinearLayout llHoudan;
     @BindView(R.id.ll_xindan)
     LinearLayout llXindan;
+    @BindView(R.id.tv_cont)
+    TextView tvCont;
     private TimePickerView pvTime;
     private ArrayList<String> proYgList = new ArrayList<>();
     private Dialog dialog;
@@ -202,13 +204,23 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             }
         });
 
+        etSearchCGY.setText(String.valueOf(SpUtil.get(context, "MC", "")));
+
     }
 
     @Override
     protected void initData() {
         dialog.show();
         strBH = getIntent().getStringExtra("strBH");
-        getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "查单");
+
+        String type = getIntent().getStringExtra("type");
+
+        if (!TextUtils.isEmpty(type)) {
+            getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "前单");
+        } else {
+            getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "查单");
+        }
+
     }
 
     @Override
@@ -234,6 +246,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             case R.id.btn_add_good:
                 startActivityForResult(new Intent(context, GoodShopActivity.class)
                                 .putExtra("ischeck", true)
+                                .putExtra("oid", tvBH.getText().toString())
                                 .putExtra("GHS", etSearchHonghuoshang.getText().toString())
                                 .putExtra("BH", tvBH.getText().toString())
                         , 205);
@@ -388,7 +401,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             }
 
                             etFd.setText("");
-                            Utils.showSoundWAV(context,R.raw.susses);
+                            Utils.showSoundWAV(context, R.raw.susses);
 
                         }
                     });
@@ -444,8 +457,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     }
 
                     showSponer(proYgList, etSearchCGY, "");
-                    Utils.showSoundWAV(context,R.raw.susses);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -498,8 +509,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     }
 
                     showSponer(proFDList, etFd, "1");
-                    Utils.showSoundWAV(context,R.raw.susses);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -565,6 +574,9 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
+                            orderFenDianListAdapter.getDatas().clear();
+
                             for (int i = 0; i < proFdlxFdBeans.size(); i++) {
                                 proDdFdBean proDdFdBean = new proDdFdBean();
                                 proDdFdBean.setErr(proFdlxFdBeans.get(i).getErr());
@@ -573,8 +585,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 orderFenDianListAdapter.getDatas().add(proDdFdBean);
                             }
                             orderFenDianListAdapter.notifyDataSetChanged();
-                            Utils.showSoundWAV(context,R.raw.susses);
-
                         }
                     });
 
@@ -638,7 +648,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
         if (resultCode == 205 && requestCode == 205) {
 
-
             StringBuffer stringBuffer = new StringBuffer();
             for (int i = 0; i < orderFenDianListAdapter.getDatas().size(); i++) {
                 if (TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getErr())) {
@@ -694,9 +703,12 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 proDdPmBean proDdPmBean = new proDdPmBean();
                                 proDdPmBean.setCol1(key[6]);
                                 proDdPmBean.setCol2(key[4]);
+                                proDdPmBean.setCol3("0");
+                                proDdPmBean.setCol4("0");
+                                proDdPmBean.setCol5("0");
                                 adapter.getDatas().add(proDdPmBean);
                                 adapter.notifyDataSetChanged();
-                                Utils.showSoundWAV(context,R.raw.susses);
+                                Utils.showSoundWAV(context, R.raw.susses);
 
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
@@ -749,7 +761,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         public void run() {
                             if (TextUtils.isEmpty(proDdInsertBeans.get(0).getErr())) {
                                 EasyToast.showShort(context, "保存成功");
-                                Utils.showSoundWAV(context,R.raw.susses);
+                                Utils.showSoundWAV(context, R.raw.susses);
 
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
@@ -802,7 +814,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         public void run() {
                             if (TextUtils.isEmpty(proDdInsertBeans.get(0).getErr())) {
                                 EasyToast.showShort(context, "保存成功");
-                                Utils.showSoundWAV(context,R.raw.susses);
+                                Utils.showSoundWAV(context, R.raw.susses);
 
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
@@ -855,6 +867,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         public void run() {
 
                             List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
+                            tvCont.setText("总计: " + proDdPmBeans.size());
                             adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans);
                             mHandler.post(new Runnable() {
                                 @Override
@@ -862,8 +875,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                     rvOrderGoods.setAdapter(adapter);
                                 }
                             });
-                            Utils.showSoundWAV(context,R.raw.susses);
-
                         }
                     });
 
@@ -921,8 +932,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 }
 
                             });
-                            Utils.showSoundWAV(context,R.raw.susses);
-
                         }
                     });
 

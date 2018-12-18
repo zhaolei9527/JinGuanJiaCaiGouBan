@@ -17,18 +17,19 @@
         android:textSize="@dimen/x17" />
 
     <EditText
-        android:singleLine="true"
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="30dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:hint="请输入连接密码"
+        android:inputType="textPassword"
         android:lineSpacingExtra="3dp"
+        android:singleLine="true"
         android:textColor="#333"
         android:textSize="@dimen/x13" />
 
@@ -51,7 +52,8 @@
             android:gravity="center"
             android:text="取消"
             android:textColor="#666"
-            android:textSize="@dimen/x15" />
+            android:textSize="@dimen/x15"
+            android:visibility="visible" />
 
         <View
             android:layout_width="1dp"

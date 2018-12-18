@@ -83,10 +83,10 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             }
         });
 
-        holder.tvTitle.setText("编号：" + datas.get(position).getCol1() + " 品名：" + datas.get(position).getCol2());
-        holder.etDanjia.setText(datas.get(position).getCol3()+"");
-        holder.etShuliang.setText(datas.get(position).getCol4()+"");
-        holder.etBeizhu.setText(datas.get(position).getCol5()+"");
+        holder.tvTitle.setText(position + datas.get(position).getCol1() + "#" + datas.get(position).getCol2());
+        holder.etDanjia.setText(datas.get(position).getCol3() + "");
+        holder.etShuliang.setText(datas.get(position).getCol4() + "");
+        holder.etBeizhu.setText(datas.get(position).getCol5() + "");
 
         holder.etDanjia.addTextChangedListener(new TextWatcher() {
             @Override
@@ -106,11 +106,11 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                         , (String) SpUtil.get(mContext, "androidIMEI", "")
                         , UrlUtils.BBH
                         , OrderEditActivity.strBH
-                        , datas.get(position).getCol1()+""
-                        , datas.get(position).getCol2()+""
-                        , datas.get(position).getCol3()+""
-                        , datas.get(position).getCol4()+""
-                        , datas.get(position).getCol5()+"");
+                        , String.valueOf(datas.get(position).getCol1())
+                        , String.valueOf(datas.get(position).getCol2())
+                        , String.valueOf(datas.get(position).getCol3())
+                        , String.valueOf(datas.get(position).getCol4())
+                        , String.valueOf(datas.get(position).getCol5()));
             }
         });
 
@@ -132,11 +132,11 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                         , (String) SpUtil.get(mContext, "androidIMEI", "")
                         , UrlUtils.BBH
                         , OrderEditActivity.strBH
-                        , datas.get(position).getCol1()+""
-                        , datas.get(position).getCol2()+""
-                        , datas.get(position).getCol3()+""
-                        , datas.get(position).getCol4()+""
-                        , datas.get(position).getCol5()+"");
+                        , String.valueOf(datas.get(position).getCol1())
+                        , String.valueOf(datas.get(position).getCol2())
+                        , String.valueOf(datas.get(position).getCol3())
+                        , String.valueOf(datas.get(position).getCol4())
+                        , String.valueOf(datas.get(position).getCol5()));
             }
         });
 
@@ -158,11 +158,11 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                         , (String) SpUtil.get(mContext, "androidIMEI", "")
                         , UrlUtils.BBH
                         , OrderEditActivity.strBH
-                        , datas.get(position).getCol1()+""
-                        , datas.get(position).getCol2()+""
-                        , datas.get(position).getCol3()+""
-                        , datas.get(position).getCol4()+""
-                        , datas.get(position).getCol5()+"");
+                        , datas.get(position).getCol1() + ""
+                        , datas.get(position).getCol2() + ""
+                        , String.valueOf(datas.get(position).getCol3())
+                        , String.valueOf(datas.get(position).getCol4())
+                        , String.valueOf(datas.get(position).getCol5()));
             }
         });
     }
