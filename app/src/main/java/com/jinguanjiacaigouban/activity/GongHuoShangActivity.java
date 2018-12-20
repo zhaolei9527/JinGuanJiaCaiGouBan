@@ -112,14 +112,13 @@ public class GongHuoShangActivity extends BaseActivity {
             }
         });
 
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 800) {
+        if (requestCode == 200) {
+        } else if (resultCode == 800) {
             mc = data.getStringExtra("MC");
         }
     }

@@ -133,9 +133,22 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
+        etSearchCGY.setText(String.valueOf(SpUtil.get(context, "MC", "")));
         dialog.show();
         getproCsAdd();
         tvSearchStartTime.setText(DateUtils.getDay(System.currentTimeMillis()));
+
+        String yue = (String) SpUtil.get(context, "yue", "");
+        String tian = (String) SpUtil.get(context, "tian", "");
+
+        if (!TextUtils.isEmpty(yue)) {
+            etYue.setText(yue);
+        }
+
+        if (!TextUtils.isEmpty(tian)) {
+            etTian.setText(tian);
+        }
+
     }
 
     @Override
@@ -198,12 +211,10 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                     return;
                 }
 
-                if (TextUtils.isEmpty(etBeizhu.getText())) {
-                    CommomDialog.showMessage(context, "请完善录入数据");
-                    return;
-                }
-
                 dialog.show();
+
+                SpUtil.putAndApply(context, "yue", etYue.getText().toString());
+                SpUtil.putAndApply(context, "tian", etTian.getText().toString());
 
                 getproDdInsert(
                         String.valueOf(SpUtil.get(context, "MC", ""))
@@ -218,6 +229,8 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                         , etTian.getText().toString()
                         , etBeizhu.getText().toString()
                 );
+
+
                 break;
             default:
                 break;

@@ -58,6 +58,8 @@ public class GoodShopActivity extends BaseActivity {
     EditText etSearchHonghuoshang;
     @BindView(R.id.img_selelte_gonghuoshang)
     ImageView imgSelelteGonghuoshang;
+    @BindView(R.id.ll_gonghuoshang)
+    LinearLayout llGonghuoshang;
     private Dialog dialog;
     private SakuraLinearLayoutManager line;
     private GoodShopListAdapter adapter;
@@ -65,7 +67,7 @@ public class GoodShopActivity extends BaseActivity {
     public boolean isCheckGongHuoShang = true;
     private String ghs;
     public static String mc;
-    private String oid;
+    private String oid = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +80,6 @@ public class GoodShopActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (!isCheckGongHuoShang) {
-            etSearchHonghuoshang.setText("");
-            etSearch.setText("");
             getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
         } else {
             getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
@@ -129,12 +129,10 @@ public class GoodShopActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(editable.toString())) {
-                    /**
-                     *检索输入监听
-                     */
-                    getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
-                }
+                /**
+                 *检索输入监听
+                 */
+                getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
             }
         });
 
@@ -172,12 +170,10 @@ public class GoodShopActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(editable.toString())) {
-                    /**
-                     *检索输入监听
-                     */
-                    getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
-                }
+                /**
+                 *检索输入监听
+                 */
+                getData(etSearchHonghuoshang.getText().toString(), etSearch.getText().toString(), oid);
             }
         });
     }
@@ -188,8 +184,16 @@ public class GoodShopActivity extends BaseActivity {
         ghs = getIntent().getStringExtra("GHS");
         oid = getIntent().getStringExtra("oid");
 
+        if (TextUtils.isEmpty(oid)) {
+            oid = "";
+        } else {
+            llGonghuoshang.setVisibility(View.VISIBLE);
+        }
+
         if (!TextUtils.isEmpty(ghs)) {
             etSearchHonghuoshang.setText(ghs);
+            etSearchHonghuoshang.setFocusable(false);
+            imgSelelteGonghuoshang.setVisibility(View.GONE);
         }
 
         dialog = Utils.showLoadingDialog(context);
@@ -255,10 +259,12 @@ public class GoodShopActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 200) {
+        if (resultCode == 200) {
             String gonghuoshang = data.getStringExtra("gonghuoshang");
-            etSearchHonghuoshang.setText(gonghuoshang);
-        } else if (requestCode == 800) {
+            if (!TextUtils.isEmpty(gonghuoshang)) {
+                etSearchHonghuoshang.setText(gonghuoshang);
+            }
+        } else if (resultCode == 800) {
             mc = data.getStringExtra("MC");
         }
     }

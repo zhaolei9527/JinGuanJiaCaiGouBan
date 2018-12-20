@@ -113,9 +113,9 @@ public class GongHuoShangListAdapter extends RecyclerView.Adapter<GongHuoShangLi
         holder.tvTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, GongHuoShangEditActivity.class)
+                mContext.startActivityForResult(new Intent(mContext, GongHuoShangEditActivity.class)
                         .putExtra("strBH", datas.get(position).getBH())
-                        .putExtra("type", "edit")
+                        .putExtra("type", "edit"), 800
                 );
             }
         });

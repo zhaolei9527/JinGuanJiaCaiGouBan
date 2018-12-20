@@ -79,10 +79,11 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x60"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="起始日期：" />
+                android:text="起始日期:"
+                android:textSize="@dimen/x12" />
 
             <LinearLayout
                 android:id="@+id/ll_start_time"
@@ -125,10 +126,11 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x60"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="结束日期：" />
+                android:text="结束日期:"
+                android:textSize="@dimen/x12" />
 
             <LinearLayout
                 android:id="@+id/ll_end_time"
@@ -170,10 +172,11 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x60"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="供货商：" />
+                android:text="供货商："
+                android:textSize="@dimen/x12" />
 
             <EditText
                 android:id="@+id/et_search_honghuoshang"
@@ -210,10 +213,11 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x60"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="采购员：" />
+                android:text="采购员："
+                android:textSize="@dimen/x12" />
 
             <EditText
                 android:id="@+id/et_search_CGY"

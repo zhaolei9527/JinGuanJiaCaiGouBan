@@ -292,6 +292,9 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                 break;
             case R.id.ll_Save_GongHuoShang:
                 if (checkMessage()) {
+
+                    setResult(800, new Intent().putExtra("MC", et_MC.getText().toString()));
+
                     if (!TextUtils.isEmpty(type)) {
                         getProCsData("pro_cs_update"
                                 , String.valueOf(SpUtil.get(context, "MC", ""))
@@ -577,8 +580,8 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                             @Override
                             public void run() {
                                 EasyToast.showShort(context, "操作成功");
+
                                 Utils.showSoundWAV(context, R.raw.susses);
-                                setResult(800, new Intent().putExtra("MC", et_MC.getText().toString()));
 
                                 if (!TextUtils.isEmpty(type)) {
                                     tvTitle.setText("供货商_修改");
@@ -587,6 +590,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                                     tvTitle.setText("供货商_新增");
                                     dialog.show();
                                     getproCsAdd();
+                                    et_MC.setText("");
                                     et_JM.setText("");
                                     et_TYM.setText("");
                                     et_Phone.setText("");

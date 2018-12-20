@@ -18,7 +18,7 @@ public class CommomDialog extends Dialog implements View.OnClickListener {
     private TextView contentTxt;
     private TextView titleTxt;
     private TextView submitTxt;
-    private TextView cancelTxt;
+    public static TextView cancelTxt;
 
     private Context mContext;
     private String content;
@@ -81,6 +81,11 @@ public class CommomDialog extends Dialog implements View.OnClickListener {
         cancelTxt = (TextView) findViewById(R.id.cancel);
         cancelTxt.setOnClickListener(this);
         contentTxt.setText(content);
+
+        if (content.equals("确认删除该条信息？")) {
+            cancelTxt.setVisibility(View.VISIBLE);
+        }
+
         if (!TextUtils.isEmpty(positiveName)) {
             submitTxt.setText(positiveName);
         }
@@ -116,7 +121,7 @@ public class CommomDialog extends Dialog implements View.OnClickListener {
     }
 
     public static void showMessage(Context context, String title) {
-        Utils.showSoundWAV(context,R.raw.faile);
+        Utils.showSoundWAV(context, R.raw.faile);
 
         new CommomDialog(context, R.style.dialog, title, new CommomDialog.OnCloseListener() {
             @Override

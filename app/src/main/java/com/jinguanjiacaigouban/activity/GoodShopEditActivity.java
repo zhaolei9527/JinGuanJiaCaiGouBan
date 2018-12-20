@@ -263,7 +263,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                     @Override
                                     public void onGranted() {
-                                        BGAQRCodeUtil.setDebug(true);
+                                        BGAQRCodeUtil.setDebug(false);
                                         startActivityForResult(new Intent(context, ScanActivity.class), 201);
                                     }
 
@@ -338,6 +338,11 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                             , etBeizhu.getText().toString().trim()
                                             , pic
                                             , isIMAGE);
+
+
+
+
+
                                 } else {
                                     getproPmUpData("pro_pm_insert"
                                             , String.valueOf(SpUtil.get(context, "MC", ""))
@@ -403,8 +408,8 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 201) {
             String result = data.getStringExtra("result");
-            Log.e("GoodShopEditActivity", result);
-            getProPmSmData(result);
+            Log.e("GoodShopEditActivity", result+"***"+result.length());
+            getProPmSmData(result.trim());
         } else if (resultCode == 200) {
             String gonghuoshang = data.getStringExtra("gonghuoshang");
             String flmc1 = data.getStringExtra("FLMC1");

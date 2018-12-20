@@ -2,6 +2,7 @@ package com.jinguanjiacaigouban.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.jinguanjiacaigouban.R;
-import com.jinguanjiacaigouban.bean.proDdFdBean;
+import com.jinguanjiacaigouban.bean.proDdFdFdBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,18 +30,18 @@ public class OrderFenDianListAdapter extends RecyclerView.Adapter<OrderFenDianLi
 
     private Activity mContext;
 
-    private ArrayList<proDdFdBean> datas = new ArrayList();
+    private ArrayList<proDdFdFdBean> datas = new ArrayList();
 
-    public ArrayList<proDdFdBean> getDatas() {
+    public ArrayList<proDdFdFdBean> getDatas() {
         return datas;
     }
 
-    public OrderFenDianListAdapter(Activity context, List<proDdFdBean> homeBean) {
+    public OrderFenDianListAdapter(Activity context, List<proDdFdFdBean> homeBean) {
         this.mContext = context;
         datas.addAll(homeBean);
     }
 
-    public void setDatas(ArrayList<proDdFdBean> datas) {
+    public void setDatas(ArrayList<proDdFdFdBean> datas) {
         this.datas.addAll(datas);
     }
 
@@ -53,7 +54,14 @@ public class OrderFenDianListAdapter extends RecyclerView.Adapter<OrderFenDianLi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.tvTitle.setText(datas.get(position).getCol1());
+
+        if (!TextUtils.isEmpty(datas.get(position).getMC())){
+            holder.tvTitle.setText(datas.get(position).getMC());
+        }
+
+        if (!TextUtils.isEmpty(datas.get(position).getCol1())){
+            holder.tvTitle.setText(datas.get(position).getCol1());
+        }
 
         if (datas.get(position).getErr().equals("1")) {
             holder.cbCheck.setChecked(false);

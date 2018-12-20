@@ -78,13 +78,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         holder.imgShowGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
-
                 Log.e("OrderListAdapter", "position:" + position);
-
                 proDdPm(holder, datas.get(position).getBH());
                 proDdFd(holder, datas.get(position).getBH());
                 if (datas.get(position).getErr().equals("")) {
@@ -294,7 +288,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                         @Override
                         public void run() {
                             List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
-
+                            holder.llOrderGoods.removeAllViews();
                             for (int i = 0; i < proDdPmBeans.size(); i++) {
                                 View item_proddpm_layout = View.inflate(mContext, R.layout.item_proddpm_layout, null);
                                 TextView tv_title = item_proddpm_layout.findViewById(R.id.tv_title);
@@ -355,11 +349,11 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                             }
                         });
                     }
-
                     mContext.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             List<proDdFdBean> proDdFdBeans = proDdFdBean.arrayproDdFdBeanFromData(pro_dd_fd);
+                            holder.llOrderFendian.removeAllViews();
                             for (int i = 0; i < proDdFdBeans.size(); i++) {
                                 View item_proddfd_layout = View.inflate(mContext, R.layout.item_proddfd_layout, null);
                                 TextView tv_title = item_proddfd_layout.findViewById(R.id.tv_title);

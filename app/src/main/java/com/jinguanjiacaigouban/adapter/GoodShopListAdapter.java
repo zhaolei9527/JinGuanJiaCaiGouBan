@@ -109,7 +109,12 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
             @Override
             public void onClick(View view) {
 
-                mContext.setResult(205, new Intent().putExtra("MC", datas.get(position).getMC()).putExtra("BH", datas.get(position).getBH()));
+                mContext.setResult(205, new Intent()
+                        .putExtra("MC", datas.get(position).getMC())
+                        .putExtra("BH", datas.get(position).getBH())
+                        .putExtra("DJ", datas.get(position).getJHDJ())
+                        .putExtra("SL", datas.get(position).getJHSL())
+                );
                 mContext.finish();
             
             }

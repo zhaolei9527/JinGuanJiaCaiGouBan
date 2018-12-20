@@ -25,7 +25,7 @@ import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.adapter.OrderFenDianListAdapter;
 import com.jinguanjiacaigouban.adapter.OrderGoodsListAdapter;
 import com.jinguanjiacaigouban.bean.proDdEditBean;
-import com.jinguanjiacaigouban.bean.proDdFdBean;
+import com.jinguanjiacaigouban.bean.proDdFdFdBean;
 import com.jinguanjiacaigouban.bean.proDdInsertBean;
 import com.jinguanjiacaigouban.bean.proDdPmBean;
 import com.jinguanjiacaigouban.bean.proFdlxFdBean;
@@ -111,6 +111,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
     LinearLayout llXindan;
     @BindView(R.id.tv_cont)
     TextView tvCont;
+    @BindView(R.id.tv_fd_cont)
+    TextView tvFdCont;
     private TimePickerView pvTime;
     private ArrayList<String> proYgList = new ArrayList<>();
     private Dialog dialog;
@@ -256,9 +258,9 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                 for (int i = 0; i < orderFenDianListAdapter.getDatas().size(); i++) {
                     if (TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getErr())) {
                         if (i == 0) {
-                            stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getCol1());
+                            stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getMC());
                         } else {
-                            stringBuffer.append("+" + orderFenDianListAdapter.getDatas().get(i).getCol1());
+                            stringBuffer.append("+" + orderFenDianListAdapter.getDatas().get(i).getMC());
                         }
                     }
                 }
@@ -578,10 +580,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             orderFenDianListAdapter.getDatas().clear();
 
                             for (int i = 0; i < proFdlxFdBeans.size(); i++) {
-                                proDdFdBean proDdFdBean = new proDdFdBean();
+                                proDdFdFdBean proDdFdBean = new proDdFdFdBean();
                                 proDdFdBean.setErr(proFdlxFdBeans.get(i).getErr());
-                                proDdFdBean.setCol1(proFdlxFdBeans.get(i).getXSNR());
-                                proDdFdBean.setCol2(proFdlxFdBeans.get(i).getBH());
+                                proDdFdBean.setMC(proFdlxFdBeans.get(i).getMC());
+                                proDdFdBean.setBH(proFdlxFdBeans.get(i).getBH());
                                 orderFenDianListAdapter.getDatas().add(proDdFdBean);
                             }
                             orderFenDianListAdapter.notifyDataSetChanged();
@@ -652,9 +654,9 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             for (int i = 0; i < orderFenDianListAdapter.getDatas().size(); i++) {
                 if (TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getErr())) {
                     if (i == 0) {
-                        stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getCol1());
+                        stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getMC());
                     } else {
-                        stringBuffer.append("+" + orderFenDianListAdapter.getDatas().get(i).getCol1());
+                        stringBuffer.append("+" + orderFenDianListAdapter.getDatas().get(i).getMC());
                     }
                 }
             }
@@ -666,6 +668,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     , data.getStringExtra("MC")
                     , stringBuffer.toString()
                     , data.getStringExtra("BH")
+                    , data.getStringExtra("DJ")
+                    , data.getStringExtra("SL")
             );
         }
 
@@ -703,16 +707,28 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 proDdPmBean proDdPmBean = new proDdPmBean();
                                 proDdPmBean.setCol1(key[6]);
                                 proDdPmBean.setCol2(key[4]);
-                                proDdPmBean.setCol3("0");
-                                proDdPmBean.setCol4("0");
-                                proDdPmBean.setCol5("0");
+                                proDdPmBean.setCol3(key[7]);
+                                proDdPmBean.setCol4(key[8]);
+                                proDdPmBean.setCol5("");
                                 adapter.getDatas().add(proDdPmBean);
                                 adapter.notifyDataSetChanged();
                                 Utils.showSoundWAV(context, R.raw.susses);
 
+                                tvCont.setText("总计: " + adapter.getDatas().size());
+
+                                if (!adapter.getDatas().isEmpty()) {
+                                    etSearchHonghuoshang.setFocusable(false);
+                                    imgSelelteGonghuoshang.setVisibility(View.GONE);
+                                } else {
+                                    etSearchHonghuoshang.setFocusable(true);
+                                    imgSelelteGonghuoshang.setVisibility(View.VISIBLE);
+                                }
+
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
                             }
+
+
                         }
                     });
 
@@ -819,6 +835,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
                             }
+
+
                         }
                     });
 
@@ -865,7 +883,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
                             List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
                             tvCont.setText("总计: " + proDdPmBeans.size());
                             adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans);
@@ -873,6 +890,15 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 @Override
                                 public void run() {
                                     rvOrderGoods.setAdapter(adapter);
+
+                                    if (!adapter.getDatas().isEmpty()) {
+                                        etSearchHonghuoshang.setFocusable(false);
+                                        imgSelelteGonghuoshang.setVisibility(View.GONE);
+                                    } else {
+                                        etSearchHonghuoshang.setFocusable(true);
+                                        imgSelelteGonghuoshang.setVisibility(View.VISIBLE);
+                                    }
+
                                 }
                             });
                         }
@@ -923,8 +949,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            List<proDdFdBean> proDdFdBeans = proDdFdBean.arrayproDdFdBeanFromData(pro_dd_fd);
-                            orderFenDianListAdapter = new OrderFenDianListAdapter(OrderEditActivity.this, proDdFdBeans);
+                            List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
+                            tvFdCont.setText("总计: " + proDdFdFdBeans.size());
+
+                            orderFenDianListAdapter = new OrderFenDianListAdapter(OrderEditActivity.this, proDdFdFdBeans);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {

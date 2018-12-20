@@ -80,6 +80,7 @@ public class FenDianListAdapter extends RecyclerView.Adapter<FenDianListAdapter.
                         }
                     }
                 }).setTitle("提示").show();
+
             }
         });
 

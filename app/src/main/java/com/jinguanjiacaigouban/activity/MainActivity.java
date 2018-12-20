@@ -131,14 +131,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_UserName:
-                doTest();
+                startActivity(new Intent(context, ChangePasswordActivity.class));
                 break;
             case R.id.fl_back:
                 startActivity(new Intent(context, LoginActivity.class));
                 finish();
                 break;
             case R.id.tv_Link_name:
-                startActivity(new Intent(context, ChangePasswordActivity.class));
+                doTest();
                 break;
             case R.id.ll_chadan:
                 startActivity(new Intent(context, OrderSearchActivity.class));

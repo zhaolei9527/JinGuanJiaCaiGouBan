@@ -2,9 +2,7 @@ package com.jinguanjiacaigouban.adapter;
 
 import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +22,7 @@ import com.jinguanjiacaigouban.utils.EasyToast;
 import com.jinguanjiacaigouban.utils.PriorityRunnable;
 import com.jinguanjiacaigouban.utils.SpUtil;
 import com.jinguanjiacaigouban.utils.UrlUtils;
+import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
 
 import java.util.ArrayList;
@@ -83,88 +82,70 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             }
         });
 
-        holder.tvTitle.setText(position + datas.get(position).getCol1() + "#" + datas.get(position).getCol2());
-        holder.etDanjia.setText(datas.get(position).getCol3() + "");
-        holder.etShuliang.setText(datas.get(position).getCol4() + "");
-        holder.etBeizhu.setText(datas.get(position).getCol5() + "");
+        holder.tvTitle.setText(position + datas.get(position).getCol1() + "." + datas.get(position).getCol2());
+        holder.etDanjia.setText(Utils.subZeroAndDot(datas.get(position).getCol3() + ""));
+        holder.etShuliang.setText(Utils.subZeroAndDot(datas.get(position).getCol4() + ""));
+        holder.etBeizhu.setText(Utils.subZeroAndDot(datas.get(position).getCol5() + ""));
 
-        holder.etDanjia.addTextChangedListener(new TextWatcher() {
+        holder.etDanjia.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onFocusChange(View view, boolean b) {
 
-            }
+                if (!b) {
+                    datas.get(position).setCol3(holder.etDanjia.toString());
+                    getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
+                            , (String) SpUtil.get(mContext, "androidIMEI", "")
+                            , UrlUtils.BBH
+                            , OrderEditActivity.strBH
+                            , String.valueOf(datas.get(position).getCol1())
+                            , String.valueOf(datas.get(position).getCol2())
+                            , String.valueOf(datas.get(position).getCol3())
+                            , String.valueOf(datas.get(position).getCol4())
+                            , String.valueOf(datas.get(position).getCol5()));
+                }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                datas.get(position).setCol3(editable.toString());
-                getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
-                        , (String) SpUtil.get(mContext, "androidIMEI", "")
-                        , UrlUtils.BBH
-                        , OrderEditActivity.strBH
-                        , String.valueOf(datas.get(position).getCol1())
-                        , String.valueOf(datas.get(position).getCol2())
-                        , String.valueOf(datas.get(position).getCol3())
-                        , String.valueOf(datas.get(position).getCol4())
-                        , String.valueOf(datas.get(position).getCol5()));
             }
         });
 
-        holder.etShuliang.addTextChangedListener(new TextWatcher() {
+
+        holder.etShuliang.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onFocusChange(View view, boolean b) {
 
-            }
+                if (!b) {
+                    datas.get(position).setCol4(holder.etShuliang.toString());
+                    getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
+                            , (String) SpUtil.get(mContext, "androidIMEI", "")
+                            , UrlUtils.BBH
+                            , OrderEditActivity.strBH
+                            , String.valueOf(datas.get(position).getCol1())
+                            , String.valueOf(datas.get(position).getCol2())
+                            , String.valueOf(datas.get(position).getCol3())
+                            , String.valueOf(datas.get(position).getCol4())
+                            , String.valueOf(datas.get(position).getCol5()));
+                }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                datas.get(position).setCol4(editable.toString());
-                getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
-                        , (String) SpUtil.get(mContext, "androidIMEI", "")
-                        , UrlUtils.BBH
-                        , OrderEditActivity.strBH
-                        , String.valueOf(datas.get(position).getCol1())
-                        , String.valueOf(datas.get(position).getCol2())
-                        , String.valueOf(datas.get(position).getCol3())
-                        , String.valueOf(datas.get(position).getCol4())
-                        , String.valueOf(datas.get(position).getCol5()));
             }
         });
 
-        holder.etBeizhu.addTextChangedListener(new TextWatcher() {
+        holder.etBeizhu.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                datas.get(position).setCol5(editable.toString());
-                getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
-                        , (String) SpUtil.get(mContext, "androidIMEI", "")
-                        , UrlUtils.BBH
-                        , OrderEditActivity.strBH
-                        , datas.get(position).getCol1() + ""
-                        , datas.get(position).getCol2() + ""
-                        , String.valueOf(datas.get(position).getCol3())
-                        , String.valueOf(datas.get(position).getCol4())
-                        , String.valueOf(datas.get(position).getCol5()));
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    datas.get(position).setCol5(holder.etBeizhu.toString());
+                    getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
+                            , (String) SpUtil.get(mContext, "androidIMEI", "")
+                            , UrlUtils.BBH
+                            , OrderEditActivity.strBH
+                            , datas.get(position).getCol1() + ""
+                            , datas.get(position).getCol2() + ""
+                            , String.valueOf(datas.get(position).getCol3())
+                            , String.valueOf(datas.get(position).getCol4())
+                            , String.valueOf(datas.get(position).getCol5()));
+                }
             }
         });
+
     }
 
     public void getDelete(final int position, final String strBH, final String strXH, final String androidIMEI) {

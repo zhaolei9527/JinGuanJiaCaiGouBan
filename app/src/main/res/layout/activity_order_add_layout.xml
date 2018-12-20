@@ -90,7 +90,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="@dimen/x60"
+                    android:layout_width="@dimen/x65"
                     android:layout_height="wrap_content"
                     android:text="编号:"
                     android:textSize="@dimen/x12" />
@@ -135,10 +135,11 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x65"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="采购日期：" />
+                android:text="采购日期:"
+                android:textSize="@dimen/x12" />
 
             <LinearLayout
                 android:id="@+id/ll_start_time"
@@ -182,10 +183,11 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x65"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="采购员：" />
+                android:text="采购员："
+                android:textSize="@dimen/x12" />
 
             <EditText
                 android:id="@+id/et_search_CGY"
@@ -219,10 +221,12 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x65"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/x12"
                 android:layout_centerVertical="true"
-                android:text="供货商：" />
+                android:text="供货商："
+             />
 
             <EditText
                 android:id="@+id/et_search_honghuoshang"
@@ -257,8 +261,9 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="@dimen/x60"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/x12"
+                android:layout_width="@dimen/x65"
                 android:text="付款方式" />
 
             <CheckBox
@@ -287,8 +292,9 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_width="@dimen/x60"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/x12"
+                android:layout_width="@dimen/x60"
                 android:text="付款周期" />
 
             <EditText
@@ -329,6 +335,7 @@
             <TextView
                 android:layout_width="@dimen/x60"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/x12"
                 android:text="备注说明" />
 
             <EditText
