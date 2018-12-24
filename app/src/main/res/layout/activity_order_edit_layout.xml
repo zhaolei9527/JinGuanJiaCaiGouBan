@@ -188,6 +188,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+
                                     android:id="@+id/tv_BH"
                                     android:layout_width="0dp"
                                     android:layout_height="@dimen/y23"
@@ -219,10 +220,10 @@
 
                         <TextView
                             android:layout_width="@dimen/x65"
-                            android:textSize="@dimen/x12"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="采购日期：" />
+                            android:text="采购日期："
+                            android:textSize="@dimen/x12" />
 
                         <LinearLayout
                             android:id="@+id/ll_start_time"
@@ -242,7 +243,7 @@
                                 android:paddingLeft="@dimen/x5"
                                 android:singleLine="true"
                                 android:textColorHint="@color/text666"
-                                android:textSize="@dimen/x13" />
+                                android:textSize="@dimen/x12" />
 
                             <ImageView
                                 android:layout_width="@dimen/x15"
@@ -269,7 +270,8 @@
                             android:layout_width="@dimen/x65"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="采购员：" />
+                            android:text="采购员："
+                            android:textSize="@dimen/x12" />
 
                         <EditText
                             android:id="@+id/et_search_CGY"
@@ -282,7 +284,7 @@
                             android:paddingLeft="@dimen/x5"
                             android:singleLine="true"
                             android:textColorHint="@color/text666"
-                            android:textSize="@dimen/x13" />
+                            android:textSize="@dimen/x12" />
 
                         <ImageView
                             android:id="@+id/img_selelte_CGY"
@@ -306,7 +308,8 @@
                             android:layout_width="@dimen/x65"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="供货商：" />
+                            android:text="供货商："
+                            android:textSize="@dimen/x12" />
 
                         <EditText
                             android:id="@+id/et_search_honghuoshang"
@@ -321,7 +324,7 @@
                             android:paddingLeft="@dimen/x5"
                             android:singleLine="true"
                             android:textColorHint="@color/text666"
-                            android:textSize="@dimen/x13" />
+                            android:textSize="@dimen/x12" />
 
                         <ImageView
                             android:id="@+id/img_selelte_gonghuoshang"
@@ -343,7 +346,8 @@
                         <TextView
                             android:layout_width="@dimen/x65"
                             android:layout_height="wrap_content"
-                            android:text="付款方式" />
+                            android:text="付款方式"
+                            android:textSize="@dimen/x12" />
 
                         <CheckBox
                             android:id="@+id/cb_yuejie"
@@ -351,14 +355,16 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x10"
                             android:checked="true"
-                            android:text="月结" />
+                            android:text="月结"
+                            android:textSize="@dimen/x12" />
 
                         <CheckBox
                             android:id="@+id/cb_xianjie"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x10"
-                            android:text="现付" />
+                            android:text="现付"
+                            android:textSize="@dimen/x12" />
 
                     </LinearLayout>
 
@@ -373,31 +379,45 @@
                         <TextView
                             android:layout_width="@dimen/x65"
                             android:layout_height="wrap_content"
-                            android:text="付款周期" />
+                            android:text="付款周期"
+                            android:textSize="@dimen/x12" />
 
                         <EditText
                             android:id="@+id/et_yue"
                             android:layout_width="@dimen/x45"
                             android:layout_height="wrap_content"
-                            android:inputType="number" />
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:textSize="@dimen/x12" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x10"
-                            android:text="月 几天送齐" />
+                            android:layout_marginLeft="@dimen/x5"
+                            android:text="月"
+                            android:textSize="@dimen/x12" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:text="几天送齐"
+                            android:textSize="@dimen/x12" />
 
                         <EditText
                             android:id="@+id/et_tian"
                             android:layout_width="@dimen/x45"
                             android:layout_height="wrap_content"
-                            android:inputType="number" />
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:textSize="@dimen/x12" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x10"
-                            android:text="天" />
+                            android:text="天"
+                            android:textSize="@dimen/x12" />
 
                     </LinearLayout>
 
@@ -411,7 +431,8 @@
                         <TextView
                             android:layout_width="@dimen/x65"
                             android:layout_height="wrap_content"
-                            android:text="备注说明" />
+                            android:text="备注说明"
+                            android:textSize="@dimen/x12" />
 
                         <EditText
                             android:id="@+id/et_beizhu"
@@ -445,7 +466,8 @@
                             android:layout_marginBottom="@dimen/x5"
                             android:background="@color/bgtitle"
                             android:text="保存"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/x12" />
 
                     </RelativeLayout>
 
@@ -467,7 +489,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x5"
                             android:text="总计：0"
-                            android:textSize="@dimen/x11" />
+                            android:textSize="@dimen/x12" />
 
                         <TextView
                             android:id="@+id/tv_fd_cont"
@@ -475,7 +497,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x15"
                             android:text="分店总计：0"
-                            android:textSize="@dimen/x11" />
+                            android:textSize="@dimen/x12" />
 
                     </LinearLayout>
 

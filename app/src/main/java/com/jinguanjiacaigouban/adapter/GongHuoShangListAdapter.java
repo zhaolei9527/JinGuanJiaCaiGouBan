@@ -41,6 +41,7 @@ import butterknife.ButterKnife;
 public class GongHuoShangListAdapter extends RecyclerView.Adapter<GongHuoShangListAdapter.ViewHolder> {
 
     private Activity mContext;
+    private TextView tvCont;
 
     private ArrayList<proCsSelectBean> datas = new ArrayList();
 
@@ -48,8 +49,9 @@ public class GongHuoShangListAdapter extends RecyclerView.Adapter<GongHuoShangLi
         return datas;
     }
 
-    public GongHuoShangListAdapter(Activity context, ArrayList<proCsSelectBean> homeBean) {
+    public GongHuoShangListAdapter(Activity context, ArrayList<proCsSelectBean> homeBean, TextView tvCont) {
         this.mContext = context;
+        this.tvCont = tvCont;
         datas.addAll(homeBean);
     }
 
@@ -146,6 +148,7 @@ public class GongHuoShangListAdapter extends RecyclerView.Adapter<GongHuoShangLi
                                     EasyToast.showShort(mContext, "删除成功");
                                     datas.remove(position);
                                     notifyDataSetChanged();
+                                    tvCont.setText("总计：" + datas.size());
                                 }
                             });
                         } else {

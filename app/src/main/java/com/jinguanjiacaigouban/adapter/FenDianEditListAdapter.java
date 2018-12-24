@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 public class FenDianEditListAdapter extends RecyclerView.Adapter<FenDianEditListAdapter.ViewHolder> {
 
     private Activity mContext;
+    TextView tvCont;
 
     private ArrayList<proFdlxFdBean> datas = new ArrayList();
 
@@ -46,8 +47,9 @@ public class FenDianEditListAdapter extends RecyclerView.Adapter<FenDianEditList
         return datas;
     }
 
-    public FenDianEditListAdapter(Activity context, List<proFdlxFdBean> homeBean) {
+    public FenDianEditListAdapter(Activity context, List<proFdlxFdBean> homeBean, TextView tvCont) {
         this.mContext = context;
+        this.tvCont = tvCont;
         datas.addAll(homeBean);
     }
 
@@ -110,6 +112,8 @@ public class FenDianEditListAdapter extends RecyclerView.Adapter<FenDianEditList
                                     EasyToast.showShort(mContext, "删除成功");
                                     datas.remove(position);
                                     notifyDataSetChanged();
+
+                                    tvCont.setText("总计：" + datas.size());
                                 }
                             });
                         } else {

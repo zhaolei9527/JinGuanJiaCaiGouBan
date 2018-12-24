@@ -223,10 +223,9 @@
             <TextView
                 android:layout_width="@dimen/x65"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/x12"
                 android:layout_centerVertical="true"
                 android:text="供货商："
-             />
+                android:textSize="@dimen/x12" />
 
             <EditText
                 android:id="@+id/et_search_honghuoshang"
@@ -261,10 +260,10 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/x12"
                 android:layout_width="@dimen/x65"
-                android:text="付款方式" />
+                android:layout_height="wrap_content"
+                android:text="付款方式"
+                android:textSize="@dimen/x12" />
 
             <CheckBox
                 android:id="@+id/cb_yuejie"
@@ -292,28 +291,36 @@
             android:padding="@dimen/x5">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/x12"
                 android:layout_width="@dimen/x60"
-                android:text="付款周期" />
+                android:layout_height="wrap_content"
+                android:text="付款周期"
+                android:textSize="@dimen/x12" />
 
             <EditText
                 android:id="@+id/et_yue"
                 android:layout_width="@dimen/x45"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:inputType="number"
                 android:text="4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x10"
-                android:text="月 几天送齐" />
+                android:layout_marginLeft="@dimen/x5"
+                android:text="月" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="几天送齐" />
 
             <EditText
                 android:id="@+id/et_tian"
                 android:layout_width="@dimen/x45"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:inputType="number"
                 android:text="7" />
 
@@ -335,8 +342,8 @@
             <TextView
                 android:layout_width="@dimen/x60"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/x12"
-                android:text="备注说明" />
+                android:text="备注说明"
+                android:textSize="@dimen/x12" />
 
             <EditText
                 android:id="@+id/et_beizhu"

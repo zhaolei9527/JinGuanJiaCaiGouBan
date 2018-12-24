@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -75,7 +76,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
 
         holder.tvXSNR.setText(datas.get(position).getXSRN());
 
-        holder.imgShowGoods.setOnClickListener(new View.OnClickListener() {
+        holder.flShowGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e("OrderListAdapter", "position:" + position);
@@ -188,6 +189,8 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         TextView tvXSNR;
         @BindView(R.id.img_show_goods)
         ImageView imgShowGoods;
+        @BindView(R.id.fl_show_goods)
+        FrameLayout flShowGoods;
         @BindView(R.id.ll_order_goods)
         LinearLayout llOrderGoods;
         @BindView(R.id.ll_order_fendian)
@@ -295,9 +298,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                                 TextView tv_danjia = item_proddpm_layout.findViewById(R.id.tv_danjia);
                                 TextView tv_shuliang = item_proddpm_layout.findViewById(R.id.tv_shuliang);
                                 TextView tv_beizhu = item_proddpm_layout.findViewById(R.id.tv_beizhu);
-                                tv_title.setText("编号：" + proDdPmBeans.get(i).getCol1() + " 品名：" + proDdPmBeans.get(i).getCol2());
+                                tv_title.setText(proDdPmBeans.get(i).getCol1() + "." + proDdPmBeans.get(i).getCol2());
                                 tv_danjia.setText("单价：" + Utils.subZeroAndDot(proDdPmBeans.get(i).getCol3()));
-                                tv_shuliang.setText("数量：" + proDdPmBeans.get(i).getCol4());
+                                tv_shuliang.setText("数量：" + Utils.subZeroAndDot(proDdPmBeans.get(i).getCol4()));
                                 tv_beizhu.setText("备注：" + proDdPmBeans.get(i).getCol5());
                                 holder.llOrderGoods.addView(item_proddpm_layout);
                                 Log.e("OrderListAdapter", proDdPmBeans.get(i).getCol2());

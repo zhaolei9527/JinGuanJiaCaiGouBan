@@ -238,6 +238,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fl_back:
+                setResult(800, new Intent().putExtra("MC", etMC.getText().toString()));
                 finish();
                 break;
             case R.id.ll_check_photo:
@@ -319,6 +320,19 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         public void doSth() {
                             try {
                                 if (!TextUtils.isEmpty(type)) {
+
+                                    if (TextUtils.isEmpty(tvDDSL.getText().toString())){
+                                        tvDDSL.setText("0");
+                                    }
+
+                                    if (TextUtils.isEmpty(tvYSDJ.getText().toString())){
+                                        tvYSDJ.setText("0");
+                                    }
+
+                                    if (TextUtils.isEmpty(tvCGDJ.getText().toString())){
+                                        tvCGDJ.setText("0");
+                                    }
+
                                     getproPmUpData("pro_pm_update"
                                             , String.valueOf(SpUtil.get(context, "MC", ""))
                                             , (String) SpUtil.get(context, "androidIMEI", "")
@@ -339,11 +353,20 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                             , pic
                                             , isIMAGE);
 
-
-
-
-
                                 } else {
+
+                                    if (TextUtils.isEmpty(tvDDSL.getText().toString())){
+                                        tvDDSL.setText("0");
+                                    }
+
+                                    if (TextUtils.isEmpty(tvYSDJ.getText().toString())){
+                                        tvYSDJ.setText("0");
+                                    }
+
+                                    if (TextUtils.isEmpty(tvCGDJ.getText().toString())){
+                                        tvCGDJ.setText("0");
+                                    }
+
                                     getproPmUpData("pro_pm_insert"
                                             , String.valueOf(SpUtil.get(context, "MC", ""))
                                             , (String) SpUtil.get(context, "androidIMEI", "")
@@ -904,6 +927,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        setResult(800, new Intent().putExtra("MC", etMC.getText().toString()));
         System.gc();
     }
 }

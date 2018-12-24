@@ -29,15 +29,16 @@ import butterknife.ButterKnife;
 public class OrderFenDianListAdapter extends RecyclerView.Adapter<OrderFenDianListAdapter.ViewHolder> {
 
     private Activity mContext;
-
+    TextView tvFdCont;
     private ArrayList<proDdFdFdBean> datas = new ArrayList();
 
     public ArrayList<proDdFdFdBean> getDatas() {
         return datas;
     }
 
-    public OrderFenDianListAdapter(Activity context, List<proDdFdFdBean> homeBean) {
+    public OrderFenDianListAdapter(Activity context, List<proDdFdFdBean> homeBean, TextView tvFdCont) {
         this.mContext = context;
+        this.tvFdCont = tvFdCont;
         datas.addAll(homeBean);
     }
 
@@ -55,11 +56,11 @@ public class OrderFenDianListAdapter extends RecyclerView.Adapter<OrderFenDianLi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        if (!TextUtils.isEmpty(datas.get(position).getMC())){
+        if (!TextUtils.isEmpty(datas.get(position).getMC())) {
             holder.tvTitle.setText(datas.get(position).getMC());
         }
 
-        if (!TextUtils.isEmpty(datas.get(position).getCol1())){
+        if (!TextUtils.isEmpty(datas.get(position).getCol1())) {
             holder.tvTitle.setText(datas.get(position).getCol1());
         }
 
@@ -82,7 +83,6 @@ public class OrderFenDianListAdapter extends RecyclerView.Adapter<OrderFenDianLi
 
             }
         });
-
 
     }
 

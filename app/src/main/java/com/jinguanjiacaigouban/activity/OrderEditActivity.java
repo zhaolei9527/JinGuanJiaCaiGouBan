@@ -254,13 +254,22 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         , 205);
                 break;
             case R.id.cb_Check_FD:
+
                 StringBuffer stringBuffer = new StringBuffer();
                 for (int i = 0; i < orderFenDianListAdapter.getDatas().size(); i++) {
                     if (TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getErr())) {
-                        if (i == 0) {
-                            stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getMC());
-                        } else {
-                            stringBuffer.append("+" + orderFenDianListAdapter.getDatas().get(i).getMC());
+                        if (!TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getMC())){
+                            if (i == 0) {
+                                stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getMC());
+                            } else {
+                                stringBuffer.append("+" + orderFenDianListAdapter.getDatas().get(i).getMC());
+                            }
+                        }else {
+                            if (i == 0) {
+                                stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getCol1());
+                            } else {
+                                stringBuffer.append("+" + orderFenDianListAdapter.getDatas().get(i).getCol1());
+                            }
                         }
                     }
                 }
@@ -327,10 +336,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     return;
                 }
 
-                if (TextUtils.isEmpty(etBeizhu.getText())) {
-                    CommomDialog.showMessage(context, "请完善录入数据");
-                    return;
-                }
 
                 dialog.show();
 
@@ -586,6 +591,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 proDdFdBean.setBH(proFdlxFdBeans.get(i).getBH());
                                 orderFenDianListAdapter.getDatas().add(proDdFdBean);
                             }
+
+                            tvFdCont.setText("分店总计: " + orderFenDianListAdapter.getDatas().size());
                             orderFenDianListAdapter.notifyDataSetChanged();
                         }
                     });
@@ -723,6 +730,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                     etSearchHonghuoshang.setFocusable(true);
                                     imgSelelteGonghuoshang.setVisibility(View.VISIBLE);
                                 }
+
+                                proDdPm(strBH);
 
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
@@ -885,12 +894,11 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         public void run() {
                             List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
                             tvCont.setText("总计: " + proDdPmBeans.size());
-                            adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans);
+                            adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans, tvCont, etSearchHonghuoshang, imgSelelteGonghuoshang);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     rvOrderGoods.setAdapter(adapter);
-
                                     if (!adapter.getDatas().isEmpty()) {
                                         etSearchHonghuoshang.setFocusable(false);
                                         imgSelelteGonghuoshang.setVisibility(View.GONE);
@@ -898,7 +906,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                         etSearchHonghuoshang.setFocusable(true);
                                         imgSelelteGonghuoshang.setVisibility(View.VISIBLE);
                                     }
-
                                 }
                             });
                         }
@@ -950,9 +957,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
-                            tvFdCont.setText("总计: " + proDdFdFdBeans.size());
 
-                            orderFenDianListAdapter = new OrderFenDianListAdapter(OrderEditActivity.this, proDdFdFdBeans);
+                            tvFdCont.setText("分店总计: " + proDdFdFdBeans.size());
+
+                            orderFenDianListAdapter = new OrderFenDianListAdapter(OrderEditActivity.this, proDdFdFdBeans, tvFdCont);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {

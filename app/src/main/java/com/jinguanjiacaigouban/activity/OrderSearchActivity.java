@@ -144,7 +144,6 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             }
         });
 
-
     }
 
     @Override
@@ -164,6 +163,11 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void initData() {
         dialog = Utils.showLoadingDialog(context);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getdata();
     }
 

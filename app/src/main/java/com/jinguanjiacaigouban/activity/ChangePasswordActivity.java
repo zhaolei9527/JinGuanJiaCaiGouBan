@@ -76,20 +76,11 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
 
     private void submit() {
         oldpassword = et_oldpassword.getText().toString().trim();
-        if (TextUtils.isEmpty(oldpassword)) {
-            EasyToast.showShort(context, "请输入旧密码");
-            return;
-        }
         newpassword = et_newpassword.getText().toString().trim();
-        if (TextUtils.isEmpty(newpassword)) {
-            EasyToast.showShort(context, "请输入新密码");
-            return;
-        }
         String newpasswordagain = et_newpasswordagain.getText().toString().trim();
-        if (TextUtils.isEmpty(newpasswordagain)) {
-            EasyToast.showShort(context, "请确认新密码");
-            return;
-        }
+
+
+
         if (!newpassword.equals(newpasswordagain)) {
             EasyToast.showShort(context, "两次输入密码不一致");
             return;

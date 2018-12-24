@@ -331,6 +331,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
 
                 break;
             case R.id.fl_back:
+                setResult(800, new Intent().putExtra("MC", et_MC.getText().toString()));
                 finish();
                 break;
             case R.id.ll_pro_fl1:
@@ -652,6 +653,9 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                     for (int i = 0; i < proCslxBeans.size(); i++) {
                         addresslist.add(proCslxBeans.get(i).getMC());
                     }
+
+                    showSponer(addresslist, etAddress);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -666,10 +670,5 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.gc();
-    }
 
 }

@@ -411,7 +411,7 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
 
                     final List<proFdlxFdBean> proFdlxSelectBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
 
-                    adapter = new FenDianEditListAdapter(FenDianEditActivity.this, proFdlxSelectBeans);
+                    adapter = new FenDianEditListAdapter(FenDianEditActivity.this, proFdlxSelectBeans, tvCont);
 
                     mHandler.post(new Runnable() {
                         @Override
@@ -465,6 +465,7 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         public void run() {
                             if (TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                                 tvBH.setText(proCsAddBeans.get(0).getBH());
+
                                 strBH = proCsAddBeans.get(0).getBH();
                                 rlAddFendian.setVisibility(View.GONE);
                                 Utils.showSoundWAV(context, R.raw.susses);

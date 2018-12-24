@@ -228,7 +228,7 @@ public class GoodShopActivity extends BaseActivity {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans);
+                            adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans,tvCont);
                             rvGonghuoshangList.setAdapter(adapter);
                             tvCont.setText("总计：" + proPmSelectBeans.size());
                             if (!TextUtils.isEmpty(GongHuoShangActivity.mc)) {

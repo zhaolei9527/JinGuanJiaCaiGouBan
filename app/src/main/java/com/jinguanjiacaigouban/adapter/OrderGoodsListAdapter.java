@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,15 +42,20 @@ import butterknife.ButterKnife;
 public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAdapter.ViewHolder> {
 
     private OrderEditActivity mContext;
-
+    TextView tvCont;
+    EditText etSearchHonghuoshang;
+    ImageView imgSelelteGonghuoshang;
     private ArrayList<proDdPmBean> datas = new ArrayList();
 
     public ArrayList<proDdPmBean> getDatas() {
         return datas;
     }
 
-    public OrderGoodsListAdapter(OrderEditActivity context, List<proDdPmBean> homeBean) {
+    public OrderGoodsListAdapter(OrderEditActivity context, List<proDdPmBean> homeBean, TextView tvCont, EditText etSearchHonghuoshang, ImageView imgSelelteGonghuoshang) {
         this.mContext = context;
+        this.etSearchHonghuoshang = etSearchHonghuoshang;
+        this.imgSelelteGonghuoshang = imgSelelteGonghuoshang;
+        this.tvCont = tvCont;
         datas.addAll(homeBean);
     }
 
@@ -82,7 +88,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             }
         });
 
-        holder.tvTitle.setText(position + datas.get(position).getCol1() + "." + datas.get(position).getCol2());
+        holder.tvTitle.setText(datas.get(position).getCol1() + "." + datas.get(position).getCol2());
         holder.etDanjia.setText(Utils.subZeroAndDot(datas.get(position).getCol3() + ""));
         holder.etShuliang.setText(Utils.subZeroAndDot(datas.get(position).getCol4() + ""));
         holder.etBeizhu.setText(Utils.subZeroAndDot(datas.get(position).getCol5() + ""));
@@ -92,7 +98,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             public void onFocusChange(View view, boolean b) {
 
                 if (!b) {
-                    datas.get(position).setCol3(holder.etDanjia.toString());
+                    datas.get(position).setCol3(holder.etDanjia.getText().toString());
                     getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
                             , (String) SpUtil.get(mContext, "androidIMEI", "")
                             , UrlUtils.BBH
@@ -113,7 +119,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             public void onFocusChange(View view, boolean b) {
 
                 if (!b) {
-                    datas.get(position).setCol4(holder.etShuliang.toString());
+                    datas.get(position).setCol4(holder.etShuliang.getText().toString());
                     getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
                             , (String) SpUtil.get(mContext, "androidIMEI", "")
                             , UrlUtils.BBH
@@ -132,7 +138,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
-                    datas.get(position).setCol5(holder.etBeizhu.toString());
+                    datas.get(position).setCol5(holder.etBeizhu.getText().toString());
                     getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
                             , (String) SpUtil.get(mContext, "androidIMEI", "")
                             , UrlUtils.BBH
@@ -145,6 +151,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                 }
             }
         });
+
 
     }
 
@@ -172,6 +179,16 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                                     EasyToast.showShort(mContext, "删除成功");
                                     datas.remove(position);
                                     notifyDataSetChanged();
+                                    tvCont.setText("总计：" + datas.size());
+
+                                    if (datas.size()==0){
+                                        etSearchHonghuoshang.setFocusable(true);
+                                        imgSelelteGonghuoshang.setVisibility(View.VISIBLE);
+                                    }else {
+                                        etSearchHonghuoshang.setFocusable(false);
+                                        imgSelelteGonghuoshang.setVisibility(View.GONE);
+                                    }
+
                                 }
                             });
                         } else {
@@ -218,11 +235,13 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                     mContext.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             if (TextUtils.isEmpty(proDdInsertBeans.get(0).getErr())) {
                                 EasyToast.showShort(mContext, "保存成功");
                             } else {
                                 CommomDialog.showMessage(mContext, proDdInsertBeans.get(0).getErr());
                             }
+
                         }
                     });
 

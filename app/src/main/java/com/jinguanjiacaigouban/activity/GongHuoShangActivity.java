@@ -160,7 +160,7 @@ public class GongHuoShangActivity extends BaseActivity {
                         });
                     }
                     final ArrayList<proCsSelectBean> proCsSelectBeans = (ArrayList<proCsSelectBean>) proCsSelectBean.arrayproCsSelectBeanFromData(pro_cs_select);
-                    adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans);
+                    adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans,  tvCont);
 
                     mHandler.post(new Runnable() {
                         @Override
