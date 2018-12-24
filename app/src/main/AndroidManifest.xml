@@ -42,6 +42,7 @@
         <activity android:name=".activity.OrderAddActivity"></activity>
         <activity android:name=".activity.OrderEditActivity"></activity>
         <activity android:name=".activity.ChangePasswordActivity"></activity>
+        <activity android:name=".activity.ShareOrderActivity"></activity>
 
         <!--====================================功能需要==========================================-->
 
@@ -52,6 +53,31 @@
         <activity
             android:name="me.iwf.photopicker.PhotoPagerActivity"
             android:theme="@style/customTheme" />
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wxf01c8a76202a8f4e" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wxf01c8a76202a8f4e" />
+            </intent-filter>
+        </activity>
+
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -113,6 +113,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
     TextView tvCont;
     @BindView(R.id.tv_fd_cont)
     TextView tvFdCont;
+    @BindView(R.id.ll_share)
+    LinearLayout llShare;
     private TimePickerView pvTime;
     private ArrayList<String> proYgList = new ArrayList<>();
     private Dialog dialog;
@@ -176,6 +178,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         llQiandan.setOnClickListener(this);
         llHoudan.setOnClickListener(this);
         llXindan.setOnClickListener(this);
+        llShare.setOnClickListener(this);
 
         strFKFS = "月结";
 
@@ -235,6 +238,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.ll_share:
+                startActivity(new Intent(context, ShareOrderActivity.class)
+                        .putExtra("strBH", strBH));
+                break;
             case R.id.ll_xindan:
                 startActivity(new Intent(context, OrderAddActivity.class));
                 finish();
@@ -258,13 +265,13 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                 StringBuffer stringBuffer = new StringBuffer();
                 for (int i = 0; i < orderFenDianListAdapter.getDatas().size(); i++) {
                     if (TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getErr())) {
-                        if (!TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getMC())){
+                        if (!TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getMC())) {
                             if (i == 0) {
                                 stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getMC());
                             } else {
                                 stringBuffer.append("+" + orderFenDianListAdapter.getDatas().get(i).getMC());
                             }
-                        }else {
+                        } else {
                             if (i == 0) {
                                 stringBuffer.append(orderFenDianListAdapter.getDatas().get(i).getCol1());
                             } else {
@@ -392,7 +399,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 etSearchCGY.setText(proDdEditBeans.get(0).getCol3());
                                 etSearchHonghuoshang.setText(proDdEditBeans.get(0).getCol4());
 
-                                if ("现价".equals(proDdEditBeans.get(0).getCol5())) {
+                                if ("现结".equals(proDdEditBeans.get(0).getCol5())) {
                                     cbXianjie.setChecked(true);
                                 } else if ("月结".equals(proDdEditBeans.get(0).getCol5())) {
                                     cbYuejie.setChecked(true);

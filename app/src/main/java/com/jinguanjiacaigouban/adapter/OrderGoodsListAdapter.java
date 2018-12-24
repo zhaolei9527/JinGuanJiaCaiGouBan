@@ -1,5 +1,6 @@
 package com.jinguanjiacaigouban.adapter;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -41,14 +42,22 @@ import butterknife.ButterKnife;
  */
 public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAdapter.ViewHolder> {
 
-    private OrderEditActivity mContext;
+    private Activity mContext;
     TextView tvCont;
     EditText etSearchHonghuoshang;
     ImageView imgSelelteGonghuoshang;
+    boolean share = false;
+
     private ArrayList<proDdPmBean> datas = new ArrayList();
 
     public ArrayList<proDdPmBean> getDatas() {
         return datas;
+    }
+
+    public OrderGoodsListAdapter(Activity context, List<proDdPmBean> homeBean) {
+        this.mContext = context;
+        share = true;
+        datas.addAll(homeBean);
     }
 
     public OrderGoodsListAdapter(OrderEditActivity context, List<proDdPmBean> homeBean, TextView tvCont, EditText etSearchHonghuoshang, ImageView imgSelelteGonghuoshang) {
@@ -152,6 +161,15 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             }
         });
 
+        if (share == true) {
+            holder.etBeizhu.setFocusable(false);
+            holder.etBeizhu.setEnabled(false);
+            holder.etShuliang.setFocusable(false);
+            holder.etShuliang.setEnabled(false);
+            holder.etDanjia.setFocusable(false);
+            holder.etDanjia.setEnabled(false);
+            holder.btnDelete.setVisibility(View.GONE);
+        }
 
     }
 
@@ -181,10 +199,10 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                                     notifyDataSetChanged();
                                     tvCont.setText("总计：" + datas.size());
 
-                                    if (datas.size()==0){
+                                    if (datas.size() == 0) {
                                         etSearchHonghuoshang.setFocusable(true);
                                         imgSelelteGonghuoshang.setVisibility(View.VISIBLE);
-                                    }else {
+                                    } else {
                                         etSearchHonghuoshang.setFocusable(false);
                                         imgSelelteGonghuoshang.setVisibility(View.GONE);
                                     }

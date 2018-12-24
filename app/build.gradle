@@ -34,9 +34,27 @@ android {
         }
     }
 }
+MobSDK {
+    appKey "2971a4b4df560"
+    appSecret "34b908d576f9d88d0526d8a55d2a4262"
 
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+            Wechat {
+                appId "wxf01c8a76202a8f4e"
+                appSecret "71f99c301d8fc8e1e017538251e155d4"
+                bypassApproval true
+            }
+            WechatMoments {
+                appId "wxf01c8a76202a8f4e"
+                appSecret "71f99c301d8fc8e1e017538251e155d4"
+                bypassApproval true
+            }
+        }
+    }
 
-
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -55,6 +73,7 @@ dependencies {
     compile 'com.github.fangx:haorefresh:1.0'
     compile 'com.wang.avi:library:1.0.1'
     compile 'org.jsoup:jsoup:1.10.2'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     compile 'com.github.addappcn:android-pickers:1.0.3'
     compile 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
     implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.4'
