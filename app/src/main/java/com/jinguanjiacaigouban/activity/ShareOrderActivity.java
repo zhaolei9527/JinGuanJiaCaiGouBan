@@ -5,20 +5,21 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jinguanjiacaigouban.App;
 import com.jinguanjiacaigouban.R;
+import com.jinguanjiacaigouban.adapter.OrderFenDianListAdapter;
 import com.jinguanjiacaigouban.adapter.OrderGoodsListAdapter;
 import com.jinguanjiacaigouban.bean.proDdEditBean;
 import com.jinguanjiacaigouban.bean.proDdFdFdBean;
@@ -70,16 +71,22 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
     ImageView imgWechat;
     @BindView(R.id.img_qq)
     ImageView imgQq;
-    @BindView(R.id.tv_zhouqi)
-    TextView tvZhouqi;
     @BindView(R.id.ll_share)
-    LinearLayout llShare;
+    ScrollView llShare;
     @BindView(R.id.tv_FD)
     TextView tvFD;
+    @BindView(R.id.tv_LJMC)
+    TextView tvLJMC;
+    @BindView(R.id.tv_BZ)
+    TextView tvBZ;
+    @BindView(R.id.rv_order_fendian)
+    JinGuanJiaRecycleView rvOrderFendian;
     private Dialog dialog;
     public static String strBH;
     private OrderGoodsListAdapter adapter;
     private SakuraLinearLayoutManager line;
+    private GridLayoutManager line2;
+    private OrderFenDianListAdapter orderFenDianListAdapter;
 
     @Override
     protected int setthislayout() {
@@ -88,6 +95,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initview() {
+
         line = new SakuraLinearLayoutManager(context);
         line.setOrientation(LinearLayoutManager.VERTICAL);
         rvOrderGoods.setLayoutManager(line);
@@ -97,9 +105,19 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         progressView.setIndicatorColor(getResources().getColor(R.color.colorAccent));
         rvOrderGoods.setFootLoadingView(progressView);
         rvOrderGoods.loadMoreComplete();
-        rvOrderGoods.setCanloadMore(false);
-    }
 
+
+        line2 = new GridLayoutManager(context,3);
+        line2.setOrientation(LinearLayoutManager.VERTICAL);
+        rvOrderFendian.setLayoutManager(line2);
+        rvOrderFendian.setItemAnimator(new DefaultItemAnimator());
+        ProgressView progressView2 = new ProgressView(context);
+        progressView2.setIndicatorId(ProgressView.BallRotate);
+        progressView2.setIndicatorColor(getResources().getColor(R.color.colorAccent));
+        rvOrderFendian.setFootLoadingView(progressView2);
+        rvOrderFendian.loadMoreComplete();
+
+    }
 
     @Override
     protected void initListener() {
@@ -170,22 +188,18 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         wechat.share(sp);
     }
 
-    public static Bitmap getBitmapFromView(View v) {
-        Bitmap b = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.RGB_565);
-        Canvas c = new Canvas(b);
-        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-        // Draw background
-        Drawable bgDrawable = v.getBackground();
-        if (bgDrawable != null) {
-            bgDrawable.draw(c);
-        } else {
-            c.drawColor(Color.WHITE);
+    public static Bitmap getBitmapFromView(ScrollView scrollView) {
+        int h = 0;
+        Bitmap bitmap = null;
+        for (int i = 0; i < scrollView.getChildCount(); i++) {
+            h += scrollView.getChildAt(i).getHeight();
+            scrollView.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"));
         }
-        // Draw view to canvas
-        v.draw(c);
-        return b;
+        bitmap = Bitmap.createBitmap(scrollView.getWidth(), h, Bitmap.Config.RGB_565);
+        final Canvas canvas = new Canvas(bitmap);
+        scrollView.draw(canvas);
+        return bitmap;
     }
-
 
     public void getEditData(final String... key) {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
@@ -214,16 +228,15 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
                             strBH = proDdEditBeans.get(0).getCol1();
-                            tvOrder.setText("订单编号" + proDdEditBeans.get(0).getCol1());
+                            tvLJMC.setText("链接名称：" + String.valueOf(SpUtil.get(context, "lastURL", "")));
+                            tvOrder.setText("订单编号:" + proDdEditBeans.get(0).getCol1());
                             tvOrderTime.setText("订单时间：" + proDdEditBeans.get(0).getCol2());
                             tvCGR.setText("采购员：" + proDdEditBeans.get(0).getCol3());
                             tvGHS.setText("供货商：" + proDdEditBeans.get(0).getCol4());
-                            tvZhouqi.setText(proDdEditBeans.get(0).getCol5());
-                            tvYue.setText(proDdEditBeans.get(0).getCol6() + "月");
+                            tvYue.setText(proDdEditBeans.get(0).getCol6() + "" + proDdEditBeans.get(0).getCol5());
                             tvTian.setText(proDdEditBeans.get(0).getCol7() + "天");
-
+                            tvBZ.setText(proDdEditBeans.get(0).getCol8());
                         }
                     });
 
@@ -243,7 +256,6 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
             }
         });
     }
-
 
     private void proDdPm(final String... key) {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
@@ -333,25 +345,17 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                         @Override
                         public void run() {
                             List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
-                            StringBuffer stringBuffer = new StringBuffer();
-                            for (int i = 0; i < proDdFdFdBeans.size(); i++) {
-                                if (stringBuffer.length() == 0) {
-                                    if (!TextUtils.isEmpty(proDdFdFdBeans.get(i).getMC())) {
-                                        stringBuffer.append("分店（" + proDdFdFdBeans.size() + "):" + proDdFdFdBeans.get(i).getMC());
-                                    } else {
-                                        stringBuffer.append("分店（" + proDdFdFdBeans.size() + "):" + proDdFdFdBeans.get(i).getCol1());
-                                    }
-                                } else {
-                                    if (!TextUtils.isEmpty(proDdFdFdBeans.get(i).getMC())) {
-                                        stringBuffer.append(" " + proDdFdFdBeans.get(i).getMC());
-                                    } else {
-                                        stringBuffer.append(" " + proDdFdFdBeans.get(i).getCol1());
-                                    }
-                                }
-                            }
 
-                            tvFD.setText(stringBuffer.toString());
-                            
+                            orderFenDianListAdapter = new OrderFenDianListAdapter(ShareOrderActivity.this, proDdFdFdBeans, tvFD);
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    rvOrderFendian.setAdapter(orderFenDianListAdapter);
+                                }
+                            });
+
+                            tvFD.setText("分店（" + proDdFdFdBeans.size() + "）");
+
                         }
                     });
 

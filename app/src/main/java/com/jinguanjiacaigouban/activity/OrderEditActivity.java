@@ -395,6 +395,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol0())) {
                                 tvBH.setText(proDdEditBeans.get(0).getCol1());
                                 strBH = proDdEditBeans.get(0).getCol1();
+
+                                proDdPm(strBH);
+                                proDdFd(strBH);
+
                                 tvSearchStartTime.setText(proDdEditBeans.get(0).getCol2());
                                 etSearchCGY.setText(proDdEditBeans.get(0).getCol3());
                                 etSearchHonghuoshang.setText(proDdEditBeans.get(0).getCol4());
@@ -420,8 +424,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         }
                     });
 
-                    proDdPm(strBH);
-                    proDdFd(strBH);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -599,7 +601,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 orderFenDianListAdapter.getDatas().add(proDdFdBean);
                             }
 
-                            tvFdCont.setText("分店总计: " + orderFenDianListAdapter.getDatas().size());
+                            tvFdCont.setText("分店: " + orderFenDianListAdapter.getDatas().size());
                             orderFenDianListAdapter.notifyDataSetChanged();
                         }
                     });
@@ -728,7 +730,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 adapter.notifyDataSetChanged();
                                 Utils.showSoundWAV(context, R.raw.susses);
 
-                                tvCont.setText("总计: " + adapter.getDatas().size());
+                                tvCont.setText("商品: " + adapter.getDatas().size());
 
                                 if (!adapter.getDatas().isEmpty()) {
                                     etSearchHonghuoshang.setFocusable(false);
@@ -900,7 +902,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
-                            tvCont.setText("总计: " + proDdPmBeans.size());
+                            tvCont.setText("商品: " + proDdPmBeans.size());
                             adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans, tvCont, etSearchHonghuoshang, imgSelelteGonghuoshang);
                             mHandler.post(new Runnable() {
                                 @Override
@@ -965,7 +967,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         public void run() {
                             List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
 
-                            tvFdCont.setText("分店总计: " + proDdFdFdBeans.size());
+                            tvFdCont.setText("分店: " + proDdFdFdBeans.size());
 
                             orderFenDianListAdapter = new OrderFenDianListAdapter(OrderEditActivity.this, proDdFdFdBeans, tvFdCont);
                             mHandler.post(new Runnable() {

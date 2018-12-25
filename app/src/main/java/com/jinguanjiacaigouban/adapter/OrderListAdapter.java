@@ -102,6 +102,10 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
             holder.llOrderGoods.setVisibility(View.VISIBLE);
         }
 
+
+
+
+
         holder.llEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

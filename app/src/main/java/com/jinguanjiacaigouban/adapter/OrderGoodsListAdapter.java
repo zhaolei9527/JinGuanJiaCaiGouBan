@@ -114,8 +114,8 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                             , OrderEditActivity.strBH
                             , String.valueOf(datas.get(position).getCol1())
                             , String.valueOf(datas.get(position).getCol2())
-                            , String.valueOf(datas.get(position).getCol3())
                             , String.valueOf(datas.get(position).getCol4())
+                            , String.valueOf(datas.get(position).getCol3())
                             , String.valueOf(datas.get(position).getCol5()));
                 }
 
@@ -135,8 +135,8 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                             , OrderEditActivity.strBH
                             , String.valueOf(datas.get(position).getCol1())
                             , String.valueOf(datas.get(position).getCol2())
-                            , String.valueOf(datas.get(position).getCol3())
                             , String.valueOf(datas.get(position).getCol4())
+                            , String.valueOf(datas.get(position).getCol3())
                             , String.valueOf(datas.get(position).getCol5()));
                 }
 
