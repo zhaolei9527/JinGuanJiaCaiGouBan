@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.ListPopupWindow;
@@ -100,6 +101,11 @@ public class PhotoPickerFragment extends Fragment {
     super.onCreate(savedInstanceState);
 
     setRetainInstance(true);
+
+    // android 7.0系统解决拍照的问题
+    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+    StrictMode.setVmPolicy(builder.build());
+    builder.detectFileUriExposure();
 
     //mGlideRequestManager = Glide.with(this);
 

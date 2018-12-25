@@ -16,7 +16,7 @@ public class UrlUtils {
     public static String user = "";//用户名
     public static String password = "";//密码
     public static String databaseName = "";//数据库定向
-    public static String BBH = "v_2018_12_24";
+    public static String BBH = "v_2018_12_25";
 
     public static void checkUrl(String serviceIP, String host, String user, String password) {
         url = "jdbc:jtds:sqlserver://" + serviceIP + ":" + host + ";instanceName=SQLEXPRESS;databaseName=master";//MYSQL数据库连接Url

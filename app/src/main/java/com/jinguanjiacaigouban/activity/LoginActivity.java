@@ -97,6 +97,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     request(new AcpOptions.Builder().setPermissions(
                             Manifest.permission.READ_PHONE_STATE
                             , Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            , Manifest.permission.CAMERA
                             )
                                     .setDeniedMessage(getString(R.string.requstPerminssions))
                                     .build(),

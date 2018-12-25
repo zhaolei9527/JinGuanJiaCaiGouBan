@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <external-path name="external_files" path="diary sdcard/photo"/>
+    <external-path
+        name="external_files"
+        path="diary sdcard/photo" />
     <!-- /storage/emulated/0/Download/${applicationId}/.beta/apk-->
-    <external-path name="beta_external_path" path="Download/"/>
+    <external-path
+        name="beta_external_path"
+        path="Download/" />
     <!--/storage/emulated/0/Android/data/${applicationId}/files/apk/-->
-    <external-path name="beta_external_files_path" path="Android/data/"/>
+    <external-path
+        name="beta_external_files_path"
+        path="Android/data/" />
+
+    <paths>
+        <external-path
+            name="image"
+            path="" />
+    </paths>
+
+    <files-path
+        name="name"
+        path="path" /> <!--相当 Context.getFilesDir() + path, name是分享url的一部分-->
+
+    <cache-path
+        name="name"
+        path="path" /> <!--getCacheDir()-->
+
+    <external-path
+        name="name"
+        path="path" /> <!--Environment.getExternalStorageDirectory()-->
+
+    <external-files-path
+        name="name"
+        path="path" /><!--getExternalFilesDir(String) Context.getExternalFilesDir(null)-->
+
+    <external-cache-path
+        name="name"
+        path="path" /> <!--Context.getExternalCacheDir()-->
+
 </resources>
