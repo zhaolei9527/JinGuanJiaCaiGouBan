@@ -124,6 +124,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
     private String autoTM;
     private String pic = "";
     private String isclear = "";
+    private String isIMAGE;
 
     @Override
     protected int setthislayout() {
@@ -301,13 +302,16 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.ll_Save_GOODSHOP:
 
-                final String isIMAGE;
 
                 if (TextUtils.isEmpty(pic)) {
                     isIMAGE = "0";
                 } else if (!TextUtils.isEmpty(isclear)) {
                     isIMAGE = "1";
                 } else {
+                    isIMAGE = "1";
+                }
+
+                if (!TextUtils.isEmpty(isclear)) {
                     isIMAGE = "1";
                 }
 
@@ -321,15 +325,15 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                             try {
                                 if (!TextUtils.isEmpty(type)) {
 
-                                    if (TextUtils.isEmpty(tvDDSL.getText().toString())){
+                                    if (TextUtils.isEmpty(tvDDSL.getText().toString())) {
                                         tvDDSL.setText("0");
                                     }
 
-                                    if (TextUtils.isEmpty(tvYSDJ.getText().toString())){
+                                    if (TextUtils.isEmpty(tvYSDJ.getText().toString())) {
                                         tvYSDJ.setText("0");
                                     }
 
-                                    if (TextUtils.isEmpty(tvCGDJ.getText().toString())){
+                                    if (TextUtils.isEmpty(tvCGDJ.getText().toString())) {
                                         tvCGDJ.setText("0");
                                     }
 
@@ -355,15 +359,15 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                                 } else {
 
-                                    if (TextUtils.isEmpty(tvDDSL.getText().toString())){
+                                    if (TextUtils.isEmpty(tvDDSL.getText().toString())) {
                                         tvDDSL.setText("0");
                                     }
 
-                                    if (TextUtils.isEmpty(tvYSDJ.getText().toString())){
+                                    if (TextUtils.isEmpty(tvYSDJ.getText().toString())) {
                                         tvYSDJ.setText("0");
                                     }
 
-                                    if (TextUtils.isEmpty(tvCGDJ.getText().toString())){
+                                    if (TextUtils.isEmpty(tvCGDJ.getText().toString())) {
                                         tvCGDJ.setText("0");
                                     }
 
@@ -431,7 +435,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 201) {
             String result = data.getStringExtra("result");
-            Log.e("GoodShopEditActivity", result+"***"+result.length());
+            Log.e("GoodShopEditActivity", result + "***" + result.length());
             getProPmSmData(result.trim());
         } else if (resultCode == 200) {
             String gonghuoshang = data.getStringExtra("gonghuoshang");
