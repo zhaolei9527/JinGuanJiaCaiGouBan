@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.jinguanjiacaigouban.App;
 import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.activity.OrderEditActivity;
+import com.jinguanjiacaigouban.activity.ShareOrderActivity;
 import com.jinguanjiacaigouban.bean.proCdBean;
 import com.jinguanjiacaigouban.bean.proCsDeleteBean;
 import com.jinguanjiacaigouban.bean.proDdFdBean;
@@ -129,6 +130,25 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                         }
                     }
                 }).setTitle("提示").show();
+            }
+        });
+
+
+        holder.cbCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                for (int i = 0; i < getDatas().size(); i++) {
+                    if (position == i) {
+                        datas.get(position).setErr("1");
+                    } else {
+                        datas.get(position).setErr("");
+                    }
+                }
+
+                mContext.startActivity(new Intent(mContext, ShareOrderActivity.class)
+                        .putExtra("strBH", datas.get(position).getBH()));
+
             }
         });
 
