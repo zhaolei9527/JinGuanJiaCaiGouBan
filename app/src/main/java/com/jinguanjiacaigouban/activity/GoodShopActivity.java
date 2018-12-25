@@ -139,7 +139,7 @@ public class GoodShopActivity extends BaseActivity {
         llAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, GoodShopEditActivity.class));
+                startActivityForResult(new Intent(context, GoodShopEditActivity.class), 800);
             }
         });
 
@@ -228,19 +228,18 @@ public class GoodShopActivity extends BaseActivity {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans,tvCont);
+                            adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans, tvCont);
                             rvGonghuoshangList.setAdapter(adapter);
                             tvCont.setText("总计：" + proPmSelectBeans.size());
-                            if (!TextUtils.isEmpty(GongHuoShangActivity.mc)) {
-                                for (int i = 0; i < proPmSelectBeans.size(); i++) {
-                                    if (proPmSelectBeans.get(i).getMC().equals(GongHuoShangActivity.mc)) {
-                                        proPmSelectBeans.get(i).setErr("1");
+                            if (!TextUtils.isEmpty(mc)) {
+                                for (int i = 0; i < adapter.getDatas().size(); i++) {
+                                    if (adapter.getDatas().get(i).getMC().equals(mc)) {
+                                        adapter.getDatas().get(i).setErr("1");
                                         rvGonghuoshangList.scrollToPosition(i);
-                                        EasyToast.showShort(context, proPmSelectBeans.get(i).getMC());
+                                        EasyToast.showShort(context, adapter.getDatas().get(i).getMC());
                                     }
                                 }
-                            }
-                        }
+                            }                        }
                     });
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -266,6 +265,7 @@ public class GoodShopActivity extends BaseActivity {
             }
         } else if (resultCode == 800) {
             mc = data.getStringExtra("MC");
+
         }
     }
 

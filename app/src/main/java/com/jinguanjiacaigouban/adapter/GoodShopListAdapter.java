@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,11 +100,20 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
             }
         });
 
-
         if (((GoodShopActivity) mContext).isCheck) {
             holder.cbCheck.setEnabled(true);
         } else {
             holder.cbCheck.setEnabled(false);
+        }
+
+
+        Log.e("GoodShopListAdapter", datas.get(position).getErr());
+
+        if (datas.get(position).getErr().equals("1")) {
+            holder.cbCheck.setEnabled(true);
+            holder.cbCheck.setChecked(true);
+        } else {
+            holder.cbCheck.setChecked(false);
         }
 
         holder.cbCheck.setOnClickListener(new View.OnClickListener() {
@@ -135,10 +145,10 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
         {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, GoodShopEditActivity.class)
-                        .putExtra("strBH", datas.get(position).getBH())
-                        .putExtra("type", "edit")
-                );
+                mContext.startActivityForResult(new Intent(mContext, GoodShopEditActivity.class)
+                                .putExtra("strBH", datas.get(position).getBH())
+                                .putExtra("type", "edit")
+                        , 800);
             }
         });
 

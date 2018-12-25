@@ -924,10 +924,17 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setResult(800, new Intent().putExtra("MC", etMC.getText().toString()));
+        Log.e("GoodShopEditActivity", etMC.getText().toString());
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        setResult(800, new Intent().putExtra("MC", etMC.getText().toString()));
         System.gc();
     }
 }
