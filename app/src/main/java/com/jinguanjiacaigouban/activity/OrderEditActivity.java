@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -299,6 +300,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                 }
                 break;
             case R.id.fl_back:
+                setResult(800, new Intent().putExtra("MC", tvBH.getText().toString()));
+                Log.e("OrderEditActivity", "失去焦点" + tvBH.getText().toString());
                 finish();
                 break;
             case R.id.img_selelte_CGY:
@@ -995,5 +998,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }

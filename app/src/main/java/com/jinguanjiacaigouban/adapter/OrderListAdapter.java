@@ -103,13 +103,17 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         }
 
 
-
-
+        if (datas.get(position).getErr().equals("1")) {
+            holder.cbCheck.setEnabled(true);
+            holder.cbCheck.setChecked(true);
+        } else {
+            holder.cbCheck.setChecked(false);
+        }
 
         holder.llEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, OrderEditActivity.class).putExtra("strBH", datas.get(position).getBH()));
+                mContext.startActivityForResult(new Intent(mContext, OrderEditActivity.class).putExtra("strBH", datas.get(position).getBH()), 800);
             }
         });
 

@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.jinguanjiacaigouban.App;
@@ -25,6 +27,7 @@ import com.jinguanjiacaigouban.bean.proCdBean;
 import com.jinguanjiacaigouban.bean.proYgBean;
 import com.jinguanjiacaigouban.db.DBService;
 import com.jinguanjiacaigouban.utils.DateUtils;
+import com.jinguanjiacaigouban.utils.EasyToast;
 import com.jinguanjiacaigouban.utils.PriorityRunnable;
 import com.jinguanjiacaigouban.utils.SpUtil;
 import com.jinguanjiacaigouban.utils.Utils;
@@ -84,6 +87,8 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     SpinerPopWindow<String> stringSpinerPopWindow;
     private ArrayList<String> proYgList = new ArrayList<>();
     boolean input = false;
+    public static String bh;
+
 
     @Override
     protected int setthislayout() {
@@ -219,9 +224,16 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Log.e( "OrderSearchActivity", "页面返回");
+
         if (resultCode == 200 && requestCode == 203) {
             etSearchHonghuoshang.setText(data.getStringExtra("gonghuoshang"));
+        } else if (resultCode == 800 && requestCode == 800) {
+            bh = data.getStringExtra("MC");
+            Toast.makeText(context, bh, Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void initTimePicker(String title, final String TYPE) {
@@ -289,6 +301,16 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
+                            if (!TextUtils.isEmpty(bh)) {
+                                for (int i = 0; i < adapter.getDatas().size(); i++) {
+                                    if (adapter.getDatas().get(i).getBH().contains(bh)) {
+                                        adapter.getDatas().get(i).setErr("1");
+                                        rvOrderList.scrollToPosition(i);
+                                        EasyToast.showShort(context, adapter.getDatas().get(i).getBH());
+                                    }
+                                }
+                            }
+
                             rvOrderList.setAdapter(adapter);
                             tvCont.setText("总计：" + proCdBeans.size());
                         }
@@ -373,6 +395,5 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             }
         });
     }
-
 
 }
