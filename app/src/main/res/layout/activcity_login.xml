@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x5"
-                android:text="版本 v_2019_01_05"
+                android:text="版本 v_2019_01_07"
                 android:textColor="@color/text333"
                 android:textSize="@dimen/x12"
                 android:textStyle="bold" />
