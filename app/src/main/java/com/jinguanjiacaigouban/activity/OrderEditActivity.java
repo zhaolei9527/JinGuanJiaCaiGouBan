@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -116,6 +117,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
     TextView tvFdCont;
     @BindView(R.id.ll_share)
     LinearLayout llShare;
+    @BindView(R.id.nsv)
+    NestedScrollView nsv;
     private TimePickerView pvTime;
     private ArrayList<String> proYgList = new ArrayList<>();
     private Dialog dialog;
@@ -301,6 +304,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.fl_back:
                 setResult(800, new Intent().putExtra("MC", tvBH.getText().toString()));
+                OrderSearchActivity.bh = tvBH.getText().toString();
                 Log.e("OrderEditActivity", "失去焦点" + tvBH.getText().toString());
                 finish();
                 break;
@@ -346,7 +350,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     return;
                 }
 
-
                 dialog.show();
 
                 getproDdInsert(
@@ -362,6 +365,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         , etTian.getText().toString()
                         , etBeizhu.getText().toString()
                 );
+
                 break;
             default:
                 break;
@@ -395,6 +399,12 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
+                            if (!TextUtils.isEmpty(proDdEditBeans.get(0).getErr())) {
+                                CommomDialog.showMessage(context, proDdEditBeans.get(0).getErr());
+                                return;
+                            }
+
                             if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol0())) {
                                 tvBH.setText(proDdEditBeans.get(0).getCol1());
                                 strBH = proDdEditBeans.get(0).getCol1();
@@ -904,13 +914,17 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
+                            final List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
                             tvCont.setText("商品: " + proDdPmBeans.size());
+                            // 倒序排列
                             adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans, tvCont, etSearchHonghuoshang, imgSelelteGonghuoshang);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     rvOrderGoods.setAdapter(adapter);
+
+                                    nsv.scrollTo(0, 280 * adapter.getItemCount() + 760);
+
                                     if (!adapter.getDatas().isEmpty()) {
                                         etSearchHonghuoshang.setFocusable(false);
                                         imgSelelteGonghuoshang.setVisibility(View.GONE);
@@ -918,6 +932,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                         etSearchHonghuoshang.setFocusable(true);
                                         imgSelelteGonghuoshang.setVisibility(View.VISIBLE);
                                     }
+
                                 }
                             });
                         }

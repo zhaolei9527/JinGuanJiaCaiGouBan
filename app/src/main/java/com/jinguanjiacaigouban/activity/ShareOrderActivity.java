@@ -107,7 +107,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         rvOrderGoods.loadMoreComplete();
 
 
-        line2 = new GridLayoutManager(context,3);
+        line2 = new GridLayoutManager(context, 3);
         line2.setOrientation(LinearLayoutManager.VERTICAL);
         rvOrderFendian.setLayoutManager(line2);
         rvOrderFendian.setItemAnimator(new DefaultItemAnimator());
@@ -129,7 +129,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
     protected void initData() {
         dialog = Utils.showLoadingDialog(context);
         strBH = getIntent().getStringExtra("strBH");
-        getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "查单");
+        getEditData(strBH);
     }
 
     @Override
@@ -206,7 +206,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
             @Override
             public void doSth() {
                 try {
-                    String pro_dd_edit = DBService.doConnection("pro_dd_edit", key[0], key[1], key[2]);
+                    String pro_dd_edit = DBService.doConnection("pro_dd_fx1", key[0]);
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -236,7 +236,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                             tvGHS.setText("供货商：" + proDdEditBeans.get(0).getCol4());
                             tvYue.setText(proDdEditBeans.get(0).getCol6() + "" + proDdEditBeans.get(0).getCol5());
                             tvTian.setText(proDdEditBeans.get(0).getCol7() + "天");
-                            tvBZ.setText(proDdEditBeans.get(0).getCol8());
+                            tvBZ.setText("备注："+proDdEditBeans.get(0).getCol8());
                         }
                     });
 
@@ -263,7 +263,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
             public void doSth() {
                 try {
 
-                    final String pro_dd_pm = DBService.doConnection("pro_dd_pm", key[0]);
+                    final String pro_dd_pm = DBService.doConnection("pro_dd_fx2", key[0]);
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -321,7 +321,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
             public void doSth() {
                 try {
 
-                    final String pro_dd_fd = DBService.doConnection("pro_dd_fd", key[0]);
+                    final String pro_dd_fd = DBService.doConnection("pro_dd_fx3", key[0]);
 
                     runOnUiThread(new Runnable() {
                         @Override

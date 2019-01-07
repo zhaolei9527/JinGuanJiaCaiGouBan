@@ -115,6 +115,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
     LinearLayout llClearPhoto;
     private Dialog dialog;
     private String type;
+    private String LastMC;
     private String strBH;
     public static BitmapDrawable bd;
     SpinerPopWindow<String> stringSpinerPopWindow;
@@ -235,12 +236,18 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
         ButterKnife.bind(this);
     }
 
+    //1104.48
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fl_back:
-                setResult(800, new Intent().putExtra("MC", etMC.getText().toString()));
-                finish();
+                if (TextUtils.isEmpty(LastMC)) {
+                    LastMC = etMC.getText().toString();
+                }
+
+                setResult(800, new Intent().putExtra("MC", LastMC));
+
+                onBackPressed();
                 break;
             case R.id.ll_check_photo:
                 PhotoPickUtils.startPick().setPhotoCount(1).setShowCamera(true).start((GoodShopEditActivity) context, 505);
@@ -316,6 +323,8 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                 }
 
                 dialog.show();
+
+                LastMC = etMC.getText().toString();
 
                 Log.e("GoodShopEditActivity", isIMAGE);
                 if (checkMessage()) {
@@ -931,9 +940,9 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void onPause() {
-        super.onPause();
-        setResult(800, new Intent().putExtra("MC", etMC.getText().toString()));
+        setResult(800, new Intent().putExtra("MC", LastMC));
         Log.e("GoodShopEditActivity", etMC.getText().toString());
+        super.onPause();
     }
 
     @Override

@@ -89,6 +89,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     boolean input = false;
     public static String bh;
 
+    public static boolean share=false;
 
     @Override
     protected int setthislayout() {
@@ -173,7 +174,11 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        getdata();
+
+        if (!share){
+            getdata();
+        }
+
     }
 
     private void getdata() {

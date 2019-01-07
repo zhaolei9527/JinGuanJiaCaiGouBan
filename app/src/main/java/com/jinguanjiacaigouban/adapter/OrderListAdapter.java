@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.jinguanjiacaigouban.App;
 import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.activity.OrderEditActivity;
+import com.jinguanjiacaigouban.activity.OrderSearchActivity;
 import com.jinguanjiacaigouban.activity.ShareOrderActivity;
 import com.jinguanjiacaigouban.bean.proCdBean;
 import com.jinguanjiacaigouban.bean.proCsDeleteBean;
@@ -148,6 +149,8 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
 
                 mContext.startActivity(new Intent(mContext, ShareOrderActivity.class)
                         .putExtra("strBH", datas.get(position).getBH()));
+
+                OrderSearchActivity.share = true;
 
             }
         });

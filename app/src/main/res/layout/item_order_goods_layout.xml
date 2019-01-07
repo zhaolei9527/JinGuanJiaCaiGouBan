@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.mcxtzhang.swipemenulib.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/y105"
+    android:layout_height="wrap_content"
     android:clickable="true"
     android:paddingBottom="1dp">
 
     <LinearLayout
         android:id="@+id/ll_edit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="330px"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y33"
+            android:layout_height="@dimen/y25"
             android:orientation="horizontal">
 
             <TextView
@@ -25,13 +25,13 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:textColor="@color/text333"
-                android:textSize="@dimen/x12" />
+                android:textSize="@dimen/x11" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y33"
+            android:layout_height="@dimen/y25"
             android:orientation="horizontal">
 
             <TextView
@@ -44,7 +44,7 @@
                 android:gravity="center_vertical"
                 android:text="单价："
                 android:textColor="@color/text333"
-                android:textSize="@dimen/x12" />
+                android:textSize="@dimen/x11" />
 
             <EditText
 
@@ -58,7 +58,7 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:textColor="@color/text333"
-                android:textSize="@dimen/x12" />
+                android:textSize="@dimen/x11" />
 
             <TextView
                 android:id="@+id/tv_shuliang"
@@ -70,7 +70,7 @@
                 android:gravity="center_vertical"
                 android:text="单店数量："
                 android:textColor="@color/text333"
-                android:textSize="@dimen/x12" />
+                android:textSize="@dimen/x11" />
 
             <EditText
                 android:id="@+id/et_shuliang"
@@ -83,13 +83,13 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:textColor="@color/text333"
-                android:textSize="@dimen/x12" />
+                android:textSize="@dimen/x11" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y33"
+            android:layout_height="@dimen/y25"
             android:orientation="horizontal">
 
             <TextView
@@ -102,7 +102,7 @@
                 android:gravity="center_vertical"
                 android:text="备注："
                 android:textColor="@color/text333"
-                android:textSize="@dimen/x12" />
+                android:textSize="@dimen/x11" />
 
             <EditText
                 android:id="@+id/et_beizhu"
@@ -114,7 +114,7 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:textColor="@color/text333"
-                android:textSize="@dimen/x12" />
+                android:textSize="@dimen/x11" />
 
         </LinearLayout>
 

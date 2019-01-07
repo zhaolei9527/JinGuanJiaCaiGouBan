@@ -154,8 +154,8 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                             , OrderEditActivity.strBH
                             , datas.get(position).getCol1() + ""
                             , datas.get(position).getCol2() + ""
-                            , String.valueOf(datas.get(position).getCol3())
                             , String.valueOf(datas.get(position).getCol4())
+                            , String.valueOf(datas.get(position).getCol3())
                             , String.valueOf(datas.get(position).getCol5()));
                 }
             }

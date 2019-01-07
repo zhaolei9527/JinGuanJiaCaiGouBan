@@ -426,7 +426,7 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
 
                             if (TextUtils.isEmpty(proDdInsertBeans.get(0).getErr())) {
                                 finish();
-                                startActivity(new Intent(context, OrderEditActivity.class).putExtra("strBH", proDdInsertBeans.get(0).getBH()));
+                                startActivityForResult(new Intent(context, OrderEditActivity.class).putExtra("strBH", proDdInsertBeans.get(0).getBH()),800);
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
                             }
