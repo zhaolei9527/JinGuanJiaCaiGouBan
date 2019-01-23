@@ -237,6 +237,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
         } else if (resultCode == 800 && requestCode == 800) {
             bh = data.getStringExtra("MC");
             Toast.makeText(context, bh, Toast.LENGTH_SHORT).show();
+            adapter.notifyDataSetChanged();
         }
 
     }
@@ -312,6 +313,8 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                                         adapter.getDatas().get(i).setErr("1");
                                         rvOrderList.scrollToPosition(i);
                                         EasyToast.showShort(context, adapter.getDatas().get(i).getBH());
+                                    }else {
+                                        adapter.getDatas().get(i).setErr("");
                                     }
                                 }
                             }

@@ -191,7 +191,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     cbYuejie.setChecked(false);
-                    strFKFS = "现价";
+                    strFKFS = "现付";
                 }
             }
         });
@@ -284,12 +284,14 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         }
                     }
                 }
+
                 getProDdFdInsert(String.valueOf(SpUtil.get(context, "MC", ""))
                         , (String) SpUtil.get(context, "androidIMEI", "")
                         , UrlUtils.BBH
                         , strBH
                         , stringBuffer.toString()
                 );
+
                 break;
             case R.id.img_add_fd:
                 startActivityForResult(new Intent(context, FenDianActivity.class).putExtra("ischeck", true), 204);
@@ -416,7 +418,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 etSearchCGY.setText(proDdEditBeans.get(0).getCol3());
                                 etSearchHonghuoshang.setText(proDdEditBeans.get(0).getCol4());
 
-                                if ("现结".equals(proDdEditBeans.get(0).getCol5())) {
+                                if ("现付".equals(proDdEditBeans.get(0).getCol5())) {
                                     cbXianjie.setChecked(true);
                                 } else if ("月结".equals(proDdEditBeans.get(0).getCol5())) {
                                     cbYuejie.setChecked(true);
@@ -551,7 +553,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
-
     private void showSponer(final List<String> profl1list, final EditText et, final String type) {
         runOnUiThread(new Runnable() {
             @Override
@@ -633,7 +634,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
-
     private void initTimePicker(String title, final String TYPE) {
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
@@ -710,12 +710,14 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             public void doSth() {
                 try {
                     String pro_dd_pm_inser = DBService.doConnection("pro_dd_pm_insert", key[0], key[1], key[2], key[3], key[4], key[5]);
+
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             dialog.dismiss();
                         }
                     });
+
                     if (TextUtils.isEmpty(pro_dd_pm_inser)) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -921,9 +923,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
+
                                     rvOrderGoods.setAdapter(adapter);
 
-                                    nsv.scrollTo(0, 280 * adapter.getItemCount() + 760);
+                                    nsv.scrollTo(0, 280 * adapter.getItemCount() + (int) (getResources().getDimension(R.dimen.y290)));
 
                                     if (!adapter.getDatas().isEmpty()) {
                                         etSearchHonghuoshang.setFocusable(false);

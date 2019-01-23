@@ -126,6 +126,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
     private String pic = "";
     private String isclear = "";
     private String isIMAGE;
+    public static Bitmap bitmap;
 
     @Override
     protected int setthislayout() {
@@ -465,7 +466,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         isclear = "";
                         pic = photos.get(0);
                         Toast.makeText(GoodShopEditActivity.this, pic, Toast.LENGTH_SHORT).show();
-                        Bitmap bitmap = BitmapFactory.decodeFile(pic);
+                        bitmap = BitmapFactory.decodeFile(pic);
                         bd = new BitmapDrawable(bitmap);
                         imgShop.setBackgroundDrawable(bd);
                         imgShop.setVisibility(View.VISIBLE);
@@ -488,6 +489,15 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
             public void onPickCancle(int requestCode) {
             }
         });
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        imgShop.setScaleType(ImageView.ScaleType.FIT_XY);
 
     }
 
@@ -791,10 +801,11 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                             InputStream in = pro_pm_edit.getBinaryStream("col14");
 
-                            Bitmap bitmap = BitmapFactory.decodeStream(in);
+                            bitmap = BitmapFactory.decodeStream(in);
                             bd = new BitmapDrawable(bitmap);
 
                             mHandler.post(new Runnable() {
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                                 @Override
                                 public void run() {
                                     try {
@@ -828,7 +839,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                                         if (bd != null) {
                                             imgShop.setVisibility(View.VISIBLE);
-                                            imgShop.setBackgroundDrawable(bd);
+                                            imgShop.setBackground(bd);
                                             imgShop.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {

@@ -138,20 +138,17 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         holder.cbCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                for (int i = 0; i < getDatas().size(); i++) {
+                for (int i = 0; i < datas.size(); i++) {
                     if (position == i) {
                         datas.get(position).setErr("1");
                     } else {
-                        datas.get(position).setErr("");
+                        datas.get(i).setErr("");
                     }
                 }
-
                 mContext.startActivity(new Intent(mContext, ShareOrderActivity.class)
                         .putExtra("strBH", datas.get(position).getBH()));
-
                 OrderSearchActivity.share = true;
-
+                notifyDataSetChanged();
             }
         });
 

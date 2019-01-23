@@ -161,7 +161,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="760px"
+                        android:layout_height="@dimen/y290"
                         android:orientation="vertical">
 
                         <LinearLayout

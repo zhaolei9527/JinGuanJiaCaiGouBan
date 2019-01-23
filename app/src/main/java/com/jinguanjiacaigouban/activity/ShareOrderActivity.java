@@ -228,15 +228,38 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
+                            if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol1())) {
+                                tvOrder.setVisibility(View.GONE);
+                            }
+                            if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol2())) {
+                                tvOrderTime.setVisibility(View.GONE);
+                            }
+                            if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol3())) {
+                                tvCGR.setVisibility(View.GONE);
+                            }
+                            if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol4())) {
+                                tvGHS.setVisibility(View.GONE);
+                            }
+                            if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol6())) {
+                                tvYue.setVisibility(View.GONE);
+                            }
+                            if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol7())) {
+                                tvTian.setVisibility(View.GONE);
+                            }
+                            if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol8())) {
+                                tvBZ.setVisibility(View.GONE);
+                            }
+
                             strBH = proDdEditBeans.get(0).getCol1();
-                            tvLJMC.setText("链接名称：" + String.valueOf(SpUtil.get(context, "lastURL", "")));
-                            tvOrder.setText("订单编号:" + proDdEditBeans.get(0).getCol1());
-                            tvOrderTime.setText("订单时间：" + proDdEditBeans.get(0).getCol2());
-                            tvCGR.setText("采购员：" + proDdEditBeans.get(0).getCol3());
-                            tvGHS.setText("供货商：" + proDdEditBeans.get(0).getCol4());
+                            tvLJMC.setText(String.valueOf(SpUtil.get(context, "lastURL", "")) + "-采购单");
+                            tvOrder.setText(proDdEditBeans.get(0).getCol1());
+                            tvOrderTime.setText(proDdEditBeans.get(0).getCol2());
+                            tvCGR.setText(proDdEditBeans.get(0).getCol3());
+                            tvGHS.setText(proDdEditBeans.get(0).getCol4());
                             tvYue.setText(proDdEditBeans.get(0).getCol6() + "" + proDdEditBeans.get(0).getCol5());
-                            tvTian.setText(proDdEditBeans.get(0).getCol7() + "天");
-                            tvBZ.setText("备注："+proDdEditBeans.get(0).getCol8());
+                            tvTian.setText(proDdEditBeans.get(0).getCol7());
+                            tvBZ.setText(proDdEditBeans.get(0).getCol8());
                         }
                     });
 
