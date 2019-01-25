@@ -36,7 +36,7 @@
             android:textSize="@dimen/x16" />
     </RelativeLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:id="@+id/ll_share"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -63,12 +63,22 @@
                 android:padding="@dimen/x5"
                 android:text="订单编号：" />
 
+
             <TextView
                 android:id="@+id/tv_order_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/x5"
                 android:text="采购日期：" />
+
+            <TextView
+                android:id="@+id/tv_CGR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/x5"
+                android:singleLine="true"
+                android:text="采购员：" />
 
             <TextView
                 android:id="@+id/tv_GHS"
@@ -80,35 +90,28 @@
                 android:text="供货商：" />
 
             <TextView
-                android:id="@+id/tv_CGR"
+                android:id="@+id/tv_Col5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/x5"
-                android:singleLine="true"
-                android:text="采购员：" />
+                android:singleLine="true" />
 
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_yue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:padding="@dimen/x5"
+                android:singleLine="true" />
 
-                <TextView
-                    android:id="@+id/tv_yue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:id="@+id/tv_tian"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:singleLine="true" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_tian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/x5"
+                android:singleLine="true" />
 
 
             <TextView
@@ -129,7 +132,8 @@
                 android:id="@+id/rv_order"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
+                android:layout_weight="1"
+                android:nestedScrollingEnabled="false"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
             <View
                 android:layout_width="match_parent"
@@ -153,7 +157,7 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 
     <LinearLayout

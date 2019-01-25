@@ -113,7 +113,7 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     cbYuejie.setChecked(false);
-                    strFKFS = "现价";
+                    strFKFS = "现付";
                 }
             }
         });

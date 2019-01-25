@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jinguanjiacaigouban.App;
@@ -72,7 +72,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
     @BindView(R.id.img_qq)
     ImageView imgQq;
     @BindView(R.id.ll_share)
-    ScrollView llShare;
+    NestedScrollView llShare;
     @BindView(R.id.tv_FD)
     TextView tvFD;
     @BindView(R.id.tv_LJMC)
@@ -81,6 +81,8 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
     TextView tvBZ;
     @BindView(R.id.rv_order_fendian)
     JinGuanJiaRecycleView rvOrderFendian;
+    @BindView(R.id.tv_Col5)
+    TextView tvCol5;
     private Dialog dialog;
     public static String strBH;
     private OrderGoodsListAdapter adapter;
@@ -188,7 +190,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         wechat.share(sp);
     }
 
-    public static Bitmap getBitmapFromView(ScrollView scrollView) {
+    public static Bitmap getBitmapFromView(NestedScrollView scrollView) {
         int h = 0;
         Bitmap bitmap = null;
         for (int i = 0; i < scrollView.getChildCount(); i++) {
@@ -241,6 +243,11 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                             if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol4())) {
                                 tvGHS.setVisibility(View.GONE);
                             }
+
+                            if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol5())) {
+                                tvCol5.setVisibility(View.GONE);
+                            }
+
                             if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol6())) {
                                 tvYue.setVisibility(View.GONE);
                             }
@@ -251,13 +258,15 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                                 tvBZ.setVisibility(View.GONE);
                             }
 
+
                             strBH = proDdEditBeans.get(0).getCol1();
                             tvLJMC.setText(String.valueOf(SpUtil.get(context, "lastURL", "")) + "-采购单");
                             tvOrder.setText(proDdEditBeans.get(0).getCol1());
                             tvOrderTime.setText(proDdEditBeans.get(0).getCol2());
                             tvCGR.setText(proDdEditBeans.get(0).getCol3());
                             tvGHS.setText(proDdEditBeans.get(0).getCol4());
-                            tvYue.setText(proDdEditBeans.get(0).getCol6() + "" + proDdEditBeans.get(0).getCol5());
+                            tvCol5.setText(proDdEditBeans.get(0).getCol5());
+                            tvYue.setText(proDdEditBeans.get(0).getCol6());
                             tvTian.setText(proDdEditBeans.get(0).getCol7());
                             tvBZ.setText(proDdEditBeans.get(0).getCol8());
                         }

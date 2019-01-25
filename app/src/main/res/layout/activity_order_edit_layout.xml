@@ -516,6 +516,7 @@
 
 
                     <com.jinguanjiacaigouban.view.JinGuanJiaRecycleView
+                        android:nestedScrollingEnabled="false"
                         android:id="@+id/rv_order_goods"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
