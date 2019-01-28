@@ -108,7 +108,6 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         rvOrderGoods.setFootLoadingView(progressView);
         rvOrderGoods.loadMoreComplete();
 
-
         line2 = new GridLayoutManager(context, 3);
         line2.setOrientation(LinearLayoutManager.VERTICAL);
         rvOrderFendian.setLayoutManager(line2);
@@ -169,21 +168,16 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         wechat.setPlatformActionListener(new PlatformActionListener() {
             @Override
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                Log.d("ShareSDK", "onComplete ---->  分享成功");
-
             }
 
             @Override
             public void onError(Platform platform, int i, Throwable throwable) {
-                Log.d("ShareSDK", "onError ---->  分享失败" + throwable.getStackTrace().toString());
-                Log.d("ShareSDK", "onError ---->  分享失败" + throwable.getMessage());
                 throwable.getMessage();
                 throwable.printStackTrace();
             }
 
             @Override
             public void onCancel(Platform platform, int i) {
-                Log.d("ShareSDK", "onCancel ---->  分享取消");
             }
         });
 // 执行图文分享

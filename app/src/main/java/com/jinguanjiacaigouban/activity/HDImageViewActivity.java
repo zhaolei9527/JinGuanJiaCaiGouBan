@@ -35,7 +35,7 @@ public class HDImageViewActivity extends BaseActivity {
     protected void initview() {
 
         if (GoodShopEditActivity.bitmap != null) {
-            image.setImageDrawable(GoodShopEditActivity.bd);
+            image.setImageDrawable(GoodShopEditActivity.bd2);
             attacher = new PhotoViewAttacher(image);
             attacher.setRotatable(true);
             attacher.setToRightAngle(true);
@@ -43,7 +43,6 @@ public class HDImageViewActivity extends BaseActivity {
             Toast.makeText(HDImageViewActivity.this, "图片加载失败，请稍候再试！", Toast.LENGTH_SHORT)
                     .show();
         }
-
 
     }
 

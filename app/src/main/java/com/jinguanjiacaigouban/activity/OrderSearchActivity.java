@@ -89,7 +89,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     boolean input = false;
     public static String bh;
 
-    public static boolean share=false;
+    public static boolean share = false;
 
     @Override
     protected int setthislayout() {
@@ -175,8 +175,17 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     protected void onResume() {
         super.onResume();
 
-        if (!share){
+        if (!share) {
             getdata();
+        } else {
+            dialog.show();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.dismiss();
+                }
+            }, 1000);
+
         }
 
     }
@@ -230,7 +239,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.e( "OrderSearchActivity", "页面返回");
+        Log.e("OrderSearchActivity", "页面返回");
 
         if (resultCode == 200 && requestCode == 203) {
             etSearchHonghuoshang.setText(data.getStringExtra("gonghuoshang"));
@@ -313,7 +322,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                                         adapter.getDatas().get(i).setErr("1");
                                         rvOrderList.scrollToPosition(i);
                                         EasyToast.showShort(context, adapter.getDatas().get(i).getBH());
-                                    }else {
+                                    } else {
                                         adapter.getDatas().get(i).setErr("");
                                     }
                                 }

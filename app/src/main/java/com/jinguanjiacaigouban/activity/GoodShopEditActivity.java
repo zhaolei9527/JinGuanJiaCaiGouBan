@@ -22,7 +22,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hss01248.frescopicker.FrescoIniter;
 import com.jinguanjiacaigouban.App;
@@ -44,6 +43,7 @@ import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
 
+import java.io.File;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -53,6 +53,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
 import me.iwf.photopicker.PhotoPickUtils;
+import me.shaohui.advancedluban.Luban;
+import me.shaohui.advancedluban.OnCompressListener;
 
 /**
  * com.jinguanjiacaigouban.activity
@@ -118,6 +120,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
     private String LastMC;
     private String strBH;
     public static BitmapDrawable bd;
+    public static BitmapDrawable bd2;
     SpinerPopWindow<String> stringSpinerPopWindow;
     ArrayList<String> profl1list = new ArrayList<>();
     ArrayList<String> profl2list = new ArrayList<>();
@@ -465,10 +468,29 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                     case 505:
                         isclear = "";
                         pic = photos.get(0);
-                        Toast.makeText(GoodShopEditActivity.this, pic, Toast.LENGTH_SHORT).show();
                         bitmap = BitmapFactory.decodeFile(pic);
+
+                        Luban.compress(context, new File(pic))
+                                .putGear(Luban.THIRD_GEAR)
+                                .launch(new OnCompressListener() {
+                                    @Override
+                                    public void onStart() {
+                                    }
+
+                                    @Override
+                                    public void onSuccess(File file) {
+                                        pic = file.getAbsolutePath();
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                    }
+                                });
+
                         bd = new BitmapDrawable(bitmap);
-                        imgShop.setBackgroundDrawable(bd);
+                        bd2 = new BitmapDrawable(bitmap);
+
+                        imgShop.setImageDrawable(bd);
                         imgShop.setVisibility(View.VISIBLE);
                         break;
                     default:
@@ -803,6 +825,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                             bitmap = BitmapFactory.decodeStream(in);
                             bd = new BitmapDrawable(bitmap);
+                            bd2 = new BitmapDrawable(bitmap);
 
                             mHandler.post(new Runnable() {
                                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -839,7 +862,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                                         if (bd != null) {
                                             imgShop.setVisibility(View.VISIBLE);
-                                            imgShop.setBackground(bd);
+                                            imgShop.setImageDrawable(bd);
                                             imgShop.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {

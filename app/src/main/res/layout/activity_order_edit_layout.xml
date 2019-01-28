@@ -511,9 +511,7 @@
                             android:layout_height="@dimen/x1"
                             android:background="@color/bgea"></View>
 
-
                     </LinearLayout>
-
 
                     <com.jinguanjiacaigouban.view.JinGuanJiaRecycleView
                         android:nestedScrollingEnabled="false"
@@ -521,16 +519,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x1"
-                        android:background="@color/bgea"></View>
-
                     <LinearLayout
+                        android:layout_marginTop="-40dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x10"
-                        android:layout_marginTop="@dimen/y5"
                         android:layout_marginRight="@dimen/x20"
                         android:orientation="vertical">
 
@@ -612,8 +605,8 @@
 
                     </LinearLayout>
 
-
                     <com.jinguanjiacaigouban.view.JinGuanJiaRecycleView
+                        android:nestedScrollingEnabled="false"
                         android:id="@+id/rv_order_fendian"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
