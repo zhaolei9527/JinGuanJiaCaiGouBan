@@ -365,7 +365,8 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
                                     "   AND NAME <> 'NORTHWIND'\n" +
                                     "   AND NAME <> 'TEMPDB'\n" +
                                     "   AND NAME <> 'PUBS'\n" +
-                                    " ORDER BY NAME");
+                                    "   AND SID = (SELECT SID FROM syslogins WHERE NAME ='"
+                                    +serviceUsername+ "') ORDER BY NAME");
                             // 循环输出每一条记录
                             final ArrayList<String> DBName = new ArrayList<>();
                             while (resultSet.next()) {

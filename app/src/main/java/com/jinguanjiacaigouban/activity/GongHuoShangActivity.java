@@ -166,31 +166,32 @@ public class GongHuoShangActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 CommomDialog.showMessage(context, proCsSelectBeans.get(0).getErr());
+                                rvGonghuoshangList.setVisibility(View.GONE);
                                 return;
                             }
                         });
-                    }
+                    }else {
+                        rvGonghuoshangList.setVisibility(View.VISIBLE);
 
+                        adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans, tvCont);
 
-
-                    adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans,  tvCont);
-
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            rvGonghuoshangList.setAdapter(adapter);
-                            tvCont.setText("总计：" + proCsSelectBeans.size());
-                            if (!TextUtils.isEmpty(GongHuoShangActivity.mc)) {
-                                for (int i = 0; i < proCsSelectBeans.size(); i++) {
-                                    if (proCsSelectBeans.get(i).getMC().equals(GongHuoShangActivity.mc)) {
-                                        proCsSelectBeans.get(i).setErr("1");
-                                        rvGonghuoshangList.scrollToPosition(i);
-                                        EasyToast.showShort(context, proCsSelectBeans.get(i).getMC());
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                rvGonghuoshangList.setAdapter(adapter);
+                                tvCont.setText("总计：" + proCsSelectBeans.size());
+                                if (!TextUtils.isEmpty(GongHuoShangActivity.mc)) {
+                                    for (int i = 0; i < proCsSelectBeans.size(); i++) {
+                                        if (proCsSelectBeans.get(i).getMC().equals(GongHuoShangActivity.mc)) {
+                                            proCsSelectBeans.get(i).setErr("1");
+                                            rvGonghuoshangList.scrollToPosition(i);
+                                            EasyToast.showShort(context, proCsSelectBeans.get(i).getMC());
+                                        }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
