@@ -101,12 +101,10 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         line.setOrientation(LinearLayoutManager.VERTICAL);
         rvOrderGoods.setLayoutManager(line);
         rvOrderGoods.setItemAnimator(new DefaultItemAnimator());
-        rvOrderGoods.loadMoreComplete();
         line2 = new GridLayoutManager(context, 3);
         line2.setOrientation(LinearLayoutManager.VERTICAL);
         rvOrderFendian.setLayoutManager(line2);
         rvOrderFendian.setItemAnimator(new DefaultItemAnimator());
-        rvOrderFendian.loadMoreComplete();
     }
 
     @Override
@@ -303,7 +301,21 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
 
                             Log.e("ShareOrderActivity", pro_dd_pm);
 
-                            List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
+                            final List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
+
+
+
+                            if (!TextUtils.isEmpty(proDdPmBeans.get(0).getErr())) {
+                                mHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CommomDialog.showMessage(context, proDdPmBeans.get(0).getErr());
+                                        return;
+                                    }
+                                });
+                            }
+
+
                             adapter = new OrderGoodsListAdapter(ShareOrderActivity.this, proDdPmBeans);
                             mHandler.post(new Runnable() {
                                 @Override
@@ -359,8 +371,16 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
-
+                            final List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
+                            if (!TextUtils.isEmpty(proDdFdFdBeans.get(0).getErr())) {
+                                mHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CommomDialog.showMessage(context, proDdFdFdBeans.get(0).getErr());
+                                        return;
+                                    }
+                                });
+                            }
                             orderFenDianListAdapter = new OrderFenDianListAdapter(ShareOrderActivity.this, proDdFdFdBeans, tvFD);
                             mHandler.post(new Runnable() {
                                 @Override

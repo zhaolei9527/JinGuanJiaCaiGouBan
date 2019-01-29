@@ -172,7 +172,18 @@ public class AddFenDianActivity extends BaseActivity implements View.OnClickList
                         });
                     }
 
+
                     final List<proFdFdlxBean> proFdFdlxBeans = proFdFdlxBean.arrayproFdFdlxBeanFromData(pro_fd_fdlx);
+
+                    if (!TextUtils.isEmpty(proFdFdlxBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proFdFdlxBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
 
                     adapter = new AddFenDianListAdapter(AddFenDianActivity.this, proFdFdlxBeans);
 

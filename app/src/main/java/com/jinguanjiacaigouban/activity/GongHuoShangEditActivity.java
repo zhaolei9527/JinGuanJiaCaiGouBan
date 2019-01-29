@@ -176,6 +176,9 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
 
                     final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
 
+
+
+
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -407,6 +410,17 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                     }
                     final List<profl1Bean> profl1Beans = profl1Bean.arrayprofl1BeanFromData(pro_cs_edit);
 
+                    if (!TextUtils.isEmpty(profl1Beans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, profl1Beans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
+
                     if ("pro_fl1".equals(host)) {
                         profl1list = new ArrayList<>();
                         for (int i = 0; i < profl1Beans.size(); i++) {
@@ -527,6 +541,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         @Override
                         public void run() {
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
+
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et_JM.setText(proPymBeans.get(0).getPYM());
                             } else {
@@ -575,6 +590,17 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         });
                     }
                     final List<proCsInsertBean> proCsInsertBeans = proCsInsertBean.arrayproCsInsertBeanFromData(pro_cs_edit);
+
+
+                    if (!TextUtils.isEmpty(proCsInsertBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proCsInsertBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
 
                     if (TextUtils.isEmpty(proCsInsertBeans.get(0).getErr().toString().trim())) {
                         mHandler.post(new Runnable() {
@@ -647,8 +673,16 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         });
                     }
 
-                    List<proCslxBean> proCslxBeans = proCslxBean.arrayproCslxBeanFromData(pro_cs_edit);
-
+                    final List<proCslxBean> proCslxBeans = proCslxBean.arrayproCslxBeanFromData(pro_cs_edit);
+                    if (!TextUtils.isEmpty(proCslxBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proCslxBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
                     addresslist = new ArrayList<>();
                     for (int i = 0; i < proCslxBeans.size(); i++) {
                         addresslist.add(proCslxBeans.get(i).getMC());

@@ -61,21 +61,23 @@
             android:id="@+id/ll_order_goods"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x30"
             android:orientation="vertical"></LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x1"
-            android:background="@color/bgea"></View>
+            android:layout_height="@dimen/x15"></View>
 
         <GridLayout
             android:id="@+id/ll_order_fendian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:columnCount="3"></GridLayout>
+            android:columnCount="3"
+            android:paddingLeft="@dimen/x35"></GridLayout>
 
         <View
+            android:layout_marginTop="@dimen/x15"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x1"
             android:background="@color/bgea"></View>

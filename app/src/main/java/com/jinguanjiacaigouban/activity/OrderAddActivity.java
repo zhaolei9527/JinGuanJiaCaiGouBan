@@ -261,7 +261,18 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                         });
                     }
 
-                    List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+                    final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+
+                    if (!TextUtils.isEmpty(proYgBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proYgBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
 
                     proYgList = new ArrayList<>();
 
@@ -367,6 +378,9 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                     }
 
                     final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
+
+
+
 
                     mHandler.post(new Runnable() {
                         @Override

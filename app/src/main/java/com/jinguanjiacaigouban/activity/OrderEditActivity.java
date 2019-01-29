@@ -494,7 +494,17 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         });
                     }
 
-                    List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+                    final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+
+                    if (!TextUtils.isEmpty(proYgBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proYgBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
 
                     proYgList = new ArrayList<>();
 
@@ -543,7 +553,19 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         });
                     }
 
-                    List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+                    final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+
+                    if (!TextUtils.isEmpty(proYgBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proYgBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
+
 
                     proFDList = new ArrayList<>();
                     proFDBHList = new ArrayList<>();
@@ -615,6 +637,18 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     }
 
                     final List<proFdlxFdBean> proFdlxFdBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
+
+
+                    if (!TextUtils.isEmpty(proFdlxFdBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proFdlxFdBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -932,6 +966,18 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             final List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
+
+                            if (!TextUtils.isEmpty(proDdPmBeans.get(0).getErr())) {
+                                mHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CommomDialog.showMessage(context, proDdPmBeans.get(0).getErr());
+                                        return;
+                                    }
+                                });
+                            }
+
+
                             tvCont.setText("商品: " + proDdPmBeans.size());
                             // 倒序排列
                             adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans, tvCont, etSearchHonghuoshang, imgSelelteGonghuoshang);
@@ -1001,7 +1047,18 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
+                            final List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
+
+
+                            if (!TextUtils.isEmpty(proDdFdFdBeans.get(0).getErr())) {
+                                mHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CommomDialog.showMessage(context, proDdFdFdBeans.get(0).getErr());
+                                        return;
+                                    }
+                                });
+                            }
 
                             tvFdCont.setText("分店: " + proDdFdFdBeans.size());
 

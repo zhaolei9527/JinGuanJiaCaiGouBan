@@ -121,7 +121,9 @@ public class CommomDialog extends Dialog implements View.OnClickListener {
     }
 
     public static void showMessage(Context context, String title) {
+
         Utils.showSoundWAV(context, R.raw.faile);
+
 
         new CommomDialog(context, R.style.dialog, title, new CommomDialog.OnCloseListener() {
             @Override

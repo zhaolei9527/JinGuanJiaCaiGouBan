@@ -225,6 +225,19 @@ public class GoodShopActivity extends BaseActivity {
                     }
 
                     final List<proPmSelectBean> proPmSelectBeans = proPmSelectBean.arrayproPmSelectBeanFromData(pro_cs_select);
+
+
+                    if (!TextUtils.isEmpty(proPmSelectBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proPmSelectBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
+
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {

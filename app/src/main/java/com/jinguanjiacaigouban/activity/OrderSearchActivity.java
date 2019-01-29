@@ -89,8 +89,6 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     boolean input = false;
     public static String bh;
 
-    public static boolean share = false;
-
     @Override
     protected int setthislayout() {
         return R.layout.activity_ordersearch_layout;
@@ -126,7 +124,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable editable) {
                 if (input) {
-                    getdata();
+                    getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
                 }
             }
         });
@@ -145,7 +143,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable editable) {
                 if (input) {
-                    getdata();
+                    getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
                 }
             }
         });
@@ -174,25 +172,14 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (!share) {
             getdata();
-        } else {
-            dialog.show();
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    dialog.dismiss();
-                }
-            }, 1000);
-        }
-
+            if (adapter!=null){
+                adapter.notifyDataSetChanged();
+            }
     }
 
     private void getdata() {
-
         if (!dialog.isShowing()) {
-            share = false;
             dialog.show();
             getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
         }
@@ -315,6 +302,19 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     final List<proCdBean> proCdBeans = proCdBean.arrayproCdBeanFromData(pro_cd);
+
+                    if (!TextUtils.isEmpty(proCdBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proCdBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
+
+
                     adapter = new OrderListAdapter(OrderSearchActivity.this, proCdBeans);
                     mHandler.post(new Runnable() {
                         @Override
@@ -374,7 +374,19 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                         });
                     }
 
-                    List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+                    final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+
+
+                    if (!TextUtils.isEmpty(proYgBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proYgBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
 
                     proYgList = new ArrayList<>();
 

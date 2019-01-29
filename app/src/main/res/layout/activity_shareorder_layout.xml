@@ -132,13 +132,13 @@
                 android:id="@+id/rv_order"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="-15dp"
                 android:layout_weight="1"
                 android:nestedScrollingEnabled="false"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x1"
+                android:layout_marginTop="-40dp"
                 android:background="@color/bgea"></View>
 
             <TextView
@@ -150,11 +150,10 @@
                 android:text="分店（0）:" />
 
             <com.jinguanjiacaigouban.view.JinGuanJiaRecycleView
-                android:nestedScrollingEnabled="false"
                 android:id="@+id/rv_order_fendian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/x20"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
+                android:nestedScrollingEnabled="false"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
         </LinearLayout>
 

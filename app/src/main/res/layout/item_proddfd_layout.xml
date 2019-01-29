@@ -10,6 +10,6 @@
         android:layout_width="@dimen/x95"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textSize="@dimen/x15" />
+        android:textSize="@dimen/x12" />
 
 </LinearLayout>

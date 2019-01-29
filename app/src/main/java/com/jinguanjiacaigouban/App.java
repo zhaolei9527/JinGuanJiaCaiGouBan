@@ -6,6 +6,7 @@ import android.support.multidex.MultiDexApplication;
 
 import com.jinguanjiacaigouban.utils.PausableThreadPoolExecutor;
 import com.mob.MobSDK;
+import com.tencent.bugly.Bugly;
 
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +34,7 @@ public class App extends MultiDexApplication {
         this.context = this;
         MobSDK.init(this);
         MultiDex.install(this);
-      //  Bugly.init(getApplicationContext(), "b9e3fb47cb", false);
+        Bugly.init(getApplicationContext(), "e4d6b083e4", false);
         pausableThreadPoolExecutor = new PausableThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS, new PriorityBlockingQueue<Runnable>());
     }
 

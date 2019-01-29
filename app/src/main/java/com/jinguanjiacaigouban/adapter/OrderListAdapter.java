@@ -147,7 +147,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                 }
                 mContext.startActivity(new Intent(mContext, ShareOrderActivity.class)
                         .putExtra("strBH", datas.get(position).getBH()));
-                OrderSearchActivity.share = true;
+
+                OrderSearchActivity.bh = datas.get(position).getBH();
+
                 notifyDataSetChanged();
             }
         });
@@ -318,10 +320,22 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                     mContext.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
+                            final List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
+
+                            if (!TextUtils.isEmpty(proDdPmBeans.get(0).getErr())) {
+                                mContext.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CommomDialog.showMessage(mContext, proDdPmBeans.get(0).getErr());
+                                        return;
+                                    }
+                                });
+                            }
+
+
                             holder.llOrderGoods.removeAllViews();
                             for (int i = 0; i < proDdPmBeans.size(); i++) {
-                                View item_proddpm_layout = View.inflate(mContext, R.layout.item_proddpm_layout, null);
+                                View item_proddpm_layout = View.inflate(mContext, R.layout.item_orrder_pm_layout, null);
                                 TextView tv_title = item_proddpm_layout.findViewById(R.id.tv_title);
                                 TextView tv_danjia = item_proddpm_layout.findViewById(R.id.tv_danjia);
                                 TextView tv_shuliang = item_proddpm_layout.findViewById(R.id.tv_shuliang);
@@ -383,7 +397,20 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                     mContext.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            List<proDdFdBean> proDdFdBeans = proDdFdBean.arrayproDdFdBeanFromData(pro_dd_fd);
+                            final List<proDdFdBean> proDdFdBeans = proDdFdBean.arrayproDdFdBeanFromData(pro_dd_fd);
+
+
+                            if (!TextUtils.isEmpty(proDdFdBeans.get(0).getErr())) {
+                                mContext.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CommomDialog.showMessage(mContext, proDdFdBeans.get(0).getErr());
+                                        return;
+                                    }
+                                });
+                            }
+
+
                             holder.llOrderFendian.removeAllViews();
                             for (int i = 0; i < proDdFdBeans.size(); i++) {
                                 View item_proddfd_layout = View.inflate(mContext, R.layout.item_proddfd_layout, null);

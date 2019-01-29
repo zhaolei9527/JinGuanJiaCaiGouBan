@@ -941,6 +941,19 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                     }
                     final List<profl1Bean> profl1Beans = profl1Bean.arrayprofl1BeanFromData(pro_cs_edit);
 
+
+                    if (!TextUtils.isEmpty(profl1Beans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, profl1Beans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
+
+
                     if ("pro_fl1".equals(host)) {
                         profl1list = new ArrayList<>();
                         for (int i = 0; i < profl1Beans.size(); i++) {

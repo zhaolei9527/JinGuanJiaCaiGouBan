@@ -135,6 +135,18 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
 
                     final List<proFdlxSelectBean> proFdlxSelectBeans = proFdlxSelectBean.arrayproFdlxSelectBeanFromData(pro_fdlx_select);
 
+
+                    if (!TextUtils.isEmpty(proFdlxSelectBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proFdlxSelectBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
+
                     adapter = new FenDianListAdapter(FenDianActivity.this, proFdlxSelectBeans, tvCont);
                     mHandler.post(new Runnable() {
                         @Override

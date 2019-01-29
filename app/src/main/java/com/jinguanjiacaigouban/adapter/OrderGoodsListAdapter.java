@@ -82,6 +82,8 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
         return vp;
     }
 
+    boolean isdelete = false;
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
@@ -93,6 +95,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                     public void onClick(Dialog dialog, final boolean confirm) {
                         dialog.dismiss();
                         if (confirm) {
+                            isdelete = true;
                             getDelete(position, OrderEditActivity.strBH, datas.get(position).getCol1(), (String) SpUtil.get(mContext, "androidIMEI", ""));
                         }
                     }
@@ -111,7 +114,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
 
                 if (!b) {
                     try {
-                        if (strBH.equals(OrderEditActivity.strBH)) {
+                        if (strBH.equals(OrderEditActivity.strBH) && !isdelete) {
                             datas.get(position).setCol3(holder.etDanjia.getText().toString());
                             getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
                                     , (String) SpUtil.get(mContext, "androidIMEI", "")
@@ -138,7 +141,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
 
                 if (!b) {
                     try {
-                        if (strBH.equals(OrderEditActivity.strBH)) {
+                        if (strBH.equals(OrderEditActivity.strBH) && !isdelete) {
                             datas.get(position).setCol4(holder.etShuliang.getText().toString());
                             getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
                                     , (String) SpUtil.get(mContext, "androidIMEI", "")
@@ -152,6 +155,8 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+
+
                     }
                 }
 
@@ -163,7 +168,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
                     try {
-                        if (strBH.equals(OrderEditActivity.strBH)) {
+                        if (strBH.equals(OrderEditActivity.strBH) && !isdelete) {
                             datas.get(position).setCol5(holder.etBeizhu.getText().toString());
                             getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
                                     , (String) SpUtil.get(mContext, "androidIMEI", "")
@@ -199,6 +204,21 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             @Override
             public void doSth() {
                 try {
+
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            super.run();
+                            try {
+                                sleep(500);
+                                isdelete = false;
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
+
+
                     String pro_cs_delete = DBService.doConnection("pro_dd_pm_delete", (String) SpUtil.get(mContext, "MC", ""), androidIMEI, UrlUtils.BBH, strBH, strXH);
                     if (TextUtils.isEmpty(pro_cs_delete)) {
                         mContext.runOnUiThread(new Runnable() {
@@ -208,6 +228,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                                 return;
                             }
                         });
+
                     } else {
                         List<proCsDeleteBean> proCsDeleteBeans = proCsDeleteBean.arrayproCsDeleteBeanFromData(pro_cs_delete);
                         final String err = proCsDeleteBeans.get(0).getErr();
@@ -215,6 +236,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                             mContext.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+
                                     EasyToast.showShort(mContext, "删除成功");
                                     datas.remove(position);
                                     notifyDataSetChanged();
@@ -227,6 +249,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                                         etSearchHonghuoshang.setFocusable(false);
                                         imgSelelteGonghuoshang.setVisibility(View.GONE);
                                     }
+
 
                                 }
                             });

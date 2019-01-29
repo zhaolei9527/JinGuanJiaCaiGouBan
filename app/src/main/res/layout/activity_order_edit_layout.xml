@@ -612,7 +612,7 @@
                         android:layout_height="wrap_content"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
                     <View
-                        android:layout_marginBottom="@dimen/x80"
+                        android:layout_marginBottom="@dimen/x110"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x1"
                         android:background="@color/bgea"></View>

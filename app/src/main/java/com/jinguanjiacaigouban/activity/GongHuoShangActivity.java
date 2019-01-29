@@ -160,6 +160,19 @@ public class GongHuoShangActivity extends BaseActivity {
                         });
                     }
                     final ArrayList<proCsSelectBean> proCsSelectBeans = (ArrayList<proCsSelectBean>) proCsSelectBean.arrayproCsSelectBeanFromData(pro_cs_select);
+
+                    if (!TextUtils.isEmpty(proCsSelectBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proCsSelectBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
+
+
                     adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans,  tvCont);
 
                     mHandler.post(new Runnable() {

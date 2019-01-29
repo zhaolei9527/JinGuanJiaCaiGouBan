@@ -303,7 +303,16 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
+
+
+
+
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
+
+
+
+
+
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et.setText(proPymBeans.get(0).getPYM());
                             } else {
@@ -411,6 +420,21 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
 
                     final List<proFdlxFdBean> proFdlxSelectBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
 
+
+
+                    if (!TextUtils.isEmpty(proFdlxSelectBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proFdlxSelectBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
+
+
+
                     adapter = new FenDianEditListAdapter(FenDianEditActivity.this, proFdlxSelectBeans, tvCont);
 
                     mHandler.post(new Runnable() {
@@ -459,6 +483,17 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
+
+                    if (!TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proCsAddBeans.get(0).getErr());
+                                return;
+                            }
+                        });
+                    }
+
 
                     mHandler.post(new Runnable() {
                         @Override

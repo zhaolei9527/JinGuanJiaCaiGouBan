@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +71,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     Button btnSubmit;
     @BindView(R.id.tv_androidIMEI)
     TextView tvAndroidIMEI;
+    @BindView(R.id.img_user)
+    ImageView imgUser;
     private SpinerPopWindow<String> mSpinerPopWindow;
     private ArrayList<String> list;
     private Map<String, String> allSP;
@@ -185,6 +189,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         flMoreLink.setOnClickListener(this);
         tvAndroidIMEI.setOnClickListener(this);
         tvTest.setOnClickListener(this);
+        imgUser.setOnClickListener(this);
     }
 
     @Override
@@ -195,7 +200,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_Link:
+            case R.id.img_user:
                 new CheckPwdDialog(context, R.style.dialog, "", new CheckPwdDialog.OnCloseListener() {
                     @Override
                     public void onClick(Dialog dialog, boolean confirm) {
@@ -225,6 +230,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     doLogin();
                 }
                 break;
+            case R.id.tv_Link:
             case R.id.fl_More_Link:
                 if (list.isEmpty()) {
                     CommomDialog.showMessage(context, "暂未添加链接数据库");
@@ -267,7 +273,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     Log.e("LoginActivity", URl);
                     String[] split = URl.split("#");
                     UrlUtils.checkUrl(split[0], split[1], split[2], split[3], split[4]);
-                    java.sql.Connection conn = DBOpenHelper.getConn();
+                    Connection conn = DBOpenHelper.getConn();
                     if (conn.isClosed()) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -355,6 +361,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 } else {
                     try {
                         final List<proLoginBean> proLoginBeans = proLoginBean.arrayproLoginBeanFromData(pro_login);
+
+
+                        if (!TextUtils.isEmpty(proLoginBeans.get(0).getErr())) {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CommomDialog.showMessage(context, proLoginBeans.get(0).getErr());
+                                    return;
+                                }
+                            });
+                        }
+
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
