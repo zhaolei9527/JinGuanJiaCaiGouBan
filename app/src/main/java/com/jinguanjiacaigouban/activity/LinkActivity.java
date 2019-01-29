@@ -88,6 +88,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
     private SpinerPopWindow<String> mSpinerPopWindow;
     private ArrayList<String> list;
     private Map<String, String> allSP;
+    private ResultSet resultSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,7 +215,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
                                 etServiceUsername.setText("");
                                 etServicePwd.setText("");
                                 tvCheckDB.setText("");
-
 
                             }
                             dialog.dismiss();
@@ -358,15 +358,27 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
                         Log.e("LinkActivity", "链接开始");
                         if (!conn.isClosed()) {
                             Statement stmt = conn.createStatement();// 创建SQL命令对象
-                            ResultSet resultSet = stmt.executeQuery("SELECT NAME FROM SYSDATABASES\n" +
-                                    " WHERE NAME <> 'MASTER'\n" +
-                                    "   AND NAME <> 'MODEL'\n" +
-                                    "   AND NAME <> 'MSDB'\n" +
-                                    "   AND NAME <> 'NORTHWIND'\n" +
-                                    "   AND NAME <> 'TEMPDB'\n" +
-                                    "   AND NAME <> 'PUBS'\n" +
-                                    "   AND SID = (SELECT SID FROM syslogins WHERE NAME ='"
-                                    +serviceUsername+ "') ORDER BY NAME");
+
+                            if (serviceUsername.equals("sa") || serviceUsername.equals("sA") || serviceUsername.equals("Sa") || serviceUsername.equals("SA")) {
+                                resultSet = stmt.executeQuery("SELECT NAME FROM SYSDATABASES\n" +
+                                        " WHERE NAME <> 'MASTER'\n" +
+                                        "   AND NAME <> 'MODEL'\n" +
+                                        "   AND NAME <> 'MSDB'\n" +
+                                        "   AND NAME <> 'NORTHWIND'\n" +
+                                        "   AND NAME <> 'TEMPDB'\n" +
+                                        "   AND NAME <> 'PUBS'\n");
+                            } else {
+                                resultSet = stmt.executeQuery("SELECT NAME FROM SYSDATABASES\n" +
+                                        " WHERE NAME <> 'MASTER'\n" +
+                                        "   AND NAME <> 'MODEL'\n" +
+                                        "   AND NAME <> 'MSDB'\n" +
+                                        "   AND NAME <> 'NORTHWIND'\n" +
+                                        "   AND NAME <> 'TEMPDB'\n" +
+                                        "   AND NAME <> 'PUBS'\n" +
+                                        "   AND SID = (SELECT SID FROM syslogins WHERE NAME ='"
+                                        + serviceUsername + "') ORDER BY NAME");
+                            }
+
                             // 循环输出每一条记录
                             final ArrayList<String> DBName = new ArrayList<>();
                             while (resultSet.next()) {
@@ -379,7 +391,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     SinglePicker<String> picker = new SinglePicker<>(LinkActivity.this, DBName);
-                                    picker.setCanLoop(true);//不禁用循环
+                                    picker.setCanLoop(false);//不禁用循环
                                     picker.setTopBackgroundColor(0xFFEEEEEE);
                                     picker.setTopHeight(50);
                                     picker.setTopLineColor(0xFF33B5E5);
