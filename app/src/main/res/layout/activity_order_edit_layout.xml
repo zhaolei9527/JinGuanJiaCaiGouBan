@@ -516,11 +516,11 @@
                     <com.jinguanjiacaigouban.view.JinGuanJiaRecycleView
                         android:nestedScrollingEnabled="false"
                         android:id="@+id/rv_order_goods"
+                        android:layout_marginBottom="-15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
                     <LinearLayout
-                        android:layout_marginTop="-40dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x10"
@@ -612,6 +612,7 @@
                         android:layout_height="wrap_content"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
                     <View
+                        android:layout_marginBottom="@dimen/x80"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x1"
                         android:background="@color/bgea"></View>

@@ -861,8 +861,11 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                         etBeizhu.setText(col13);
 
                                         if (bd != null) {
+
                                             imgShop.setVisibility(View.VISIBLE);
                                             imgShop.setImageDrawable(bd);
+                                            imgShop.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+
                                             imgShop.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {

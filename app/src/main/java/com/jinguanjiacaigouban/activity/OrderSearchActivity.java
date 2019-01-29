@@ -106,8 +106,8 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
         progressView.setIndicatorId(ProgressView.BallRotate);
         progressView.setIndicatorColor(getResources().getColor(R.color.colorAccent));
         rvOrderList.setFootLoadingView(progressView);
-        rvOrderList.loadMoreComplete();
         rvOrderList.setCanloadMore(false);
+        rvOrderList.loadMoreComplete();
 
         tvSearchStartTime.setText(DateUtils.getDay(System.currentTimeMillis()));
         tvSearchEndTime.setText(DateUtils.getDay(System.currentTimeMillis()));
@@ -126,7 +126,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable editable) {
                 if (input) {
-                    getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
+                    getdata();
                 }
             }
         });
@@ -145,7 +145,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable editable) {
                 if (input) {
-                    getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
+                    getdata();
                 }
             }
         });
@@ -185,14 +185,17 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                     dialog.dismiss();
                 }
             }, 1000);
-
         }
 
     }
 
     private void getdata() {
-        dialog.show();
-        getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
+
+        if (!dialog.isShowing()) {
+            share = false;
+            dialog.show();
+            getDataFtime(tvSearchStartTime.getText().toString(), tvSearchEndTime.getText().toString(), etSearchHonghuoshang.getText().toString(), etSearchCGY.getText().toString());
+        }
     }
 
     @Override

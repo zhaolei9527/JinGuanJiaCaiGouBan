@@ -47,6 +47,8 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
     EditText etSearchHonghuoshang;
     ImageView imgSelelteGonghuoshang;
     boolean share = false;
+    String strBH = "";
+
 
     private ArrayList<proDdPmBean> datas = new ArrayList();
 
@@ -66,6 +68,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
         this.imgSelelteGonghuoshang = imgSelelteGonghuoshang;
         this.tvCont = tvCont;
         datas.addAll(homeBean);
+        this.strBH = OrderEditActivity.strBH;
     }
 
     public void setDatas(ArrayList<proDdPmBean> datas) {
@@ -107,16 +110,22 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             public void onFocusChange(View view, boolean b) {
 
                 if (!b) {
-                    datas.get(position).setCol3(holder.etDanjia.getText().toString());
-                    getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
-                            , (String) SpUtil.get(mContext, "androidIMEI", "")
-                            , UrlUtils.BBH
-                            , OrderEditActivity.strBH
-                            , String.valueOf(datas.get(position).getCol1())
-                            , String.valueOf(datas.get(position).getCol2())
-                            , String.valueOf(datas.get(position).getCol4())
-                            , String.valueOf(datas.get(position).getCol3())
-                            , String.valueOf(datas.get(position).getCol5()));
+                    try {
+                        if (strBH.equals(OrderEditActivity.strBH)) {
+                            datas.get(position).setCol3(holder.etDanjia.getText().toString());
+                            getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
+                                    , (String) SpUtil.get(mContext, "androidIMEI", "")
+                                    , UrlUtils.BBH
+                                    , OrderEditActivity.strBH
+                                    , String.valueOf(datas.get(position).getCol1())
+                                    , String.valueOf(datas.get(position).getCol2())
+                                    , String.valueOf(datas.get(position).getCol4())
+                                    , String.valueOf(datas.get(position).getCol3())
+                                    , String.valueOf(datas.get(position).getCol5()));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
@@ -128,16 +137,22 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             public void onFocusChange(View view, boolean b) {
 
                 if (!b) {
-                    datas.get(position).setCol4(holder.etShuliang.getText().toString());
-                    getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
-                            , (String) SpUtil.get(mContext, "androidIMEI", "")
-                            , UrlUtils.BBH
-                            , OrderEditActivity.strBH
-                            , String.valueOf(datas.get(position).getCol1())
-                            , String.valueOf(datas.get(position).getCol2())
-                            , String.valueOf(datas.get(position).getCol4())
-                            , String.valueOf(datas.get(position).getCol3())
-                            , String.valueOf(datas.get(position).getCol5()));
+                    try {
+                        if (strBH.equals(OrderEditActivity.strBH)) {
+                            datas.get(position).setCol4(holder.etShuliang.getText().toString());
+                            getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
+                                    , (String) SpUtil.get(mContext, "androidIMEI", "")
+                                    , UrlUtils.BBH
+                                    , OrderEditActivity.strBH
+                                    , String.valueOf(datas.get(position).getCol1())
+                                    , String.valueOf(datas.get(position).getCol2())
+                                    , String.valueOf(datas.get(position).getCol4())
+                                    , String.valueOf(datas.get(position).getCol3())
+                                    , String.valueOf(datas.get(position).getCol5()));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
@@ -147,16 +162,22 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
-                    datas.get(position).setCol5(holder.etBeizhu.getText().toString());
-                    getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
-                            , (String) SpUtil.get(mContext, "androidIMEI", "")
-                            , UrlUtils.BBH
-                            , OrderEditActivity.strBH
-                            , datas.get(position).getCol1() + ""
-                            , datas.get(position).getCol2() + ""
-                            , String.valueOf(datas.get(position).getCol4())
-                            , String.valueOf(datas.get(position).getCol3())
-                            , String.valueOf(datas.get(position).getCol5()));
+                    try {
+                        if (strBH.equals(OrderEditActivity.strBH)) {
+                            datas.get(position).setCol5(holder.etBeizhu.getText().toString());
+                            getProDdPmUpdate(String.valueOf(SpUtil.get(mContext, "MC", ""))
+                                    , (String) SpUtil.get(mContext, "androidIMEI", "")
+                                    , UrlUtils.BBH
+                                    , OrderEditActivity.strBH
+                                    , datas.get(position).getCol1() + ""
+                                    , datas.get(position).getCol2() + ""
+                                    , String.valueOf(datas.get(position).getCol4())
+                                    , String.valueOf(datas.get(position).getCol3())
+                                    , String.valueOf(datas.get(position).getCol5()));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -237,6 +258,7 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
             @Override
             public void doSth() {
                 try {
+
                     String pro_dd_insert = DBService.doConnection("pro_dd_pm_update", key[0], key[1], key[2], key[3], key[4], key[5], key[6], key[7], key[8]);
                     if (TextUtils.isEmpty(pro_dd_insert)) {
                         mContext.runOnUiThread(new Runnable() {

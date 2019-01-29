@@ -30,7 +30,6 @@ import com.jinguanjiacaigouban.utils.SpUtil;
 import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
 import com.jinguanjiacaigouban.view.JinGuanJiaRecycleView;
-import com.jinguanjiacaigouban.view.ProgressView;
 import com.jinguanjiacaigouban.view.SakuraLinearLayoutManager;
 
 import java.util.HashMap;
@@ -102,22 +101,12 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         line.setOrientation(LinearLayoutManager.VERTICAL);
         rvOrderGoods.setLayoutManager(line);
         rvOrderGoods.setItemAnimator(new DefaultItemAnimator());
-        ProgressView progressView = new ProgressView(context);
-        progressView.setIndicatorId(ProgressView.BallRotate);
-        progressView.setIndicatorColor(getResources().getColor(R.color.colorAccent));
-        rvOrderGoods.setFootLoadingView(progressView);
         rvOrderGoods.loadMoreComplete();
-
         line2 = new GridLayoutManager(context, 3);
         line2.setOrientation(LinearLayoutManager.VERTICAL);
         rvOrderFendian.setLayoutManager(line2);
         rvOrderFendian.setItemAnimator(new DefaultItemAnimator());
-        ProgressView progressView2 = new ProgressView(context);
-        progressView2.setIndicatorId(ProgressView.BallRotate);
-        progressView2.setIndicatorColor(getResources().getColor(R.color.colorAccent));
-        rvOrderFendian.setFootLoadingView(progressView2);
         rvOrderFendian.loadMoreComplete();
-
     }
 
     @Override

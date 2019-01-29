@@ -1,5 +1,6 @@
 package com.jinguanjiacaigouban.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -151,8 +153,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         progressView.setIndicatorId(ProgressView.BallRotate);
         progressView.setIndicatorColor(getResources().getColor(R.color.colorAccent));
         rvOrderGoods.setFootLoadingView(progressView);
-        rvOrderGoods.loadMoreComplete();
         rvOrderGoods.setCanloadMore(false);
+        rvOrderGoods.loadMoreComplete();
 
         line2 = new GridLayoutManager(context, 3);
         line2.setOrientation(LinearLayoutManager.VERTICAL);
@@ -162,8 +164,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         progressView2.setIndicatorId(ProgressView.BallRotate);
         progressView2.setIndicatorColor(getResources().getColor(R.color.colorAccent));
         rvOrderFendian.setFootLoadingView(progressView2);
-        rvOrderFendian.loadMoreComplete();
         rvOrderFendian.setCanloadMore(false);
+        rvOrderFendian.loadMoreComplete();
 
     }
 
@@ -239,6 +241,17 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         ButterKnife.bind(this);
     }
 
+    /**
+     * 隐藏软键盘(只适用于Activity，不适用于Fragment)
+     */
+    public static void hideSoftKeyboard(Activity activity) {
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -251,9 +264,11 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.ll_houdan:
+                hideSoftKeyboard(OrderEditActivity.this);
                 getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "后单");
                 break;
             case R.id.ll_qiandan:
+                hideSoftKeyboard(OrderEditActivity.this);
                 getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "前单");
                 break;
             case R.id.btn_add_good:
@@ -926,7 +941,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                                     rvOrderGoods.setAdapter(adapter);
 
-                                    nsv.scrollTo(0, 280 * adapter.getItemCount() + (int) (getResources().getDimension(R.dimen.y290)));
+                                    nsv.scrollTo(0, 280 * (adapter.getItemCount() - 1) + (int) (getResources().getDimension(R.dimen.y290)));
 
                                     if (!adapter.getDatas().isEmpty()) {
                                         etSearchHonghuoshang.setFocusable(false);
