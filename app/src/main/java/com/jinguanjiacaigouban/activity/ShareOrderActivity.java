@@ -149,7 +149,6 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
 
     private void showShare() {
 
-        proDdFdX();
 
         Wechat.ShareParams sp = new Wechat.ShareParams();
         //微信分享网页的参数严格对照列表中微信分享网页的参数要求
@@ -161,6 +160,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         wechat.setPlatformActionListener(new PlatformActionListener() {
             @Override
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                proDdFdX();
             }
 
             @Override
