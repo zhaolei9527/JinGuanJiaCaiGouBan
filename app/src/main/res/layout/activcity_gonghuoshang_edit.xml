@@ -118,7 +118,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_address"
                             android:layout_width="0dp"
@@ -230,7 +230,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_TYM"
                             android:layout_width="0dp"
@@ -294,7 +294,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_MC"
                             android:layout_width="0dp"
@@ -346,7 +346,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_JM"
                             android:layout_width="0dp"
@@ -396,7 +396,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_Phone"
                             android:layout_width="0dp"
@@ -449,7 +449,7 @@
 
                         <EditText
                             android:id="@+id/yiji"
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -515,7 +515,7 @@
 
                         <EditText
                             android:id="@+id/erji"
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -580,7 +580,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/sanji"
                             android:layout_width="0dp"
@@ -647,7 +647,7 @@
                         android:background="@drawable/bg_gonghuoshang_edit">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_beizhu"
                             android:layout_width="0dp"

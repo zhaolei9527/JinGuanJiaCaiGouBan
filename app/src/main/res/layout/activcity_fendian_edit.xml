@@ -165,7 +165,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_MC"
                             android:layout_width="0dp"
@@ -212,7 +212,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_JM"
                             android:layout_width="0dp"

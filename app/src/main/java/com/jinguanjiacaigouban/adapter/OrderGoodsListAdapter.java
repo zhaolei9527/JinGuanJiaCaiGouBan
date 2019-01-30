@@ -26,6 +26,7 @@ import com.jinguanjiacaigouban.utils.SpUtil;
 import com.jinguanjiacaigouban.utils.UrlUtils;
 import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
+import com.jinguanjiacaigouban.view.LastInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -345,15 +346,15 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
         @BindView(R.id.tv_danjia)
         TextView tvDanjia;
         @BindView(R.id.et_danjia)
-        EditText etDanjia;
+        LastInputEditText etDanjia;
         @BindView(R.id.tv_shuliang)
         TextView tvShuliang;
         @BindView(R.id.et_shuliang)
-        EditText etShuliang;
+        LastInputEditText etShuliang;
         @BindView(R.id.tv_beizhu)
         TextView tvBeizhu;
         @BindView(R.id.et_beizhu)
-        EditText etBeizhu;
+        LastInputEditText etBeizhu;
         @BindView(R.id.ll_edit)
         LinearLayout llEdit;
         @BindView(R.id.btn_delete)

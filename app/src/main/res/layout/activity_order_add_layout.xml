@@ -190,7 +190,7 @@
                 android:textSize="@dimen/x12" />
 
             <EditText
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:id="@+id/et_search_CGY"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -228,7 +228,7 @@
                 android:textSize="@dimen/x12" />
 
             <EditText
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:id="@+id/et_search_honghuoshang"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -297,7 +297,7 @@
                 android:textSize="@dimen/x12" />
 
             <EditText
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:id="@+id/et_yue"
                 android:layout_width="@dimen/x45"
                 android:layout_height="wrap_content"
@@ -318,7 +318,7 @@
                 android:text="几天送齐" />
 
             <EditText
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:id="@+id/et_tian"
                 android:layout_width="@dimen/x45"
                 android:layout_height="wrap_content"
@@ -348,7 +348,7 @@
                 android:textSize="@dimen/x12" />
 
             <EditText
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:id="@+id/et_beizhu"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/y80"

@@ -94,7 +94,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
 
                         android:id="@+id/tv_Link_name"
                         android:layout_width="0dp"
@@ -163,7 +163,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
 
                         android:id="@+id/et_Service_IP"
                         android:layout_width="0dp"
@@ -231,7 +231,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
 
                         android:id="@+id/et_Service_Host"
                         android:layout_width="0dp"
@@ -300,7 +300,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
 
                         android:id="@+id/et_Service_username"
                         android:layout_width="0dp"
@@ -368,7 +368,7 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
 
                         android:id="@+id/et_Service_pwd"
                         android:layout_width="0dp"
@@ -532,7 +532,7 @@
                         android:textColor="@color/text333" />
 
                     <EditText
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
 
                         android:id="@+id/et_app_pwd"
                         android:layout_width="match_parent"

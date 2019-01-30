@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -55,6 +56,7 @@ import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
 import me.iwf.photopicker.PhotoPickUtils;
 import me.shaohui.advancedluban.Luban;
 import me.shaohui.advancedluban.OnCompressListener;
+import uk.co.senab.photoview.PhotoView;
 
 /**
  * com.jinguanjiacaigouban.activity
@@ -110,7 +112,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.et_beizhu)
     EditText etBeizhu;
     @BindView(R.id.img_shop)
-    ImageView imgShop;
+    PhotoView imgShop;
     @BindView(R.id.ll_check_photo)
     LinearLayout llCheckPhoto;
     @BindView(R.id.ll_clear_photo)
@@ -514,13 +516,9 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
-
-        imgShop.setScaleType(ImageView.ScaleType.FIT_XY);
-
     }
 
     public void getproPmUpData(final String host
@@ -886,15 +884,17 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                                             imgShop.setVisibility(View.VISIBLE);
                                             imgShop.setImageDrawable(bd);
-                                            imgShop.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-                                            imgShop.setOnClickListener(new View.OnClickListener() {
+                                            imgShop.setOnTouchListener(new View.OnTouchListener() {
                                                 @Override
-                                                public void onClick(View view) {
+                                                public boolean onTouch(View view, MotionEvent motionEvent) {
                                                     startActivity(new Intent(context, HDImageViewActivity.class));
+                                                    return true;
                                                 }
                                             });
+
                                         }
+
                                         dialog.dismiss();
                                         input = true;
                                     } catch (Exception e) {

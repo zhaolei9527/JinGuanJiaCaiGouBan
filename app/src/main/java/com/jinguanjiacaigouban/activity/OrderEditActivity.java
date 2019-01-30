@@ -98,7 +98,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
     @BindView(R.id.v_no)
     View vNo;
     @BindView(R.id.et_fd)
-    EditText etFd;
+    TextView etFd;
     @BindView(R.id.ll_pro_fl1)
     FrameLayout llProFl1;
     @BindView(R.id.img_add_fd)
@@ -180,6 +180,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         imgAddFd.setOnClickListener(this);
         cbCheckFD.setOnClickListener(this);
         btnAddGood.setOnClickListener(this);
+        etFd.setOnClickListener(this);
 
         llQiandan.setOnClickListener(this);
         llHoudan.setOnClickListener(this);
@@ -311,6 +312,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             case R.id.img_add_fd:
                 startActivityForResult(new Intent(context, FenDianActivity.class).putExtra("ischeck", true), 204);
                 break;
+            case R.id.et_fd:
             case R.id.ll_pro_fl1:
                 if (proFDList.isEmpty()) {
                     dialog.show();
@@ -414,7 +416,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     final List<proDdEditBean> proDdEditBeans = proDdEditBean.arrayproDdEditBeanFromData(pro_dd_edit);
 
 
-                    if (proDdEditBeans.isEmpty()){
+                    if (proDdEditBeans.isEmpty()) {
                         return;
                     }
 
@@ -504,7 +506,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
 
 
-                    if (proYgBeans.isEmpty()){
+                    if (proYgBeans.isEmpty()) {
                         return;
                     }
 
@@ -570,7 +572,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
 
 
-                    if (proYgBeans.isEmpty()){
+                    if (proYgBeans.isEmpty()) {
                         return;
                     }
 
@@ -583,10 +585,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             }
                         });
                     }
-
-
-
-
 
 
                     for (int i = 0; i < proYgBeans.size(); i++) {
@@ -608,7 +606,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
-    private void showSponer(final List<String> profl1list, final EditText et, final String type) {
+    private void showSponer(final List<String> profl1list, final TextView et, final String type) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -656,7 +654,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                     final List<proFdlxFdBean> proFdlxFdBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
 
-                    if (proFdlxFdBeans.isEmpty()){
+                    if (proFdlxFdBeans.isEmpty()) {
                         Log.e("OrderEditActivity", "内容为空");
                         return;
                     }
@@ -801,7 +799,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                     final List<proDdInsertBean> proDdInsertBeans = proDdInsertBean.arrayproDdInsertBeanFromData(pro_dd_pm_inser);
 
-                    if (proDdInsertBeans.isEmpty()){
+                    if (proDdInsertBeans.isEmpty()) {
                         return;
                     }
 
@@ -882,7 +880,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     final List<proDdInsertBean> proDdInsertBeans = proDdInsertBean.arrayproDdInsertBeanFromData(pro_dd_insert);
 
 
-                    if (proDdInsertBeans.isEmpty()){
+                    if (proDdInsertBeans.isEmpty()) {
                         return;
                     }
 
@@ -939,7 +937,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                     final List<proDdInsertBean> proDdInsertBeans = proDdInsertBean.arrayproDdInsertBeanFromData(pro_dd_insert);
 
-                    if (proDdInsertBeans.isEmpty()){
+                    if (proDdInsertBeans.isEmpty()) {
                         return;
                     }
 
@@ -1007,7 +1005,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                             adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans, tvCont, etSearchHonghuoshang, imgSelelteGonghuoshang);
 
-                            if (proDdPmBeans.isEmpty()){
+                            if (proDdPmBeans.isEmpty()) {
                                 return;
                             }
 
@@ -1092,7 +1090,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             final List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
 
 
-                            if (!proDdFdFdBeans.isEmpty()){
+                            if (!proDdFdFdBeans.isEmpty()) {
                                 if (!TextUtils.isEmpty(proDdFdFdBeans.get(0).getErr())) {
                                     mHandler.post(new Runnable() {
                                         @Override

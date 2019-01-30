@@ -96,7 +96,7 @@
                     android:textSize="@dimen/x11" />
 
                 <EditText
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:id="@+id/et_GHS"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/y23"
@@ -147,7 +147,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/yiji"
                             android:layout_width="0dp"
@@ -212,7 +212,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/erji"
                             android:layout_width="0dp"
@@ -277,7 +277,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/sanji"
                             android:layout_width="0dp"
@@ -463,7 +463,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_JM"
                             android:layout_width="0dp"
@@ -514,7 +514,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_TYM"
                             android:layout_width="0dp"
@@ -564,7 +564,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_TM"
                             android:layout_width="0dp"
@@ -623,7 +623,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/tv_CGDJ"
                             android:layout_width="0dp"
@@ -676,7 +676,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/tv_YSDJ"
                             android:layout_width="0dp"
@@ -728,7 +728,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/tv_DDSL"
                             android:layout_width="0dp"
@@ -780,7 +780,7 @@
                         android:background="@drawable/bg_gonghuoshang_edit">
 
                         <EditText
-                            android:imeOptions="actionDone"
+                            android:imeOptions="actionNext"
 
                             android:id="@+id/et_beizhu"
                             android:layout_width="0dp"
@@ -872,12 +872,13 @@
 
             </LinearLayout>
 
-            <ImageView
+            <uk.co.senab.photoview.PhotoView
+                android:layout_marginBottom="@dimen/x30"
+                android:layout_gravity="center"
                 android:id="@+id/img_shop"
-                android:layout_width="@dimen/x180"
-                android:layout_height="@dimen/x180"
-                android:scaleType="centerInside"
-                android:layout_gravity="center_horizontal" />
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:layout_centerInParent="true" />
 
         </LinearLayout>
 
