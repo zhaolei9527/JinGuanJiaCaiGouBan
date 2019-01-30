@@ -20,6 +20,7 @@ import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.activity.GoodShopActivity;
 import com.jinguanjiacaigouban.activity.GoodShopEditActivity;
 import com.jinguanjiacaigouban.bean.proCsDeleteBean;
+import com.jinguanjiacaigouban.bean.proPmCopyBean;
 import com.jinguanjiacaigouban.bean.proPmSelectBean;
 import com.jinguanjiacaigouban.db.DBService;
 import com.jinguanjiacaigouban.utils.EasyToast;
@@ -94,6 +95,12 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
                     ClipboardManager cm = (ClipboardManager) mContext.getSystemService(mContext.CLIPBOARD_SERVICE);
                     cm.setText(datas.get(position).getMC());
                     EasyToast.showShort(mContext, "已复制到粘贴板");
+
+                    mContext.startActivity(new Intent(mContext,GoodShopEditActivity.class)
+                            .putExtra("strBH",datas.get(position).getBH())
+                            .putExtra("type","copy")
+                    );
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -154,6 +161,10 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
 
     }
 
+
+
+
+
     public void getData(final int position, final String strBH, final String strMC, final String androidIMEI) {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
             @Override
@@ -171,7 +182,7 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
                     } else {
                         List<proCsDeleteBean> proCsDeleteBeans = proCsDeleteBean.arrayproCsDeleteBeanFromData(pro_cs_delete);
 
-                        if (proCsDeleteBeans.isEmpty()){
+                        if (proCsDeleteBeans.isEmpty()) {
                             return;
                         }
 

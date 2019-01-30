@@ -304,7 +304,6 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                     final List<proCdBean> proCdBeans = proCdBean.arrayproCdBeanFromData(pro_cd);
                     adapter = new OrderListAdapter(OrderSearchActivity.this, proCdBeans);
 
-
                     if (proCdBeans.isEmpty()){
                         return;
                     }
@@ -354,10 +353,12 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     }
 
     public void getDataFCGY() {
+
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
             @Override
             public void doSth() {
                 try {
+
                     String pro_yg = DBService.doConnection("pro_yg");
 
                     mHandler.post(new Runnable() {
@@ -392,8 +393,6 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                             }
                         });
                     }
-
-
 
                     for (int i = 0; i < proYgBeans.size(); i++) {
                         proYgList.add(proYgBeans.get(i).getMC());

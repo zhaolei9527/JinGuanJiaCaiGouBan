@@ -159,6 +159,9 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
         if (!TextUtils.isEmpty(type)) {
             tvTitle.setText("商品_修改");
+            if (type.equals("copy")) {
+                tvTitle.setText("商品_新增");
+            }
         } else {
             tvTitle.setText("商品_新增");
         }
@@ -227,7 +230,11 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
     protected void initData() {
         if (!TextUtils.isEmpty(strBH)) {
             dialog.show();
-            getEditData(strBH);
+            if (type.equals("copy")) {
+                getProPmCopy(strBH);
+            } else {
+                getEditData(strBH);
+            }
         } else {
             dialog.show();
             getproPmAdd();
@@ -352,25 +359,52 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                         tvCGDJ.setText("0");
                                     }
 
-                                    getproPmUpData("pro_pm_update"
-                                            , String.valueOf(SpUtil.get(context, "MC", ""))
-                                            , (String) SpUtil.get(context, "androidIMEI", "")
-                                            , UrlUtils.BBH
-                                            , etGHS.getText().toString().trim()
-                                            , yiji.getText().toString().trim()
-                                            , erji.getText().toString().trim()
-                                            , sanji.getText().toString().trim()
-                                            , tvBH.getText().toString().trim()
-                                            , etMC.getText().toString().trim()
-                                            , etJM.getText().toString().trim()
-                                            , etTYM.getText().toString().trim()
-                                            , etTM.getText().toString().trim()
-                                            , tvCGDJ.getText().toString().trim()
-                                            , tvYSDJ.getText().toString().trim()
-                                            , tvDDSL.getText().toString().trim()
-                                            , etBeizhu.getText().toString().trim()
-                                            , pic
-                                            , isIMAGE);
+
+                                    if (type.equals("copy")) {
+
+                                        getproPmUpData("pro_pm_insert"
+                                                , String.valueOf(SpUtil.get(context, "MC", ""))
+                                                , (String) SpUtil.get(context, "androidIMEI", "")
+                                                , UrlUtils.BBH
+                                                , etGHS.getText().toString().trim()
+                                                , yiji.getText().toString().trim()
+                                                , erji.getText().toString().trim()
+                                                , sanji.getText().toString().trim()
+                                                , tvBH.getText().toString().trim()
+                                                , etMC.getText().toString().trim()
+                                                , etJM.getText().toString().trim()
+                                                , etTYM.getText().toString().trim()
+                                                , etTM.getText().toString().trim()
+                                                , tvCGDJ.getText().toString().trim()
+                                                , tvYSDJ.getText().toString().trim()
+                                                , tvDDSL.getText().toString().trim()
+                                                , etBeizhu.getText().toString().trim()
+                                                , pic
+                                                , isIMAGE);
+
+                                    } else {
+
+                                        getproPmUpData("pro_pm_update"
+                                                , String.valueOf(SpUtil.get(context, "MC", ""))
+                                                , (String) SpUtil.get(context, "androidIMEI", "")
+                                                , UrlUtils.BBH
+                                                , etGHS.getText().toString().trim()
+                                                , yiji.getText().toString().trim()
+                                                , erji.getText().toString().trim()
+                                                , sanji.getText().toString().trim()
+                                                , tvBH.getText().toString().trim()
+                                                , etMC.getText().toString().trim()
+                                                , etJM.getText().toString().trim()
+                                                , etTYM.getText().toString().trim()
+                                                , etTM.getText().toString().trim()
+                                                , tvCGDJ.getText().toString().trim()
+                                                , tvYSDJ.getText().toString().trim()
+                                                , tvDDSL.getText().toString().trim()
+                                                , etBeizhu.getText().toString().trim()
+                                                , pic
+                                                , isIMAGE);
+
+                                    }
 
                                 } else {
 
@@ -567,33 +601,28 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                     final List<proPmInsertBean> proPmInsertBeans = proPmInsertBean.arrayproPmInsertBeanFromData(pro_pm_update);
 
-                    if (proPmInsertBeans.isEmpty()){
+                    if (proPmInsertBeans.isEmpty()) {
                         return;
                     }
-
-
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
                             try {
-
                                 if (TextUtils.isEmpty(proPmInsertBeans.get(0).getErr())) {
-
                                     setResult(800, new Intent().putExtra("MC", etMC.getText().toString()));
-
                                     if (!TextUtils.isEmpty(type)) {
                                         Utils.showSoundWAV(context, R.raw.susses);
-
-                                        EasyToast.showShort(context, "修改成功");
+                                        if (type.equals("copy")) {
+                                            EasyToast.showShort(context, "添加成功");
+                                        } else {
+                                            EasyToast.showShort(context, "修改成功");
+                                        }
                                         finish();
                                     } else {
                                         Utils.showSoundWAV(context, R.raw.susses);
-
                                         EasyToast.showShort(context, "添加成功");
                                         getproPmAdd();
-
                                         etMC.setText("");
                                         etJM.setText("");
                                         etTYM.setText("");
@@ -605,7 +634,6 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                         pic = "";
                                         isclear = "";
                                         imgShop.setVisibility(View.GONE);
-
                                     }
 
                                 } else {
@@ -622,6 +650,126 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                     });
 
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                            CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    public void getProPmCopy(final String key) {
+        App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
+            @Override
+            public void doSth() {
+                try {
+
+                    final ResultSet pro_pm_edit = DBService.doConnectionForResultSet("pro_pm_copy", key);
+
+                    if (null == pro_pm_edit) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                                return;
+                            }
+                        });
+                    }
+
+                    try {
+                        Log.e("GoodShopEditActivity", "数据流转换");
+                        while (pro_pm_edit.next()) {
+                            Log.e("GoodShopEditActivity", "数据流寻找");
+
+                            final String err = pro_pm_edit.getString("err");
+                            final String col0 = pro_pm_edit.getString("col0");
+                            final String col1 = pro_pm_edit.getString("col1");
+                            final String col2 = pro_pm_edit.getString("col2");
+                            final String col3 = pro_pm_edit.getString("col3");
+                            final String col4 = pro_pm_edit.getString("col4");
+                            final String col5 = pro_pm_edit.getString("col5");
+                            final String col6 = pro_pm_edit.getString("col6");
+                            final String col7 = pro_pm_edit.getString("col7");
+                            final String col8 = pro_pm_edit.getString("col8");
+                            final String col9 = pro_pm_edit.getString("col9");
+                            final String col10 = pro_pm_edit.getString("col10");
+                            final String col11 = pro_pm_edit.getString("col11");
+                            final String col12 = pro_pm_edit.getString("col12");
+                            final String col13 = pro_pm_edit.getString("col13");
+
+                            InputStream in = pro_pm_edit.getBinaryStream("col14");
+
+                            bitmap = BitmapFactory.decodeStream(in);
+                            bd = new BitmapDrawable(bitmap);
+                            bd2 = new BitmapDrawable(bitmap);
+
+                            mHandler.post(new Runnable() {
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                @Override
+                                public void run() {
+                                    try {
+                                        if (!TextUtils.isEmpty(err)) {
+                                            CommomDialog.showMessage(context, err);
+                                            return;
+                                        }
+                                        if (col0.equals("1")) {
+                                            tvZxing.setVisibility(View.GONE);
+                                            imgSelelteGonghuoshang.setVisibility(View.GONE);
+                                            etMC.setFocusable(false);
+                                            etMC.setEnabled(false);
+                                            etJM.setEnabled(false);
+                                            etJM.setFocusable(false);
+                                            etGHS.setEnabled(false);
+                                            etGHS.setFocusable(false);
+                                        }
+                                        etGHS.setText(col1);
+                                        yiji.setText(col2);
+                                        erji.setText(col3);
+                                        sanji.setText(col4);
+                                        tvBH.setText(col5);
+                                        etMC.setText(col6);
+                                        etJM.setText(col7);
+                                        etTYM.setText(col8);
+                                        etTM.setText(col9);
+                                        tvCGDJ.setText(Utils.subZeroAndDot(col10));
+                                        tvYSDJ.setText(Utils.subZeroAndDot(col11));
+                                        tvDDSL.setText(Utils.subZeroAndDot(col12));
+                                        etBeizhu.setText(col13);
+
+                                        if (bd != null) {
+
+                                            imgShop.setVisibility(View.VISIBLE);
+                                            imgShop.setImageDrawable(bd);
+
+                                            imgShop.setOnTouchListener(new View.OnTouchListener() {
+                                                @Override
+                                                public boolean onTouch(View view, MotionEvent motionEvent) {
+                                                    startActivity(new Intent(context, HDImageViewActivity.class));
+                                                    return true;
+                                                }
+                                            });
+
+                                        }
+
+                                        dialog.dismiss();
+                                        input = true;
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                        pro_pm_edit.close();
+                    } catch (Exception e) {
+                        Log.e("GoodShopEditActivity", "数据流转换失败");
+                        e.printStackTrace();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.post(new Runnable() {
@@ -661,7 +809,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                     final List<proPmSmBean> proPmSmBeans = proPmSmBean.arrayproPmSmBeanFromData(pro_pm_sm);
 
-                    if (proPmSmBeans.isEmpty()){
+                    if (proPmSmBeans.isEmpty()) {
                         return;
                     }
 
@@ -720,7 +868,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         public void run() {
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
 
-                            if (proPymBeans.isEmpty()){
+                            if (proPymBeans.isEmpty()) {
                                 return;
                             }
 
@@ -771,7 +919,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                     final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
 
-                    if (proCsAddBeans.isEmpty()){
+                    if (proCsAddBeans.isEmpty()) {
                         return;
                     }
 
@@ -963,7 +1111,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                     }
                     final List<profl1Bean> profl1Beans = profl1Bean.arrayprofl1BeanFromData(pro_cs_edit);
 
-                    if (profl1Beans.isEmpty()){
+                    if (profl1Beans.isEmpty()) {
                         return;
                     }
                     if (!TextUtils.isEmpty(profl1Beans.get(0).getErr())) {
@@ -975,7 +1123,6 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                             }
                         });
                     }
-
 
 
                     if ("pro_fl1".equals(host)) {
