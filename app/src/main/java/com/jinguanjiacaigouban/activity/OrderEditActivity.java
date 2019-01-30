@@ -866,7 +866,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
-
     private void getProDdFdInsert(final String... key) {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
             @Override
@@ -923,7 +922,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             }
         });
     }
-
 
     private void getproDdInsert(final String... key) {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
