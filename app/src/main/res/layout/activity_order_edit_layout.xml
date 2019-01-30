@@ -3,10 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgfff"
+    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -144,22 +147,30 @@
         </LinearLayout>
 
         <android.support.v4.widget.NestedScrollView
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:id="@+id/nsv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
             <FrameLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
 
                     <LinearLayout
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y290"
                         android:orientation="vertical">
@@ -194,7 +205,6 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-
                                         android:id="@+id/tv_BH"
                                         android:layout_width="0dp"
                                         android:layout_height="@dimen/y23"
@@ -514,13 +524,17 @@
                     </LinearLayout>
 
                     <com.jinguanjiacaigouban.view.JinGuanJiaRecycleView
-                        android:nestedScrollingEnabled="false"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:id="@+id/rv_order_goods"
-                        android:layout_marginBottom="-15dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-15dp"
+                        android:nestedScrollingEnabled="false"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
                     <LinearLayout
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x10"
@@ -546,13 +560,13 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:imeOptions="actionNext"
                                     android:id="@+id/et_fd"
                                     android:layout_width="@dimen/x90"
                                     android:layout_height="@dimen/y23"
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="@dimen/x5"
                                     android:gravity="center_vertical"
+                                    android:imeOptions="actionNext"
                                     android:singleLine="true"
                                     android:textColor="@color/text333"
                                     android:textColorHint="@color/text999"
@@ -603,27 +617,23 @@
                     </LinearLayout>
 
                     <com.jinguanjiacaigouban.view.JinGuanJiaRecycleView
-                        android:nestedScrollingEnabled="false"
+
                         android:id="@+id/rv_order_fendian"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
-
-                    <View
-                        android:layout_marginBottom="@dimen/x110"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x1"
-                        android:background="@color/bgea"></View>
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"></com.jinguanjiacaigouban.view.JinGuanJiaRecycleView>
 
                 </LinearLayout>
 
                 <View
                     android:id="@+id/v_no"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"></View>
+                    android:layout_height="wrap_content"></View>
 
             </FrameLayout>
 
         </android.support.v4.widget.NestedScrollView>
+
 
         <Button
             android:id="@+id/btn_add_good"

@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -135,6 +136,14 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
     private OrderFenDianListAdapter orderFenDianListAdapter;
     private ArrayList<String> proFDList = new ArrayList<>();
     private ArrayList<String> proFDBHList;
+
+
+    @Override
+    protected void ready() {
+        super.ready();
+        //让布局向上移来显示软键盘
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
 
     @Override
     protected int setthislayout() {
@@ -265,10 +274,12 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.ll_houdan:
+                nsv.scrollTo(0, 0);
                 hideSoftKeyboard(OrderEditActivity.this);
                 getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "后单");
                 break;
             case R.id.ll_qiandan:
+                nsv.scrollTo(0, 0);
                 hideSoftKeyboard(OrderEditActivity.this);
                 getEditData(strBH, String.valueOf(SpUtil.get(context, "MC", "")), "前单");
                 break;
@@ -458,6 +469,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                             etFd.setText("");
                             Utils.showSoundWAV(context, R.raw.susses);
+
 
                         }
                     });
@@ -829,7 +841,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                     imgSelelteGonghuoshang.setVisibility(View.VISIBLE);
                                 }
 
-                                proDdPm(strBH);
+                                proDdPm(strBH, "1");
 
                             } else {
                                 CommomDialog.showMessage(context, proDdInsertBeans.get(0).getErr());
@@ -1027,7 +1039,9 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                                     rvOrderGoods.setAdapter(adapter);
 
-                                    nsv.scrollTo(0, 280 * (adapter.getItemCount() - 1) + (int) (getResources().getDimension(R.dimen.y290)));
+                                    if (key.length > 1) {
+                                        nsv.scrollTo(0, 280 * (adapter.getItemCount() - 1) + (int) (getResources().getDimension(R.dimen.y290)));
+                                    }
 
                                     if (!adapter.getDatas().isEmpty()) {
                                         etSearchHonghuoshang.setFocusable(false);
@@ -1039,8 +1053,13 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                                 }
                             });
+
+                            hideSoftKeyboard(OrderEditActivity.this);
+
+
                         }
                     });
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1131,8 +1150,9 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onResume() {
+        super.onResume();
     }
 }
