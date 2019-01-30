@@ -24,9 +24,11 @@ import com.jinguanjiacaigouban.adapter.OrderGoodsListAdapter;
 import com.jinguanjiacaigouban.bean.proDdEditBean;
 import com.jinguanjiacaigouban.bean.proDdFdFdBean;
 import com.jinguanjiacaigouban.bean.proDdPmBean;
+import com.jinguanjiacaigouban.bean.proddfxx;
 import com.jinguanjiacaigouban.db.DBService;
 import com.jinguanjiacaigouban.utils.PriorityRunnable;
 import com.jinguanjiacaigouban.utils.SpUtil;
+import com.jinguanjiacaigouban.utils.UrlUtils;
 import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
 import com.jinguanjiacaigouban.view.JinGuanJiaRecycleView;
@@ -88,6 +90,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
     private SakuraLinearLayoutManager line;
     private GridLayoutManager line2;
     private OrderFenDianListAdapter orderFenDianListAdapter;
+    private List<proDdEditBean> proDdEditBeans;
 
     @Override
     protected int setthislayout() {
@@ -145,6 +148,9 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
     }
 
     private void showShare() {
+
+        proDdFdX();
+
         Wechat.ShareParams sp = new Wechat.ShareParams();
         //微信分享网页的参数严格对照列表中微信分享网页的参数要求
         sp.setImageData(getBitmapFromView(llShare));
@@ -206,8 +212,8 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                         });
                     }
 
-                    final List<proDdEditBean> proDdEditBeans = proDdEditBean.arrayproDdEditBeanFromData(pro_dd_edit);
-                    if (proDdEditBeans.isEmpty()){
+                    proDdEditBeans = proDdEditBean.arrayproDdEditBeanFromData(pro_dd_edit);
+                    if (proDdEditBeans.isEmpty()) {
                         return;
                     }
                     runOnUiThread(new Runnable() {
@@ -305,7 +311,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
 
                             final List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
 
-                            if (proDdPmBeans.isEmpty()){
+                            if (proDdPmBeans.isEmpty()) {
                                 return;
                             }
 
@@ -378,7 +384,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                             final List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
                             orderFenDianListAdapter = new OrderFenDianListAdapter(ShareOrderActivity.this, proDdFdFdBeans, tvFD);
 
-                            if (proDdFdFdBeans.isEmpty()){
+                            if (proDdFdFdBeans.isEmpty()) {
                                 return;
                             }
 
@@ -391,6 +397,8 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                                     }
                                 });
                             }
+
+
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -417,5 +425,48 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
             }
         });
     }
+
+
+    private void proDdFdX() {
+        App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
+            @Override
+            public void doSth() {
+                try {
+
+                    Log.e("ShareOrderActivity", getIntent().getStringExtra("strBH"));
+
+                    final String pro_dd_fd = DBService.doConnection("pro_dd_fx4"
+                            , (String) SpUtil.get(context, "MC", "")
+                            , (String) SpUtil.get(context, "androidIMEI", "")
+                            , UrlUtils.BBH
+                            , getIntent().getStringExtra("strBH"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    List<proddfxx> proddfxxes = proddfxx.arrayproddfxxFromData(pro_dd_fd);
+
+                    if (!proddfxxes.isEmpty()) {
+                        CommomDialog.showMessage(context, proddfxxes.get(0).getErr());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                            CommomDialog.showMessage(context, "链接异常，请检查链接信息");
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 
 }

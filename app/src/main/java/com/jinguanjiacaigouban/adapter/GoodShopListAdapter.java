@@ -20,7 +20,6 @@ import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.activity.GoodShopActivity;
 import com.jinguanjiacaigouban.activity.GoodShopEditActivity;
 import com.jinguanjiacaigouban.bean.proCsDeleteBean;
-import com.jinguanjiacaigouban.bean.proPmCopyBean;
 import com.jinguanjiacaigouban.bean.proPmSelectBean;
 import com.jinguanjiacaigouban.db.DBService;
 import com.jinguanjiacaigouban.utils.EasyToast;
@@ -170,7 +169,11 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
             @Override
             public void doSth() {
                 try {
-                    String pro_cs_delete = DBService.doConnection("pro_pm_delete", (String) SpUtil.get(mContext, "MC", ""), androidIMEI, UrlUtils.BBH, strBH, strMC);
+                    String pro_cs_delete = DBService.doConnection("pro_pm_delete"
+                            , (String) SpUtil.get(mContext, "MC", "")
+                            , androidIMEI
+                            , UrlUtils.BBH
+                            , strBH, strMC);
                     if (TextUtils.isEmpty(pro_cs_delete)) {
                         mContext.runOnUiThread(new Runnable() {
                             @Override
