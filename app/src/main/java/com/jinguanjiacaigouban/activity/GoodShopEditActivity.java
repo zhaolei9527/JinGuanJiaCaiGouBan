@@ -569,6 +569,12 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                     final List<proPmInsertBean> proPmInsertBeans = proPmInsertBean.arrayproPmInsertBeanFromData(pro_pm_update);
 
+                    if (proPmInsertBeans.isEmpty()){
+                        return;
+                    }
+
+
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -656,6 +662,12 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                     }
 
                     final List<proPmSmBean> proPmSmBeans = proPmSmBean.arrayproPmSmBeanFromData(pro_pm_sm);
+
+                    if (proPmSmBeans.isEmpty()){
+                        return;
+                    }
+
+
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -709,6 +721,11 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                         @Override
                         public void run() {
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
+
+                            if (proPymBeans.isEmpty()){
+                                return;
+                            }
+
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et.setText(proPymBeans.get(0).getPYM());
                             } else {
@@ -755,6 +772,11 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                     }
 
                     final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
+
+                    if (proCsAddBeans.isEmpty()){
+                        return;
+                    }
+
 
                     mHandler.post(new Runnable() {
                         @Override
@@ -941,7 +963,9 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                     }
                     final List<profl1Bean> profl1Beans = profl1Bean.arrayprofl1BeanFromData(pro_cs_edit);
 
-
+                    if (profl1Beans.isEmpty()){
+                        return;
+                    }
                     if (!TextUtils.isEmpty(profl1Beans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
                             @Override

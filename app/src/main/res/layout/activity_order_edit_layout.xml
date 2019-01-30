@@ -546,6 +546,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
+                                    android:imeOptions="actionDone"
                                     android:id="@+id/et_fd"
                                     android:layout_width="@dimen/x90"
                                     android:layout_height="@dimen/y23"

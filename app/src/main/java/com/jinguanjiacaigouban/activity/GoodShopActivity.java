@@ -226,6 +226,11 @@ public class GoodShopActivity extends BaseActivity {
 
                     final List<proPmSelectBean> proPmSelectBeans = proPmSelectBean.arrayproPmSelectBeanFromData(pro_cs_select);
 
+                    adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans, tvCont);
+
+                    if (proPmSelectBeans.isEmpty()){
+                        return;
+                    }
 
                     if (!TextUtils.isEmpty(proPmSelectBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
@@ -241,7 +246,6 @@ public class GoodShopActivity extends BaseActivity {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans, tvCont);
                             rvGonghuoshangList.setAdapter(adapter);
                             tvCont.setText("总计：" + proPmSelectBeans.size());
                             if (!TextUtils.isEmpty(mc)) {

@@ -161,6 +161,12 @@ public class GongHuoShangActivity extends BaseActivity {
                     }
                     final ArrayList<proCsSelectBean> proCsSelectBeans = (ArrayList<proCsSelectBean>) proCsSelectBean.arrayproCsSelectBeanFromData(pro_cs_select);
 
+                    adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans, tvCont);
+
+                    if (proCsSelectBeans.isEmpty()){
+                        return;
+                    }
+
                     if (!TextUtils.isEmpty(proCsSelectBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -173,7 +179,6 @@ public class GongHuoShangActivity extends BaseActivity {
                     }else {
                         rvGonghuoshangList.setVisibility(View.VISIBLE);
 
-                        adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans, tvCont);
 
                         mHandler.post(new Runnable() {
                             @Override

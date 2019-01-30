@@ -413,6 +413,12 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                     final List<proDdEditBean> proDdEditBeans = proDdEditBean.arrayproDdEditBeanFromData(pro_dd_edit);
 
+
+                    if (proDdEditBeans.isEmpty()){
+                        return;
+                    }
+
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -493,8 +499,14 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             }
                         });
                     }
+                    proYgList = new ArrayList<>();
 
                     final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+
+
+                    if (proYgBeans.isEmpty()){
+                        return;
+                    }
 
                     if (!TextUtils.isEmpty(proYgBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
@@ -506,7 +518,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         });
                     }
 
-                    proYgList = new ArrayList<>();
 
                     for (int i = 0; i < proYgBeans.size(); i++) {
                         proYgList.add(proYgBeans.get(i).getMC());
@@ -553,7 +564,15 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         });
                     }
 
+                    proFDList = new ArrayList<>();
+                    proFDBHList = new ArrayList<>();
+
                     final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
+
+
+                    if (proYgBeans.isEmpty()){
+                        return;
+                    }
 
                     if (!TextUtils.isEmpty(proYgBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
@@ -567,8 +586,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
 
 
-                    proFDList = new ArrayList<>();
-                    proFDBHList = new ArrayList<>();
+
 
 
                     for (int i = 0; i < proYgBeans.size(); i++) {
@@ -638,6 +656,10 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                     final List<proFdlxFdBean> proFdlxFdBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
 
+                    if (proFdlxFdBeans.isEmpty()){
+                        Log.e("OrderEditActivity", "内容为空");
+                        return;
+                    }
 
                     if (!TextUtils.isEmpty(proFdlxFdBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
@@ -648,7 +670,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             }
                         });
                     }
-
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -729,6 +750,7 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
         if (resultCode == 205 && requestCode == 205) {
 
             StringBuffer stringBuffer = new StringBuffer();
+
             for (int i = 0; i < orderFenDianListAdapter.getDatas().size(); i++) {
                 if (TextUtils.isEmpty(orderFenDianListAdapter.getDatas().get(i).getErr())) {
                     if (i == 0) {
@@ -778,6 +800,11 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     }
 
                     final List<proDdInsertBean> proDdInsertBeans = proDdInsertBean.arrayproDdInsertBeanFromData(pro_dd_pm_inser);
+
+                    if (proDdInsertBeans.isEmpty()){
+                        return;
+                    }
+
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -854,6 +881,11 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
 
                     final List<proDdInsertBean> proDdInsertBeans = proDdInsertBean.arrayproDdInsertBeanFromData(pro_dd_insert);
 
+
+                    if (proDdInsertBeans.isEmpty()){
+                        return;
+                    }
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -906,6 +938,11 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                     }
 
                     final List<proDdInsertBean> proDdInsertBeans = proDdInsertBean.arrayproDdInsertBeanFromData(pro_dd_insert);
+
+                    if (proDdInsertBeans.isEmpty()){
+                        return;
+                    }
+
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -967,6 +1004,13 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                         public void run() {
                             final List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
 
+
+                            adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans, tvCont, etSearchHonghuoshang, imgSelelteGonghuoshang);
+
+                            if (proDdPmBeans.isEmpty()){
+                                return;
+                            }
+
                             if (!TextUtils.isEmpty(proDdPmBeans.get(0).getErr())) {
                                 mHandler.post(new Runnable() {
                                     @Override
@@ -977,10 +1021,8 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                                 });
                             }
 
-
                             tvCont.setText("商品: " + proDdPmBeans.size());
                             // 倒序排列
-                            adapter = new OrderGoodsListAdapter(OrderEditActivity.this, proDdPmBeans, tvCont, etSearchHonghuoshang, imgSelelteGonghuoshang);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -1050,19 +1092,22 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             final List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
 
 
-                            if (!TextUtils.isEmpty(proDdFdFdBeans.get(0).getErr())) {
-                                mHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        CommomDialog.showMessage(context, proDdFdFdBeans.get(0).getErr());
-                                        return;
-                                    }
-                                });
+                            if (!proDdFdFdBeans.isEmpty()){
+                                if (!TextUtils.isEmpty(proDdFdFdBeans.get(0).getErr())) {
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            CommomDialog.showMessage(context, proDdFdFdBeans.get(0).getErr());
+                                            return;
+                                        }
+                                    });
+                                }
                             }
+
+                            orderFenDianListAdapter = new OrderFenDianListAdapter(OrderEditActivity.this, proDdFdFdBeans, tvFdCont);
 
                             tvFdCont.setText("分店: " + proDdFdFdBeans.size());
 
-                            orderFenDianListAdapter = new OrderFenDianListAdapter(OrderEditActivity.this, proDdFdFdBeans, tvFdCont);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {

@@ -207,7 +207,9 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                     }
 
                     final List<proDdEditBean> proDdEditBeans = proDdEditBean.arrayproDdEditBeanFromData(pro_dd_edit);
-
+                    if (proDdEditBeans.isEmpty()){
+                        return;
+                    }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -303,7 +305,9 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
 
                             final List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
 
-
+                            if (proDdPmBeans.isEmpty()){
+                                return;
+                            }
 
                             if (!TextUtils.isEmpty(proDdPmBeans.get(0).getErr())) {
                                 mHandler.post(new Runnable() {
@@ -372,6 +376,12 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                         @Override
                         public void run() {
                             final List<proDdFdFdBean> proDdFdFdBeans = proDdFdFdBean.arrayproDdFdFdBeanFromData(pro_dd_fd);
+                            orderFenDianListAdapter = new OrderFenDianListAdapter(ShareOrderActivity.this, proDdFdFdBeans, tvFD);
+
+                            if (proDdFdFdBeans.isEmpty()){
+                                return;
+                            }
+
                             if (!TextUtils.isEmpty(proDdFdFdBeans.get(0).getErr())) {
                                 mHandler.post(new Runnable() {
                                     @Override
@@ -381,7 +391,6 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                                     }
                                 });
                             }
-                            orderFenDianListAdapter = new OrderFenDianListAdapter(ShareOrderActivity.this, proDdFdFdBeans, tvFD);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {

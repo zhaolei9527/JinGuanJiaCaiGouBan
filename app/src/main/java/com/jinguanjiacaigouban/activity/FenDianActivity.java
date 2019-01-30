@@ -136,6 +136,13 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                     final List<proFdlxSelectBean> proFdlxSelectBeans = proFdlxSelectBean.arrayproFdlxSelectBeanFromData(pro_fdlx_select);
 
 
+                    adapter = new FenDianListAdapter(FenDianActivity.this, proFdlxSelectBeans, tvCont);
+
+                    if (proFdlxSelectBeans.isEmpty()){
+                        return;
+                    }
+
+
                     if (!TextUtils.isEmpty(proFdlxSelectBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -147,7 +154,6 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                     }
 
 
-                    adapter = new FenDianListAdapter(FenDianActivity.this, proFdlxSelectBeans, tvCont);
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {

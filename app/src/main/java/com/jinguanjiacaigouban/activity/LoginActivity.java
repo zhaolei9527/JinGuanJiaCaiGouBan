@@ -363,6 +363,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         final List<proLoginBean> proLoginBeans = proLoginBean.arrayproLoginBeanFromData(pro_login);
 
 
+                        if (proLoginBeans.isEmpty()){
+                            return;
+                        }
+
                         if (!TextUtils.isEmpty(proLoginBeans.get(0).getErr())) {
                             mHandler.post(new Runnable() {
                                 @Override

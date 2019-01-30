@@ -139,6 +139,10 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
 
                     final List<proPassBean> proPassBeans = proPassBean.arrayproPassBeanFromData(pro_pass);
 
+                    if (proPassBeans.isEmpty()){
+                        return;
+                    }
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

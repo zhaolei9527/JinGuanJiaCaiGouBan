@@ -165,6 +165,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/et_MC"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -210,6 +212,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/et_JM"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"

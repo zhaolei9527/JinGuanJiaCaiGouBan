@@ -96,6 +96,7 @@
                     android:textSize="@dimen/x11" />
 
                 <EditText
+                    android:imeOptions="actionDone"
                     android:id="@+id/et_GHS"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/y23"
@@ -103,7 +104,6 @@
                     android:layout_marginRight="@dimen/x10"
                     android:layout_weight="1"
                     android:background="@drawable/bg_gonghuoshang_edit"
-                    android:imeOptions="actionSearch"
                     android:paddingLeft="@dimen/x5"
                     android:singleLine="true"
                     android:textColor="@color/text333"
@@ -147,6 +147,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/yiji"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -210,6 +212,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/erji"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -273,6 +277,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/sanji"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -457,6 +463,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/et_JM"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -506,6 +514,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/et_TYM"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -554,6 +564,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/et_TM"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -611,6 +623,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/tv_CGDJ"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -662,6 +676,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/tv_YSDJ"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -712,6 +728,8 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/tv_DDSL"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y23"
@@ -762,6 +780,8 @@
                         android:background="@drawable/bg_gonghuoshang_edit">
 
                         <EditText
+                            android:imeOptions="actionDone"
+
                             android:id="@+id/et_beizhu"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/y80"

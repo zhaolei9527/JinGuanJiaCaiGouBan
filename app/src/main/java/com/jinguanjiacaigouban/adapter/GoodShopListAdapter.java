@@ -92,7 +92,7 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
             public void onClick(View view) {
                 try {
                     ClipboardManager cm = (ClipboardManager) mContext.getSystemService(mContext.CLIPBOARD_SERVICE);
-                    cm.setText(datas.get(position).getXSNR() + "===" + datas.get(position).getXSNR2());
+                    cm.setText(datas.get(position).getMC());
                     EasyToast.showShort(mContext, "已复制到粘贴板");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -170,6 +170,11 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
                         });
                     } else {
                         List<proCsDeleteBean> proCsDeleteBeans = proCsDeleteBean.arrayproCsDeleteBeanFromData(pro_cs_delete);
+
+                        if (proCsDeleteBeans.isEmpty()){
+                            return;
+                        }
+
                         final String err = proCsDeleteBeans.get(0).getErr();
                         if (TextUtils.isEmpty(err)) {
                             mContext.runOnUiThread(new Runnable() {

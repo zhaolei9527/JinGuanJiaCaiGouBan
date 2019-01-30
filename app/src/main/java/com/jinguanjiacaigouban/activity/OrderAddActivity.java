@@ -263,6 +263,11 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
 
                     final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
 
+
+                    if (proYgBeans.isEmpty()){
+                        return;
+                    }
+
                     if (!TextUtils.isEmpty(proYgBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -379,7 +384,9 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
 
                     final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
 
-
+                    if (proCsAddBeans.isEmpty()){
+                        return;
+                    }
 
 
                     mHandler.post(new Runnable() {
@@ -433,6 +440,11 @@ public class OrderAddActivity extends BaseActivity implements View.OnClickListen
                     }
 
                     final List<proDdInsertBean> proDdInsertBeans = proDdInsertBean.arrayproDdInsertBeanFromData(pro_dd_insert);
+
+
+                    if (proDdInsertBeans.isEmpty()){
+                        return;
+                    }
 
                     runOnUiThread(new Runnable() {
                         @Override

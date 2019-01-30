@@ -231,6 +231,12 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
 
                     } else {
                         List<proCsDeleteBean> proCsDeleteBeans = proCsDeleteBean.arrayproCsDeleteBeanFromData(pro_cs_delete);
+
+                        if (proCsDeleteBeans.isEmpty()){
+                            return;
+                        }
+
+
                         final String err = proCsDeleteBeans.get(0).getErr();
                         if (TextUtils.isEmpty(err)) {
                             mContext.runOnUiThread(new Runnable() {
@@ -294,6 +300,11 @@ public class OrderGoodsListAdapter extends RecyclerView.Adapter<OrderGoodsListAd
                     }
 
                     final List<proDdInsertBean> proDdInsertBeans = proDdInsertBean.arrayproDdInsertBeanFromData(pro_dd_insert);
+
+                    if (proDdInsertBeans.isEmpty()){
+                        return;
+                    }
+
 
                     mContext.runOnUiThread(new Runnable() {
                         @Override

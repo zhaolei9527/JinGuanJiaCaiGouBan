@@ -131,6 +131,11 @@ public class FenDianListAdapter extends RecyclerView.Adapter<FenDianListAdapter.
                         });
                     } else {
                         List<proCsDeleteBean> proCsDeleteBeans = proCsDeleteBean.arrayproCsDeleteBeanFromData(pro_cs_delete);
+
+                        if (proCsDeleteBeans.isEmpty()){
+                            return;
+                        }
+
                         final String err = proCsDeleteBeans.get(0).getErr();
                         if (TextUtils.isEmpty(err)) {
                             mContext.runOnUiThread(new Runnable() {

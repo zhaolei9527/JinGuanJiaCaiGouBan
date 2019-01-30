@@ -244,6 +244,11 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         });
                     }
                     final List<proCsInsertBean> proCsInsertBeans = proCsInsertBean.arrayproCsInsertBeanFromData(pro_cs_edit);
+
+                    if (proCsInsertBeans.isEmpty()) {
+                        return;
+                    }
+
                     if (TextUtils.isEmpty(proCsInsertBeans.get(0).getErr().toString().trim())) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -304,14 +309,11 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         @Override
                         public void run() {
 
-
-
-
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
 
-
-
-
+                            if (proPymBeans.isEmpty()) {
+                                return;
+                            }
 
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
                                 et.setText(proPymBeans.get(0).getPYM());
@@ -361,6 +363,11 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                         });
                     }
                     final List<proFdlxEditBean> proFdlxEditBeans = proFdlxEditBean.arrayproFdlxEditBeanFromData(pro_fdlx_edit);
+
+                    if (proFdlxEditBeans.isEmpty()) {
+                        return;
+                    }
+
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -420,7 +427,11 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
 
                     final List<proFdlxFdBean> proFdlxSelectBeans = proFdlxFdBean.arrayproFdlxFdBeanFromData(pro_fdlx_fd);
 
+                    adapter = new FenDianEditListAdapter(FenDianEditActivity.this, proFdlxSelectBeans, tvCont);
 
+                    if (proFdlxSelectBeans.isEmpty()) {
+                        return;
+                    }
 
                     if (!TextUtils.isEmpty(proFdlxSelectBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
@@ -431,11 +442,6 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                             }
                         });
                     }
-
-
-
-
-                    adapter = new FenDianEditListAdapter(FenDianEditActivity.this, proFdlxSelectBeans, tvCont);
 
                     mHandler.post(new Runnable() {
                         @Override
@@ -483,6 +489,11 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
+
+                    if (proCsAddBeans.isEmpty()) {
+                        return;
+                    }
+
 
                     if (!TextUtils.isEmpty(proCsAddBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {

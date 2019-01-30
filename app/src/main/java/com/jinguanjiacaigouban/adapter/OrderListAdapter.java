@@ -173,6 +173,13 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                         });
                     } else {
                         List<proCsDeleteBean> proCsDeleteBeans = proCsDeleteBean.arrayproCsDeleteBeanFromData(pro_cs_delete);
+
+
+                        if (proCsDeleteBeans.isEmpty()){
+                            return;
+                        }
+
+
                         final String err = proCsDeleteBeans.get(0).getErr();
                         if (TextUtils.isEmpty(err)) {
                             mContext.runOnUiThread(new Runnable() {
@@ -322,6 +329,11 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                         public void run() {
                             final List<proDdPmBean> proDdPmBeans = proDdPmBean.arrayproDdPmBeanFromData(pro_dd_pm);
 
+
+                            if (proDdPmBeans.isEmpty()){
+                                return;
+                            }
+
                             if (!TextUtils.isEmpty(proDdPmBeans.get(0).getErr())) {
                                 mContext.runOnUiThread(new Runnable() {
                                     @Override
@@ -378,6 +390,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
 
                     final String pro_dd_fd = DBService.doConnection("pro_dd_fd", key[0]);
 
+
+
+
                     mContext.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -398,7 +413,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                         @Override
                         public void run() {
                             final List<proDdFdBean> proDdFdBeans = proDdFdBean.arrayproDdFdBeanFromData(pro_dd_fd);
-
+                            if (proDdFdBeans.isEmpty()){
+                                return;
+                            }
 
                             if (!TextUtils.isEmpty(proDdFdBeans.get(0).getErr())) {
                                 mContext.runOnUiThread(new Runnable() {

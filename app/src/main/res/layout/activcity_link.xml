@@ -94,6 +94,8 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:imeOptions="actionDone"
+
                         android:id="@+id/tv_Link_name"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -161,6 +163,8 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:imeOptions="actionDone"
+
                         android:id="@+id/et_Service_IP"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -227,6 +231,8 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:imeOptions="actionDone"
+
                         android:id="@+id/et_Service_Host"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -294,6 +300,8 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:imeOptions="actionDone"
+
                         android:id="@+id/et_Service_username"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -360,6 +368,8 @@
                         android:textSize="@dimen/x12" />
 
                     <EditText
+                        android:imeOptions="actionDone"
+
                         android:id="@+id/et_Service_pwd"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/y33"
@@ -522,6 +532,8 @@
                         android:textColor="@color/text333" />
 
                     <EditText
+                        android:imeOptions="actionDone"
+
                         android:id="@+id/et_app_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
