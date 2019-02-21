@@ -184,6 +184,21 @@ public class Utils {
     }
 
     /**
+     * 显示正在加载动画
+     *
+     * @param context
+     */
+    public static Dialog showLoadingShare(Context context) {
+        //创建Dialog并传递style文件
+        final Dialog dialog = new BackDiaLog(context, R.style.dialog);
+        // 设置它的ContentView
+        dialog.setCanceledOnTouchOutside(false);// 设置点击屏幕Dialog不消失
+        dialog.setContentView(R.layout.dialog_loading_share_layout);
+        return dialog;
+    }
+
+
+    /**
      * 手机号码，正则表达式
      */
 

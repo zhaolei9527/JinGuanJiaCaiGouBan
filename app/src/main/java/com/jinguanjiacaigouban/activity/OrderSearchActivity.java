@@ -172,10 +172,10 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-            getdata();
-            if (adapter!=null){
-                adapter.notifyDataSetChanged();
-            }
+        getdata();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void getdata() {
@@ -304,7 +304,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                     final List<proCdBean> proCdBeans = proCdBean.arrayproCdBeanFromData(pro_cd);
                     adapter = new OrderListAdapter(OrderSearchActivity.this, proCdBeans);
 
-                    if (proCdBeans.isEmpty()){
+                    if (proCdBeans.isEmpty()) {
                         return;
                     }
 
@@ -312,8 +312,17 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
+                                tvCont.setText("总计：0");
+                                rvOrderList.setVisibility(View.GONE);
                                 CommomDialog.showMessage(context, proCdBeans.get(0).getErr());
                                 return;
+                            }
+                        });
+                    } else {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                rvOrderList.setVisibility(View.VISIBLE);
                             }
                         });
                     }
@@ -380,7 +389,7 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                     proYgList = new ArrayList<>();
 
                     final List<proYgBean> proYgBeans = proYgBean.arrayproYgBeanFromData(pro_yg);
-                    if (proYgBeans.isEmpty()){
+                    if (proYgBeans.isEmpty()) {
                         return;
                     }
 

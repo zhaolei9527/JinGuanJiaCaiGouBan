@@ -91,6 +91,7 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
     private GridLayoutManager line2;
     private OrderFenDianListAdapter orderFenDianListAdapter;
     private List<proDdEditBean> proDdEditBeans;
+    private Dialog dialog1;
 
     @Override
     protected int setthislayout() {
@@ -149,7 +150,6 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
 
     private void showShare() {
 
-
         Wechat.ShareParams sp = new Wechat.ShareParams();
         //微信分享网页的参数严格对照列表中微信分享网页的参数要求
         sp.setImageData(getBitmapFromView(llShare));
@@ -160,7 +160,16 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
         wechat.setPlatformActionListener(new PlatformActionListener() {
             @Override
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                proDdFdX();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog1 = Utils.showLoadingShare(context);
+                        dialog1.show();
+                        proDdFdX();
+                    }
+                });
+
             }
 
             @Override
@@ -216,6 +225,12 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                     if (proDdEditBeans.isEmpty()) {
                         return;
                     }
+
+
+                    if (!TextUtils.isEmpty(proDdEditBeans.get(0).getErr())) {
+                        CommomDialog.showMessage(context, proDdEditBeans.get(0).getErr());
+                    }
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -433,6 +448,8 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
             public void doSth() {
                 try {
 
+                    dialog1.dismiss();
+
                     Log.e("ShareOrderActivity", getIntent().getStringExtra("strBH"));
 
                     final String pro_dd_fd = DBService.doConnection("pro_dd_fx4"
@@ -447,10 +464,17 @@ public class ShareOrderActivity extends BaseActivity implements View.OnClickList
                         }
                     });
 
-                    List<proddfxx> proddfxxes = proddfxx.arrayproddfxxFromData(pro_dd_fd);
+                    final List<proddfxx> proddfxxes = proddfxx.arrayproddfxxFromData(pro_dd_fd);
 
                     if (!proddfxxes.isEmpty()) {
-                        CommomDialog.showMessage(context, proddfxxes.get(0).getErr());
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommomDialog.showMessage(context, proddfxxes.get(0).getErr());
+                            }
+                        });
+
                     }
 
                 } catch (Exception e) {

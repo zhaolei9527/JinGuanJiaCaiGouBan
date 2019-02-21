@@ -2,12 +2,14 @@ package com.jinguanjiacaigouban.activity;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -45,10 +47,13 @@ import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -334,6 +339,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                 if (!TextUtils.isEmpty(isclear)) {
                     isIMAGE = "1";
                 }
+
 
                 dialog.show();
 
@@ -706,6 +712,9 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                             InputStream in = pro_pm_edit.getBinaryStream("col14");
 
                             bitmap = BitmapFactory.decodeStream(in);
+
+                            pic = saveBitmap(context, bitmap);
+
                             bd = new BitmapDrawable(bitmap);
                             bd2 = new BitmapDrawable(bitmap);
 
@@ -715,6 +724,7 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
                                 public void run() {
                                     try {
                                         if (!TextUtils.isEmpty(err)) {
+                                            dialog.dismiss();
                                             CommomDialog.showMessage(context, err);
                                             return;
                                         }
@@ -1171,4 +1181,55 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
         super.onDestroy();
         System.gc();
     }
+
+
+    private static final String SD_PATH = "/sdcard/dskqxt/pic/";
+    private static final String IN_PATH = "/dskqxt/pic/";
+
+    /**
+     * 随机生产文件名
+     *
+     * @return
+     */
+    private static String generateFileName() {
+        return UUID.randomUUID().toString();
+    }
+
+    /**
+     * 保存bitmap到本地
+     *
+     * @param context
+     * @param mBitmap
+     * @return
+     */
+    public static String saveBitmap(Context context, Bitmap mBitmap) {
+        String savePath;
+        File filePic;
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            savePath = SD_PATH;
+        } else {
+            savePath = context.getApplicationContext().getFilesDir()
+                    .getAbsolutePath()
+                    + IN_PATH;
+        }
+        try {
+            filePic = new File(savePath + generateFileName() + ".jpg");
+            if (!filePic.exists()) {
+                filePic.getParentFile().mkdirs();
+                filePic.createNewFile();
+            }
+            FileOutputStream fos = new FileOutputStream(filePic);
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+
+        return filePic.getAbsolutePath();
+    }
+
 }

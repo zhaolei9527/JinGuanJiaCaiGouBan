@@ -20,6 +20,7 @@ import com.jinguanjiacaigouban.utils.SpUtil;
 import com.jinguanjiacaigouban.utils.UrlUtils;
 import com.jinguanjiacaigouban.utils.Utils;
 import com.jinguanjiacaigouban.view.CommomDialog;
+import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -156,14 +157,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(context, GoodShopActivity.class));
                 break;
             case R.id.ll_setting:
-                dialog.show();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                        CommomDialog.showMessage(context, "已是最新版本");
-                    }
-                }, 1200);
+                /***** 检查更新 *****/
+                Beta.checkUpgrade();
                 break;
             default:
                 break;

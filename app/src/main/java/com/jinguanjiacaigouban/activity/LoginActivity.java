@@ -367,16 +367,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             return;
                         }
 
-                        if (!TextUtils.isEmpty(proLoginBeans.get(0).getErr())) {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    CommomDialog.showMessage(context, proLoginBeans.get(0).getErr());
-                                    return;
-                                }
-                            });
-                        }
-
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {

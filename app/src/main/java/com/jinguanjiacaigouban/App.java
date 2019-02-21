@@ -34,7 +34,7 @@ public class App extends MultiDexApplication {
         this.context = this;
         MobSDK.init(this);
         MultiDex.install(this);
-        Bugly.init(getApplicationContext(), "e4d6b083e4", false);
+        Bugly.init(getApplicationContext(), "04de89a430", false);
         pausableThreadPoolExecutor = new PausableThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS, new PriorityBlockingQueue<Runnable>());
     }
 

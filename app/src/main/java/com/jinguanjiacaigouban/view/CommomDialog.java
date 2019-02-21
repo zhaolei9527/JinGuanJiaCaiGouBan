@@ -124,13 +124,13 @@ public class CommomDialog extends Dialog implements View.OnClickListener {
 
         Utils.showSoundWAV(context, R.raw.faile);
 
-
         new CommomDialog(context, R.style.dialog, title, new CommomDialog.OnCloseListener() {
             @Override
             public void onClick(Dialog dialog, final boolean confirm) {
                 dialog.dismiss();
             }
         }).setTitle("提示").show();
+
     }
 
 }

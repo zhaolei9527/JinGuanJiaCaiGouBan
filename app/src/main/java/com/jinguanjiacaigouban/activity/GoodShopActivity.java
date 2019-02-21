@@ -228,7 +228,7 @@ public class GoodShopActivity extends BaseActivity {
 
                     adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans, tvCont);
 
-                    if (proPmSelectBeans.isEmpty()){
+                    if (proPmSelectBeans.isEmpty()) {
                         return;
                     }
 
@@ -236,8 +236,17 @@ public class GoodShopActivity extends BaseActivity {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
+                                rvGonghuoshangList.setVisibility(View.GONE);
+                                tvCont.setText("总计：0");
                                 CommomDialog.showMessage(context, proPmSelectBeans.get(0).getErr());
                                 return;
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                rvGonghuoshangList.setVisibility(View.VISIBLE);
                             }
                         });
                     }
@@ -256,7 +265,8 @@ public class GoodShopActivity extends BaseActivity {
                                         EasyToast.showShort(context, adapter.getDatas().get(i).getMC());
                                     }
                                 }
-                            }                        }
+                            }
+                        }
                     });
                 } catch (Exception e) {
                     e.printStackTrace();

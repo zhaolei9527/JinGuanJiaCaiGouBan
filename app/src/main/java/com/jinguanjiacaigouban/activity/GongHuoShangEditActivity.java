@@ -650,14 +650,6 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                                 }
                             }
                         });
-                    } else {
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialog.dismiss();
-                                CommomDialog.showMessage(context, proCsInsertBeans.get(0).getErr().toString().trim());
-                            }
-                        });
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
