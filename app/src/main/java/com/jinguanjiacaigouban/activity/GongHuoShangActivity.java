@@ -163,11 +163,20 @@ public class GongHuoShangActivity extends BaseActivity {
 
                     adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans, tvCont);
 
-                    if (proCsSelectBeans.isEmpty()) {
-                        rvGonghuoshangList.setVisibility(View.GONE);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (proCsSelectBeans.isEmpty()) {
+                                rvGonghuoshangList.setVisibility(View.GONE);
+                                return;
+                            } else {
+                                rvGonghuoshangList.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
+
+                    if (proCsSelectBeans.isEmpty()){
                         return;
-                    } else {
-                        rvGonghuoshangList.setVisibility(View.VISIBLE);
                     }
 
                     if (!TextUtils.isEmpty(proCsSelectBeans.get(0).getErr())) {
@@ -179,7 +188,7 @@ public class GongHuoShangActivity extends BaseActivity {
                                 return;
                             }
                         });
-                    }else {
+                    } else {
                         rvGonghuoshangList.setVisibility(View.VISIBLE);
 
 

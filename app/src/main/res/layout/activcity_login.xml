@@ -314,7 +314,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="电话:18642275921"
+                android:text="电话:13050086858"
                 android:textColor="@color/white"
                 android:textSize="@dimen/x11" />
 
