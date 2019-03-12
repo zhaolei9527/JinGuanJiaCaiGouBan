@@ -628,12 +628,11 @@
                 <View
                     android:id="@+id/v_no"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></View>
+                    android:layout_height="match_parent"></View>
 
             </FrameLayout>
 
         </android.support.v4.widget.NestedScrollView>
-
 
         <Button
             android:id="@+id/btn_add_good"

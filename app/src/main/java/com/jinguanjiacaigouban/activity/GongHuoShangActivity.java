@@ -120,6 +120,7 @@ public class GongHuoShangActivity extends BaseActivity {
         if (requestCode == 200) {
         } else if (resultCode == 800) {
             mc = data.getStringExtra("MC");
+            EasyToast.showShort(context, mc);
         }
     }
 
@@ -159,6 +160,7 @@ public class GongHuoShangActivity extends BaseActivity {
                             }
                         });
                     }
+
                     final ArrayList<proCsSelectBean> proCsSelectBeans = (ArrayList<proCsSelectBean>) proCsSelectBean.arrayproCsSelectBeanFromData(pro_cs_select);
 
                     adapter = new GongHuoShangListAdapter(GongHuoShangActivity.this, proCsSelectBeans, tvCont);
@@ -175,7 +177,7 @@ public class GongHuoShangActivity extends BaseActivity {
                         }
                     });
 
-                    if (proCsSelectBeans.isEmpty()){
+                    if (proCsSelectBeans.isEmpty()) {
                         return;
                     }
 

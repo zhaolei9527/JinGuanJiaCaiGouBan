@@ -218,6 +218,8 @@ public class FenDianEditActivity extends BaseActivity implements View.OnClickLis
             return false;
         }
 
+        setResult(800, new Intent().putExtra("MC", Mc));
+
         return true;
     }
 

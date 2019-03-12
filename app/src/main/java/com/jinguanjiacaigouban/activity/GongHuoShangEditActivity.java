@@ -87,6 +87,9 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
     ArrayList<String> profl3list = new ArrayList<>();
     ArrayList<String> addresslist = new ArrayList<>();
 
+    private String MC;
+
+
     @Override
     protected int setthislayout() {
         return R.layout.activcity_gonghuoshang_edit;
@@ -176,7 +179,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
 
                     final List<proCsAddBean> proCsAddBeans = proCsAddBean.arrayproCsAddBeanFromData(pro_cs_add);
 
-                    if (proCsAddBeans.isEmpty()){
+                    if (proCsAddBeans.isEmpty()) {
                         return;
                     }
 
@@ -231,7 +234,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                     }
                     final List<proCsEditBean> proCsEditBeans = proCsEditBean.arrayproCsEditBeanFromData(pro_cs_edit);
 
-                    if (proCsEditBeans.isEmpty()){
+                    if (proCsEditBeans.isEmpty()) {
                         return;
                     }
 
@@ -304,7 +307,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
             case R.id.ll_Save_GongHuoShang:
                 if (checkMessage()) {
 
-                    setResult(800, new Intent().putExtra("MC", et_MC.getText().toString()));
+                    MC = et_MC.getText().toString().trim();
 
                     if (!TextUtils.isEmpty(type)) {
                         getProCsData("pro_cs_update"
@@ -342,7 +345,9 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
 
                 break;
             case R.id.fl_back:
-                setResult(800, new Intent().putExtra("MC", et_MC.getText().toString()));
+
+                setResult(800, new Intent().putExtra("MC", MC));
+
                 finish();
                 break;
             case R.id.ll_pro_fl1:
@@ -418,10 +423,9 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                     }
                     final List<profl1Bean> profl1Beans = profl1Bean.arrayprofl1BeanFromData(pro_cs_edit);
 
-                    if (profl1Beans.isEmpty()){
+                    if (profl1Beans.isEmpty()) {
                         return;
                     }
-
 
 
                     if (!TextUtils.isEmpty(profl1Beans.get(0).getErr())) {
@@ -556,10 +560,9 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         public void run() {
                             List<proPymBean> proPymBeans = proPymBean.arrayproPymBeanFromData(pro_pym);
 
-                            if (proPymBeans.isEmpty()){
+                            if (proPymBeans.isEmpty()) {
                                 return;
                             }
-
 
 
                             if (TextUtils.isEmpty(proPymBeans.get(0).getErr())) {
@@ -610,7 +613,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
                         });
                     }
                     final List<proCsInsertBean> proCsInsertBeans = proCsInsertBean.arrayproCsInsertBeanFromData(pro_cs_edit);
-                    if (proCsInsertBeans.isEmpty()){
+                    if (proCsInsertBeans.isEmpty()) {
                         return;
                     }
 
@@ -690,7 +693,7 @@ public class GongHuoShangEditActivity extends BaseActivity implements View.OnCli
 
                     final List<proCslxBean> proCslxBeans = proCslxBean.arrayproCslxBeanFromData(pro_cs_edit);
 
-                    if (proCslxBeans.isEmpty()){
+                    if (proCslxBeans.isEmpty()) {
                         return;
                     }
 

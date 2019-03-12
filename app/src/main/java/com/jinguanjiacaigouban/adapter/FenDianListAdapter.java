@@ -106,12 +106,19 @@ public class FenDianListAdapter extends RecyclerView.Adapter<FenDianListAdapter.
         holder.llEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, FenDianEditActivity.class)
-                        .putExtra("strBH", datas.get(position).getBH())
-                        .putExtra("type", "edit")
-                );
+                mContext.startActivityForResult(new Intent(mContext, FenDianEditActivity.class)
+                                .putExtra("strBH", datas.get(position).getBH())
+                                .putExtra("type", "edit")
+                        , 800);
             }
         });
+
+        if (datas.get(position).getErr().equals("1")) {
+            holder.cbCheck.setEnabled(true);
+            holder.cbCheck.setChecked(true);
+        } else {
+            holder.cbCheck.setChecked(false);
+        }
 
     }
 
@@ -132,7 +139,7 @@ public class FenDianListAdapter extends RecyclerView.Adapter<FenDianListAdapter.
                     } else {
                         List<proCsDeleteBean> proCsDeleteBeans = proCsDeleteBean.arrayproCsDeleteBeanFromData(pro_cs_delete);
 
-                        if (proCsDeleteBeans.isEmpty()){
+                        if (proCsDeleteBeans.isEmpty()) {
                             return;
                         }
 

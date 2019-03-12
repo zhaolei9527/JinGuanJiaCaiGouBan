@@ -713,10 +713,12 @@ public class GoodShopEditActivity extends BaseActivity implements View.OnClickLi
 
                             bitmap = BitmapFactory.decodeStream(in);
 
-                            pic = saveBitmap(context, bitmap);
+                            if (bitmap!=null){
+                                pic = saveBitmap(context, bitmap);
+                                bd = new BitmapDrawable(bitmap);
+                                bd2 = new BitmapDrawable(bitmap);
+                            }
 
-                            bd = new BitmapDrawable(bitmap);
-                            bd2 = new BitmapDrawable(bitmap);
 
                             mHandler.post(new Runnable() {
                                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

@@ -95,10 +95,10 @@ public class GoodShopListAdapter extends RecyclerView.Adapter<GoodShopListAdapte
                     cm.setText(datas.get(position).getMC());
                     EasyToast.showShort(mContext, "已复制到粘贴板");
 
-                    mContext.startActivity(new Intent(mContext,GoodShopEditActivity.class)
+                    mContext.startActivityForResult(new Intent(mContext,GoodShopEditActivity.class)
                             .putExtra("strBH",datas.get(position).getBH())
                             .putExtra("type","copy")
-                    );
+                    ,800);
 
                 } catch (Exception e) {
                     e.printStackTrace();

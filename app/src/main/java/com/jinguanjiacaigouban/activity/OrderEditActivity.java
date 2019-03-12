@@ -442,30 +442,30 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
                             }
 
                             if (TextUtils.isEmpty(proDdEditBeans.get(0).getCol0())) {
-                                tvBH.setText(proDdEditBeans.get(0).getCol1());
-                                strBH = proDdEditBeans.get(0).getCol1();
-
-                                proDdPm(strBH);
-                                proDdFd(strBH);
-
-                                tvSearchStartTime.setText(proDdEditBeans.get(0).getCol2());
-                                etSearchCGY.setText(proDdEditBeans.get(0).getCol3());
-                                etSearchHonghuoshang.setText(proDdEditBeans.get(0).getCol4());
-
-                                if ("现付".equals(proDdEditBeans.get(0).getCol5())) {
-                                    cbXianjie.setChecked(true);
-                                } else if ("月结".equals(proDdEditBeans.get(0).getCol5())) {
-                                    cbYuejie.setChecked(true);
-                                }
-
-                                etYue.setText(proDdEditBeans.get(0).getCol6());
-                                etTian.setText(proDdEditBeans.get(0).getCol7());
-                                etBeizhu.setText(proDdEditBeans.get(0).getCol8());
-
                                 vNo.setVisibility(View.GONE);
                             } else {
                                 vNo.setVisibility(View.VISIBLE);
                             }
+
+                            tvBH.setText(proDdEditBeans.get(0).getCol1());
+                            strBH = proDdEditBeans.get(0).getCol1();
+
+                            proDdPm(strBH);
+                            proDdFd(strBH);
+
+                            tvSearchStartTime.setText(proDdEditBeans.get(0).getCol2());
+                            etSearchCGY.setText(proDdEditBeans.get(0).getCol3());
+                            etSearchHonghuoshang.setText(proDdEditBeans.get(0).getCol4());
+
+                            if ("现付".equals(proDdEditBeans.get(0).getCol5())) {
+                                cbXianjie.setChecked(true);
+                            } else if ("月结".equals(proDdEditBeans.get(0).getCol5())) {
+                                cbYuejie.setChecked(true);
+                            }
+
+                            etYue.setText(proDdEditBeans.get(0).getCol6());
+                            etTian.setText(proDdEditBeans.get(0).getCol7());
+                            etBeizhu.setText(proDdEditBeans.get(0).getCol8());
 
                             etFd.setText("");
                             Utils.showSoundWAV(context, R.raw.susses);
@@ -488,7 +488,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             }
         });
     }
-
 
     public void getDataFCGY() {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
@@ -1147,7 +1146,6 @@ public class OrderEditActivity extends BaseActivity implements View.OnClickListe
             }
         });
     }
-
 
     @Override
     protected void onResume() {

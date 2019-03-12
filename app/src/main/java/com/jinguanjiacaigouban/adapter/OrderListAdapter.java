@@ -97,13 +97,12 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         });
 
         if (datas.get(position).getErr().equals("")) {
-            holder.llOrderFendian.setVisibility(View.GONE);
-            holder.llOrderGoods.setVisibility(View.GONE);
+            //holder.llOrderFendian.setVisibility(View.GONE);
+            //holder.llOrderGoods.setVisibility(View.GONE);
         } else {
-            holder.llOrderFendian.setVisibility(View.VISIBLE);
-            holder.llOrderGoods.setVisibility(View.VISIBLE);
+            //holder.llOrderFendian.setVisibility(View.VISIBLE);
+            //holder.llOrderGoods.setVisibility(View.VISIBLE);
         }
-
 
         if (datas.get(position).getErr().equals("1")) {
             holder.cbCheck.setEnabled(true);
@@ -155,7 +154,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         });
 
     }
-
 
     public void getData(final int position, final String strBH, final String strMC, final String androidIMEI) {
         App.pausableThreadPoolExecutor.execute(new PriorityRunnable(1) {
@@ -212,7 +210,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

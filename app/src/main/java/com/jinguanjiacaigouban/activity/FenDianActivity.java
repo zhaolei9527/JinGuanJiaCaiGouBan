@@ -16,6 +16,7 @@ import com.jinguanjiacaigouban.R;
 import com.jinguanjiacaigouban.adapter.FenDianListAdapter;
 import com.jinguanjiacaigouban.bean.proFdlxSelectBean;
 import com.jinguanjiacaigouban.db.DBService;
+import com.jinguanjiacaigouban.utils.EasyToast;
 import com.jinguanjiacaigouban.utils.PriorityRunnable;
 import com.jinguanjiacaigouban.utils.SpUtil;
 import com.jinguanjiacaigouban.utils.Utils;
@@ -142,7 +143,6 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                         return;
                     }
 
-
                     if (!TextUtils.isEmpty(proFdlxSelectBeans.get(0).getErr())) {
                         mHandler.post(new Runnable() {
                             @Override
@@ -153,12 +153,20 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                         });
                     }
 
-
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             rvFendianList.setAdapter(adapter);
                             tvCont.setText("总计：" + proFdlxSelectBeans.size());
+                            if (!TextUtils.isEmpty(mc)) {
+                                for (int i = 0; i < proFdlxSelectBeans.size(); i++) {
+                                    if (proFdlxSelectBeans.get(i).getMC().equals(mc)) {
+                                        proFdlxSelectBeans.get(i).setErr("1");
+                                        rvFendianList.scrollToPosition(i);
+                                        EasyToast.showShort(context, proFdlxSelectBeans.get(i).getMC());
+                                    }
+                                }
+                            }
                         }
                     });
 
@@ -174,6 +182,16 @@ public class FenDianActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         });
+    }
+    public static String mc;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+         if (resultCode == 800) {
+            mc = data.getStringExtra("MC");
+            EasyToast.showShort(context, mc);
+        }
     }
 
 }

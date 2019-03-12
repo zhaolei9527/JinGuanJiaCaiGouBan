@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -229,6 +230,14 @@ public class GoodShopActivity extends BaseActivity {
                     adapter = new GoodShopListAdapter(GoodShopActivity.this, proPmSelectBeans, tvCont);
 
                     if (proPmSelectBeans.isEmpty()) {
+                        Log.e("GoodShopActivity", "proPmSelectBeans.isEmpty");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                rvGonghuoshangList.setVisibility(View.GONE);
+                                tvCont.setText("总计：" + 0);
+                            }
+                        });
                         return;
                     }
 
@@ -250,7 +259,6 @@ public class GoodShopActivity extends BaseActivity {
                             }
                         });
                     }
-
 
                     mHandler.post(new Runnable() {
                         @Override
@@ -291,6 +299,7 @@ public class GoodShopActivity extends BaseActivity {
                 etSearchHonghuoshang.setText(gonghuoshang);
             }
         } else if (resultCode == 800) {
+            EasyToast.showShort(context,mc);
             mc = data.getStringExtra("MC");
 
         }

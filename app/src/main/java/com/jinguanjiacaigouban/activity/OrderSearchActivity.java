@@ -235,7 +235,6 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
             etSearchHonghuoshang.setText(data.getStringExtra("gonghuoshang"));
         } else if (resultCode == 800 && requestCode == 800) {
             bh = data.getStringExtra("MC");
-            Toast.makeText(context, bh, Toast.LENGTH_SHORT).show();
             adapter.notifyDataSetChanged();
         }
 
@@ -305,6 +304,13 @@ public class OrderSearchActivity extends BaseActivity implements View.OnClickLis
                     adapter = new OrderListAdapter(OrderSearchActivity.this, proCdBeans);
 
                     if (proCdBeans.isEmpty()) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                rvOrderList.setVisibility(View.GONE);
+                                tvCont.setText("总计：0");
+                            }
+                        });
                         return;
                     }
 
